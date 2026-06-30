@@ -4,7 +4,7 @@ Baaeed is a Japanese diet record PWA for tracking weight, meals, steps, body log
 
 ## Public App
 
-This repository is configured for GitHub Pages.
+This repository is prepared for GitHub Pages branch deployment.
 
 Expected URL:
 
@@ -24,3 +24,9 @@ User records are stored only in each browser's `localStorage`.
 ## Update Notes
 
 When app files change, update the `CACHE_NAME` in `sw.js` so installed PWAs refresh their cached app shell reliably.
+
+For GitHub Pages, use:
+
+```text
+Settings > Pages > Deploy from a branch > gh-pages > / (root)
+```
