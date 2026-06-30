@@ -359,6 +359,29 @@
     background:radial-gradient(115% 130% at 50% 24%,rgba(24,35,68,.92),rgba(7,12,28,.96));
     box-shadow:inset 0 0 38px rgba(4,7,18,.78),0 0 0 1px rgba(140,170,255,.15);overflow:hidden}
   .behav-line-chart canvas{display:block;width:100%;height:100%;cursor:pointer}
+  /* 詳細グラフの宇宙枠（放射状3D枠と同じデザイン） */
+  .behav-orb{position:relative;width:100%;height:clamp(280px,44vw,360px);margin-top:10px;border-radius:18px;overflow:hidden;z-index:1;
+    background:radial-gradient(125% 130% at 50% 30%,#141d3c 0%,#0a1024 48%,#03050d 100%);
+    box-shadow:0 0 0 1px rgba(201,161,58,.5),0 0 0 5px #060a16,0 0 0 6px rgba(201,161,58,.5),
+      inset 0 2px 40px rgba(90,130,255,.16),0 24px 60px rgba(10,20,60,.42);
+    cursor:grab;touch-action:none;-webkit-tap-highlight-color:transparent;user-select:none}
+  .behav-orb:active{cursor:grabbing}
+  .behav-orb canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+  .behav-orb::before{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;z-index:3;
+    box-shadow:inset 0 0 80px rgba(3,5,13,.85),inset 0 6px 30px rgba(120,160,255,.08)}
+  /* 全画面：枠内右上／リセット：枠内右下 */
+  .behav-rotbtn,.behav-fsbtn{position:absolute;right:12px;z-index:5;display:inline-flex;align-items:center;gap:6px;
+    padding:7px 12px;border-radius:999px;cursor:pointer;font-size:11px;font-weight:800;letter-spacing:.04em;font-family:inherit;
+    color:#dce6ff;background:rgba(10,16,34,.62);border:1px solid rgba(140,170,255,.3);
+    -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:all .15s ease}
+  .behav-fsbtn{top:12px}
+  .behav-rotbtn{bottom:12px}
+  .behav-rotbtn svg,.behav-fsbtn svg{width:14px;height:14px}
+  .behav-rotbtn:hover,.behav-fsbtn:hover{color:#fff;border-color:rgba(150,180,255,.6);box-shadow:0 8px 20px rgba(60,100,255,.3)}
+  .behav-fsbtn.active{color:#3a2c06;background:linear-gradient(135deg,#f0d98f,#c9a13a);border-color:transparent}
+  .behav-orb:fullscreen{width:100%;height:100%;border-radius:0}
+  .behav-orb:fullscreen::before{border-radius:0}
+  .behav-orb:-webkit-full-screen{width:100%;height:100%;border-radius:0}
   .behav-chart-empty{position:relative;z-index:1;height:150px;display:grid;place-items:center;color:#8fa1cf;font-size:12px;font-weight:800}
   /* 運動の内容テーブル（暗色テーマ） */
   .behav-extable-wrap{position:relative;z-index:1;margin-top:10px;max-height:340px;overflow:auto;border-radius:12px;
@@ -657,6 +680,9 @@
   .dt-field textarea.hr-memo{border:none;background:transparent;box-shadow:none;border-radius:0;padding:6px 0;font-size:15px}
   .dt-field .body-input input{width:80px}
   .dt-field .body-input.time input{width:118px}
+  .dt-field .body-input.time select{width:118px;border:none;background:transparent;color:var(--text);
+    font-family:inherit;font-size:15px;font-weight:600;padding:6px 0;outline:none}
+  .dt-field .body-input.time select:focus{box-shadow:inset 0 -2px 0 var(--blue)}
   .dt-field .steps-select{border:none;background-color:transparent;width:auto;max-width:none;padding:6px 32px 6px 0}
   .dt-field textarea.hr-memo{width:100%;margin-top:0}
   .dt-field .body-input input:focus,
@@ -724,11 +750,12 @@
   .hcard{background:transparent;padding:8px 0;transition:.12s}
   .htime{font-family:var(--serif);font-weight:700;font-size:17px;margin-bottom:11px;display:flex;align-items:center;gap:9px;color:#101a36}
   .htime small{font-size:11px;color:var(--muted);font-weight:500}
-  .mrow{display:grid;grid-template-columns:74px 1fr;align-items:center;gap:10px;margin-bottom:9px}
+  .mrow{display:block;margin-bottom:16px}
+  .mrow .mhead{margin-bottom:6px}
+  .mrow .mname{font-size:14.5px;font-weight:900;color:#0d1226;letter-spacing:.02em}
   .mrow .mlab{font-size:12px;color:var(--muted);font-weight:700}
-  @media(max-width:420px){.mrow{grid-template-columns:1fr}.mrow .mlab{margin-bottom:-2px}}
 
-  .rating{display:grid;grid-template-columns:1fr 96px;gap:12px;align-items:center}
+  .rating{display:grid;grid-template-columns:1fr;gap:12px;align-items:center}
   .rating-bar{position:relative;padding:13px 0 16px;margin-right:28px}
   .rating-bar::before{content:'';position:absolute;left:0;right:0;top:18px;height:2px;
     background:linear-gradient(90deg,#1d4ed8,#3b82f6,#74a6ff,#e8c977,#caa23e);opacity:.85;border-radius:2px}
@@ -747,6 +774,7 @@
   .rating-ticks span:nth-child(3){left:50%}
   .rating-ticks span:nth-child(4){left:75%}
   .rating-ticks span:nth-child(5){left:100%;transform:translateX(-100%)}
+  .rating-legend{font-size:11.5px;color:#33406a;font-weight:800;line-height:1.55;margin:2px 0 0}
   .rating-read{min-height:36px;background:transparent;display:flex;align-items:center;justify-content:flex-end;text-align:right;
     color:var(--muted);font-size:11px;font-weight:850;line-height:1.25}
   .rating-read strong{font-family:var(--serif);font-size:18px;color:var(--gold-deep);margin-right:4px}
@@ -891,6 +919,10 @@
             <canvas id="wikiCanvas"></canvas>
             <div class="wiki-tip" id="wikiTip"></div>
             <div class="wiki-cats" id="wikiCats"></div>
+            <button class="wiki-fsbtn" id="wikiFsBtn" type="button" title="全画面" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+              <span>全画面</span>
+            </button>
             <button class="wiki-panbtn" id="wikiPanBtn" type="button" title="平行移動モードに切り替え（もう一度で回転に戻る）" aria-pressed="false">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg>
               <span>移動</span>
@@ -1217,11 +1249,11 @@
         </div>
         <div class="dt-row">
           <div class="dt-label">起床時間</div>
-          <div class="dt-field"><div class="body-input time"><input id="waketimeInput" type="time" step="300"></div></div>
+          <div class="dt-field"><div class="body-input time"><select id="waketimeInput" aria-label="起床時間"></select></div></div>
         </div>
         <div class="dt-row">
           <div class="dt-label">就寝時間</div>
-          <div class="dt-field"><div class="body-input time"><input id="bedtimeInput" type="time" step="300"></div></div>
+          <div class="dt-field"><div class="body-input time"><select id="bedtimeInput" aria-label="就寝時間"></select></div></div>
         </div>
         <div class="dt-row">
           <div class="dt-label">運動による消費カロリー</div>
@@ -1833,7 +1865,7 @@ function renderDayVisuals(dd){
   const protein=num(dd.protein), fat=num(dd.fat), carbs=num(dd.carbs);
   const proteinKcal=protein*4, fatKcal=fat*9, carbsKcal=carbs*4;
   const macroTotal=proteinKcal+fatKcal+carbsKcal;
-  setText('dayMacroNote',macroTotal ? 'P＝タンパク質／F＝脂質／C＝炭水化物の比率' : 'PFCを入れると比率が出ます（P＝タンパク質・F＝脂質・C＝炭水化物）');
+  setText('dayMacroNote',macroTotal ? 'P＝タンパク質／F＝脂質／C＝炭水化物の比率' : '食事内容を記載するとPFC比率が自動で出ます（P＝タンパク質・F＝脂質・C＝炭水化物）。');
   const stack=document.getElementById('dayMacroStack');
   if(stack) stack.style.gridTemplateColumns=macroTotal ? `${proteinKcal}fr ${fatKcal}fr ${carbsKcal}fr` : '0fr 0fr 0fr';
   const legend=document.getElementById('dayMacroLegend');
@@ -1892,7 +1924,11 @@ function renderHourEntry(dd){
   card.innerHTML=`<div class="htime">${h}時 <small>${ampm}</small></div>`;
   METRICS.forEach(mt=>{
     const mrow=document.createElement('div'); mrow.className='mrow';
-    mrow.innerHTML=`<div class="mlab">${mt.name}</div>`;
+    // 見出し：項目名（目立たせる）＋ その直下に5段階の凡例
+    const head=document.createElement('div'); head.className='mhead';
+    head.innerHTML=`<div class="mname">${mt.name}</div>`+
+      `<div class="rating-legend">${mt.labels.map((l,i)=>`${i+1}=${l}`).join(' / ')}</div>`;
+    mrow.appendChild(head);
     const rating=document.createElement('div'); rating.className='rating';
     const bar=document.createElement('div'); bar.className='rating-bar';
     const input=document.createElement('input');
@@ -1983,8 +2019,8 @@ function renderSteps(dd){
 function renderBodyLog(dd){
   document.getElementById('weightInput').value=dd.weight||'';
   document.getElementById('waistInput').value=dd.waist||'';
-  document.getElementById('bedtimeInput').value=dd.bedtime||'';
-  document.getElementById('waketimeInput').value=dd.waketime||'';
+  window.preserveTimeSelectValue('bedtimeInput',dd.bedtime);
+  window.preserveTimeSelectValue('waketimeInput',dd.waketime);
   document.getElementById('exerciseBurnInput').value=(dd.bmrNet ? (dd.exerciseBurn||'') : (dd.burnedCalories||''));
   document.getElementById('exerciseInput').value=dd.exercise||'';
   renderBodyTargets(dd);
@@ -2454,14 +2490,36 @@ document.getElementById('stepsInput').oninput=function(){
   renderCal();
 };
 document.getElementById('stepsInput').onchange=function(){ flash('歩数を保存しました'); };
-document.getElementById('bedtimeInput').oninput=function(){
+(function(){
+  // 就寝・起床時間：空欄（--）+ 0:00〜30:00 を15分刻みで。値は従来どおり「HH:MM」文字列。
+  function fillTimeSelect(id){
+    const s=document.getElementById(id);
+    s.appendChild(new Option('--',''));
+    for(let h=0;h<=30;h++) for(let m=0;m<60;m+=15){
+      if(h===30&&m>0) break; // 上限は 30:00
+      const v=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+      s.appendChild(new Option(v, v));
+    }
+  }
+  function preserveTimeSelectValue(id,value){
+    const s=document.getElementById(id), v=value||'';
+    if(v && !Array.from(s.options).some(opt=>opt.value===v)){
+      s.appendChild(new Option(v, v));
+    }
+    s.value=v;
+  }
+  fillTimeSelect('bedtimeInput');
+  fillTimeSelect('waketimeInput');
+  window.preserveTimeSelectValue=preserveTimeSelectValue;
+})();
+document.getElementById('bedtimeInput').onchange=function(){
   dayData(sel).bedtime=this.value||null; save(); renderCal();
+  flash('就寝時間を保存しました');
 };
-document.getElementById('bedtimeInput').onchange=function(){ flash('就寝時間を保存しました'); };
-document.getElementById('waketimeInput').oninput=function(){
+document.getElementById('waketimeInput').onchange=function(){
   dayData(sel).waketime=this.value||null; save(); renderCal();
+  flash('起床時間を保存しました');
 };
-document.getElementById('waketimeInput').onchange=function(){ flash('起床時間を保存しました'); };
 document.getElementById('exerciseInput').oninput=function(){
   dayData(sel).exercise=this.value||null;
   save();
@@ -2884,7 +2942,7 @@ function bhLowIdx(bars){ let bi=-1,bv=1e18; bars.forEach((b,i)=>{ if((b.cnt? b.c
 function bhNormBars(bars){ const max=Math.max.apply(null,bars.map(b=>b.val))||1; bars.forEach(b=>b.norm=b.val/max); }
 function bhTimeMin(s){ const m=/^(\d{1,2}):(\d{2})$/.exec(s||''); return m ? (+m[1])*60+(+m[2]) : null; }
 function bhClock(min){ min=((Math.round(min)%1440)+1440)%1440; return Math.floor(min/60)+':'+String(min%60).padStart(2,'0'); }
-function bhSleepHours(d){ const b=bhTimeMin(d&&d.bedtime), w=bhTimeMin(d&&d.waketime); return b!=null&&w!=null ? ((w-b+1440)%1440)/60 : null; }
+function bhSleepHours(d){ const b=bhTimeMin(d&&d.bedtime), w=bhTimeMin(d&&d.waketime); return b!=null&&w!=null ? (((w-b)%1440+1440)%1440)/60 : null; }
 function bhBedHour(d){ const b=bhTimeMin(d&&d.bedtime); return b==null ? null : (b<720?b+1440:b)/60; }
 function bhWakeHour(d){ const w=bhTimeMin(d&&d.waketime); return w==null ? null : w/60; }
 function bhExerciseDone(d){ return d&&(num(d.exerciseBurn)>0||num(d.burnedCalories)>0||(d.exercise&&d.exercise.trim())) ? 1 : null; }
@@ -3029,7 +3087,7 @@ const BEHAV_METRICS=[
     const fmtMin=m=>{ m=((Math.round(m)%1440)+1440)%1440; return Math.floor(m/60)+':'+String(m%60).padStart(2,'0'); };
     const recs=win.filter(x=>x.d && hm(x.d.bedtime)!=null && hm(x.d.waketime)!=null);
     if(!recs.length) return bhEmpty('睡眠の記録がありません。「就寝時間」と「起床時間」を入力すると傾向が表示されます。');
-    const dur=d=>{ const b=hm(d.bedtime), w=hm(d.waketime); return ((w-b+1440)%1440)/60; };
+    const dur=d=>{ const b=hm(d.bedtime), w=hm(d.waketime); return (((w-b)%1440+1440)%1440)/60; };
     const avgDur=bhAvg(recs.map(x=>dur(x.d)));
     const avgBed=fmtMin(bhAvg(recs.map(x=>{ const b=hm(x.d.bedtime); return b<720?b+1440:b; })));
     const avgWake=fmtMin(bhAvg(recs.map(x=>hm(x.d.waketime))));
@@ -3270,9 +3328,7 @@ function wikiInit(){
       fb.querySelector('span').textContent=on?'戻る':'全画面';
       requestAnimationFrame(wikiResize); setTimeout(wikiResize,120); };
     fb.addEventListener('pointerdown',e=>e.stopPropagation());
-    fb.addEventListener('click',e=>{ e.stopPropagation();
-      if(isFs()){ (document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document); }
-      else{ (gx.requestFullscreen||gx.webkitRequestFullscreen||function(){}).call(gx); } });
+    fb.addEventListener('click',e=>{ e.stopPropagation(); fs3dToggle(gx); });   // スマホは横画面ロック
     document.addEventListener('fullscreenchange',syncFs);
     document.addEventListener('webkitfullscreenchange',syncFs);
   }
@@ -3527,84 +3583,204 @@ function bhLineChartHTML(metric,color){
   const s=bhTrendSeries(metric);
   const nav=`<div class="behav-month-nav"><button type="button" id="behavPrevM">‹</button><div class="behav-month-label">${s.navLabel}</div><button type="button" id="behavNextM">›</button></div>`;
   if(!s.points.length) return nav+`<div class="behav-chart-title">${s.title}</div><div class="behav-chart-empty">${s.empty}</div>`;
-  const r=bhTrendRange(s);
-  /* 縦軸ラベルはチャート枠の外（左側）にHTMLで配置。位置は plot 領域に合わせて固定 */
-  const yax=`<div class="behav-yaxis">`+
-    `<span style="top:16px">${bhMetricFormat(metric,r.vhi)}</span>`+
-    `<span style="top:105px">${bhMetricFormat(metric,(r.vlo+r.vhi)/2)}</span>`+
-    `<span style="top:194px">${bhMetricFormat(metric,r.vlo)}</span>`+
-  `</div>`;
+  /* 放射状3D枠と同じ宇宙枠。折れ線は3D投影で描画（左右に揺れ＋ドラッグ回転） */
   return nav+`<div class="behav-chart-title">${s.title}</div>`+
-    `<div class="behav-chart-row">${yax}`+
-      `<div class="behav-line-chart"><canvas id="behavTrendCanvas" aria-label="${metric.label}の推移"></canvas><div class="behav-bar-tip" id="behavBarTip"></div></div>`+
+    `<div class="behav-orb" id="behavOrb">`+
+      `<canvas id="behavTrendCanvas" aria-label="${metric.label}の推移"></canvas>`+
+      `<button class="behav-fsbtn" id="behavFsBtn" type="button" title="全画面" aria-pressed="false">`+
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg><span>全画面</span>`+
+      `</button>`+
+      `<button class="behav-rotbtn" id="behavRotBtn" type="button" title="揺れに戻す">`+
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg><span>リセット</span>`+
+      `</button>`+
+      `<div class="behav-bar-tip" id="behavBarTip"></div>`+
     `</div>`;
 }
-/* 詳細パネルのグラフ：2D 棒グラフ（コンディションは当日24時間、それ以外は当月の日別） */
-function bhDrawTrendBars(metric,color){
+/* ===================================================================
+   詳細パネルのグラフ：放射状3D枠と同じエンジンで「宇宙空間に浮かぶ折れ線」
+   投影は wk と同方式（wkRotate 相当＋wkProject）。デフォルトで左右に揺れ、
+   ドラッグで回転（揺れは停止）。リセットボタン／ダブルタップで揺れに戻る。
+   =================================================================== */
+const lc={ started:false, cv:null, ctx:null, W:0,H:0,dpr:1, t0:0,
+  rotY:0, rotX:-0.24, userY:0, userX:0, frozen:false, zoom:1, panX:0, panY:0, _pinch:false,
+  drag:false, moved:false, lastX:0, lastY:0, downX:0, downY:0,
+  mx:null, my:null, metric:null, color:'#8ec5ff', stars:[], hits:[], _winBound:false, _fsBound:false };
+function lcReset(){ lc.userX=0; lc.userY=0; lc.frozen=false; lc.zoom=1; lc.panX=0; lc.panY=0; }
+const LC_BASE_X=0;   // 既定は正面（傾けない）。揺れは左右(rotY)のみ
+
+function lcRotate(p){
+  const cy=Math.cos(lc.rotY), sy=Math.sin(lc.rotY);
+  let x=p.x*cy-p.z*sy, z=p.x*sy+p.z*cy, y=p.y;
+  const cx=Math.cos(lc.rotX), sx=Math.sin(lc.rotX);
+  return {x, y:y*cx-z*sx, z:y*sx+z*cx};
+}
+function lcStars(){
+  if(lc.stars.length) return;
+  for(let i=0;i<120;i++){
+    const u=Math.random()*2-1, th=Math.random()*Math.PI*2, r=Math.sqrt(1-u*u);
+    lc.stars.push({x:r*Math.cos(th),y:u,z:r*Math.sin(th),d:1.05+Math.random()*0.6,
+      mag:0.2+Math.random()*0.55,tw:Math.random()*Math.PI*2});
+  }
+}
+function lcResize(){
   const cv=document.getElementById('behavTrendCanvas'); if(!cv) return;
-  const box=cv.parentElement.getBoundingClientRect(), dpr=Math.min(2,window.devicePixelRatio||1);
-  const W=box.width||720, H=box.height||220, ctx=cv.getContext('2d');
-  cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+  lc.cv=cv; lc.ctx=cv.getContext('2d');
+  const r=cv.parentElement.getBoundingClientRect(); if(!r.width) return;
+  lc.dpr=Math.min(2,window.devicePixelRatio||1); lc.W=r.width; lc.H=r.height;
+  cv.width=Math.round(r.width*lc.dpr); cv.height=Math.round(r.height*lc.dpr);
+  lc.ctx.setTransform(lc.dpr,0,0,lc.dpr,0,0);
+}
+/* ---- 3D枠の全画面（スマホは横画面ロック）。放射状3D枠とラインチャートで共用 ---- */
+function fs3dActive(el){ return document.fullscreenElement===el||document.webkitFullscreenElement===el; }
+function fs3dLockLandscape(){ try{ const o=screen.orientation; if(o&&o.lock) o.lock('landscape').catch(()=>{}); }catch(_){} }
+function fs3dToggle(el){
+  if(fs3dActive(el)){
+    try{ const o=screen.orientation; if(o&&o.unlock) o.unlock(); }catch(_){}
+    (document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);
+  }else{
+    const req=el.requestFullscreen||el.webkitRequestFullscreen;
+    if(req){ const p=req.call(el); if(p&&p.then) p.then(fs3dLockLandscape).catch(()=>{}); else fs3dLockLandscape(); }
+  }
+}
+
+/* 詳細パネルは再生成のたびに canvas/枠が作り直されるので、その都度ここで結線する */
+function lcMount(metric,color){
+  lcStars();
+  lc.metric=metric; lc.color=color;
+  if(!lc.started) lc.t0=performance.now();
+  const cv=document.getElementById('behavTrendCanvas'), orb=document.getElementById('behavOrb');
+  if(!cv||!orb) return;
+  lc.cv=cv; lc.ctx=cv.getContext('2d'); lcResize();
+  orb.addEventListener('contextmenu',e=>e.preventDefault());
+  orb.addEventListener('pointerdown',e=>{ lc.drag=true; lc.moved=false; lc.frozen=true;
+    const rc=orb.getBoundingClientRect(); lc.mx=e.clientX-rc.left; lc.my=e.clientY-rc.top;
+    lc.lastX=lc.downX=e.clientX; lc.lastY=lc.downY=e.clientY; orb.setPointerCapture(e.pointerId); });
+  orb.addEventListener('pointermove',e=>{
+    const rc=orb.getBoundingClientRect(); lc.mx=e.clientX-rc.left; lc.my=e.clientY-rc.top;
+    if(!lc.drag || lc._pinch) return;
+    const dx=e.clientX-lc.lastX, dy=e.clientY-lc.lastY;
+    if(Math.abs(e.clientX-lc.downX)+Math.abs(e.clientY-lc.downY)>5) lc.moved=true;
+    lc.userY+=dx*0.008; lc.userX=Math.max(-1.2,Math.min(1.2,lc.userX+dy*0.006));
+    lc.lastX=e.clientX; lc.lastY=e.clientY; });
+  orb.addEventListener('pointerup',()=>{ if(!lc.drag) return; lc.drag=false; if(!lc.moved) lcTapTip(); });
+  orb.addEventListener('pointercancel',()=>{ lc.drag=false; });
+  orb.addEventListener('dblclick',lcReset);
+  /* PC：ホイールでカーソル位置を中心に拡大縮小 */
+  orb.addEventListener('wheel',e=>{ e.preventDefault();
+    const rc=orb.getBoundingClientRect(), mx=e.clientX-rc.left, my=e.clientY-rc.top;
+    const f=e.deltaY<0?1.12:1/1.12, nz=Math.max(0.6,Math.min(6,lc.zoom*f)), r=nz/lc.zoom;
+    const ax=lc.W/2+lc.panX, ay=lc.H/2+lc.panY;
+    lc.panX=mx-(mx-ax)*r-lc.W/2; lc.panY=my-(my-ay)*r-lc.H/2; lc.zoom=nz;
+  },{passive:false});
+  /* スマホ：2本指ピンチで拡大縮小／ダブルタップでリセット */
+  attach3DTouch(orb, lc, 6, lcReset);
+  const rb=document.getElementById('behavRotBtn');
+  if(rb){ rb.addEventListener('pointerdown',e=>e.stopPropagation());
+    rb.addEventListener('click',e=>{ e.stopPropagation(); lcReset(); }); }
+  const fsb=document.getElementById('behavFsBtn');
+  if(fsb){ fsb.addEventListener('pointerdown',e=>e.stopPropagation());
+    fsb.addEventListener('click',e=>{ e.stopPropagation(); fs3dToggle(orb); }); }
+  if(!lc._fsBound){ lc._fsBound=true;
+    const syncFs=()=>{ const b=document.getElementById('behavFsBtn'), o=document.getElementById('behavOrb'), on=o&&fs3dActive(o);
+      if(b){ b.classList.toggle('active',!!on); const sp=b.querySelector('span'); if(sp) sp.textContent=on?'戻る':'全画面'; }
+      requestAnimationFrame(lcResize); setTimeout(lcResize,150); };
+    document.addEventListener('fullscreenchange',syncFs);
+    document.addEventListener('webkitfullscreenchange',syncFs);
+  }
+  if(!lc._winBound){ lc._winBound=true; window.addEventListener('resize',lcResize); }
+  if(!lc.started){ lc.started=true; requestAnimationFrame(lcFrame); }
+}
+function lcFrame(now){
+  const cv=document.getElementById('behavTrendCanvas'), det=document.getElementById('behavDetail');
+  if(!cv || !det || det.style.display==='none'){ lc.started=false; return; }   // パネルが閉じたら停止
+  requestAnimationFrame(lcFrame);
+  if(cv!==lc.cv) lcResize();
+  if(!lc.W||!lc.H){ lcResize(); if(!lc.W) return; }
+  lcDraw(now||performance.now());
+}
+function lcTapTip(){
+  const tip=document.getElementById('behavBarTip'); if(!tip||lc.mx==null) return;
+  let best=null, bd=1e9;
+  lc.hits.forEach(h=>{ const d=Math.hypot(h.cx-lc.mx,h.cy-lc.my); if(d<bd){ bd=d; best=h; } });
+  if(best && bd<=30){
+    tip.innerHTML=`<b>${best.val}</b><span>${best.desc}</span>`;
+    tip.style.left=Math.max(34,Math.min(lc.W-34,best.cx))+'px';
+    tip.style.top=Math.max(18,best.cy-10)+'px';
+    tip.classList.add('show');
+  }else tip.classList.remove('show');
+}
+function lcDraw(now){
+  const ctx=lc.ctx, W=lc.W, H=lc.H, metric=lc.metric, color=lc.color;
   ctx.clearRect(0,0,W,H);
-  const s=bhTrendSeries(metric); const points=s.points;
-  if(!points.length){ const t0=document.getElementById('behavBarTip'); if(t0) t0.classList.remove('show'); return; }
-  /* 値域（縦軸）— 縦軸ラベルは枠外のHTMLが担当 */
+  const s=bhTrendSeries(metric), points=s.points;
+  if(!points.length) return;
   const rg=bhTrendRange(s), lo=rg.vlo, hi=rg.vhi, range=hi-lo||1;
-  /* 描画領域（左は最小限の余白のみ。数値ラベルは枠外） */
-  const padL=10, padR=14, padT=16, padB=26;
-  const plotW=Math.max(10,W-padL-padR), plotH=Math.max(10,H-padT-padB);
-  const x0=padL, y0=padT, baseY=y0+plotH;
-  const nSlots=Math.max(1,s.axisMax-s.axisMin+1), slotW=plotW/nSlots;
-  const bw=Math.max(2,Math.min(slotW*0.62,26));
-  /* 横グリッド */
-  [1,0.5,0].forEach(t=>{
-    const yy=baseY-t*plotH;
-    ctx.strokeStyle='rgba(120,150,230,.16)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(x0,yy); ctx.lineTo(x0+plotW,yy); ctx.stroke();
+  const t=(now-lc.t0)/1000;
+  /* 左右の揺れ（デフォルト）＋ ドラッグ回転（frozen で自動の揺れは止まる）。
+     t=0 では rotY=rotX=0 ＝ 正面。揺れは振れ幅控えめでラベルが枠内に収まる範囲に */
+  lc.rotY=(lc.frozen?0:0.24*Math.sin(t*0.34))+lc.userY;
+  lc.rotX=Math.max(-1.2,Math.min(1.2, LC_BASE_X+(lc.frozen?0:0.04*Math.sin(t*0.22))+lc.userX));
+  const cx=W/2+lc.panX, cy=H/2+lc.panY, Rx=W*0.40*lc.zoom, Ry=H*0.40*lc.zoom;
+  ctx.globalCompositeOperation='lighter';
+
+  /* 背景の星（放射状と同じ動き） */
+  lc.stars.forEach(st=>{
+    const rp=lcRotate({x:st.x*st.d,y:st.y*st.d,z:st.z*st.d}), p=wkProject(rp,Rx*0.92,Ry*0.92,cx,cy);
+    const a=st.mag*(0.4+0.3*Math.sin(t*1.5+st.tw))*((rp.z+1.2)/2.2);
+    ctx.fillStyle=`rgba(200,215,255,${Math.max(0,a)})`;
+    ctx.beginPath(); ctx.arc(p.x,p.y,0.8*p.s,0,7); ctx.fill();
   });
-  /* 棒（クリック判定用の座標を保持） */
-  const hits=[];
-  points.forEach(p=>{
-    const cxp=x0+(p.x-s.axisMin+0.5)*slotW;
-    const h=Math.max(2,((p.v-lo)/range)*plotH);
-    const yTop=baseY-h, x=cxp-bw/2, r=Math.min(4,bw/2,h/2);
-    const g=ctx.createLinearGradient(0,yTop,0,baseY);
-    g.addColorStop(0,wkHexA(color,0.95)); g.addColorStop(1,wkHexA(color,0.32));
-    ctx.fillStyle=g;
-    ctx.beginPath();
-    ctx.moveTo(x,baseY); ctx.lineTo(x,yTop+r); ctx.arcTo(x,yTop,x+r,yTop,r);
-    ctx.lineTo(x+bw-r,yTop); ctx.arcTo(x+bw,yTop,x+bw,yTop+r,r);
-    ctx.lineTo(x+bw,baseY); ctx.closePath(); ctx.fill();
-    ctx.fillStyle=wkHexA(color,0.95); ctx.fillRect(x,yTop,bw,Math.min(2,h));
+
+  /* モデル座標：グラフは厚みのない1枚の平面(z=0)。平面ごと3D空間で揺れ／回転する。
+     u=日/時(0..1)→x、vn=値(0..1)→y(上が−)。奥行きは持たせない。 */
+  const ax=0.82, ay=0.54;   // ラベル込みで枠内に収まる範囲に縮小
+  const NX=v=>(v-s.axisMin)/Math.max(1,(s.axisMax-s.axisMin));
+  const VN=v=>Math.max(0,Math.min(1,(v-lo)/range));
+  const MX=u=>(u-0.5)*2*ax, MY=vn=>(0.5-vn)*2*ay;
+  const P=(u,vn)=>{ const p=wkProject(lcRotate({x:MX(u),y:MY(vn),z:0}),Rx,Ry,cx,cy); return [p.x,p.y,p.s]; };
+
+  /* 平面上のグリッド（横＝値の目盛り、縦＝日付の目盛り） */
+  ctx.lineWidth=1;
+  [0,0.5,1].forEach(vn=>{ const a=P(0,vn), b=P(1,vn);
+    ctx.strokeStyle=`rgba(120,150,230,${vn===0?0.26:0.13})`; ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); });
+  s.ticks.forEach(tk=>{ const a=P(NX(tk),0), b=P(NX(tk),1);
+    ctx.strokeStyle='rgba(120,150,230,.08)'; ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); });
+
+  /* データ系列（平面上の2D折れ線） */
+  const F=points.map(p=>P(NX(p.x),VN(p.v)));
+  /* エリア塗り（曲線→基準線 vn=0） */
+  ctx.beginPath();
+  const a0=P(NX(points[0].x),0); ctx.moveTo(a0[0],a0[1]);
+  F.forEach(a=>ctx.lineTo(a[0],a[1]));
+  const aN=P(NX(points[points.length-1].x),0); ctx.lineTo(aN[0],aN[1]); ctx.closePath();
+  ctx.fillStyle=wkHexA(color,0.18); ctx.fill();
+  /* 折れ線（発光） */
+  ctx.save(); ctx.shadowColor=wkHexA(color,0.85); ctx.shadowBlur=12;
+  ctx.strokeStyle=wkHexA(color,0.98); ctx.lineWidth=2.4; ctx.lineJoin='round'; ctx.beginPath();
+  F.forEach((a,i)=>{ i?ctx.lineTo(a[0],a[1]):ctx.moveTo(a[0],a[1]); }); ctx.stroke();
+  ctx.restore();
+
+  /* ノード（放射状の項目ノードと同じ：放射グラデ＋白コア）＋ タップ判定 */
+  lc.hits=[];
+  points.forEach((p,i)=>{
+    const a=F[i], rp=lcRotate({x:MX(NX(p.x)),y:MY(VN(p.v)),z:0}), dep=(rp.z+1.2)/2.2;
+    const rad=(2.6+1.4*dep)*a[2];
+    const g=ctx.createRadialGradient(a[0],a[1],0,a[0],a[1],rad*3.2);
+    g.addColorStop(0,wkHexA(color,0.95*dep)); g.addColorStop(0.4,wkHexA(color,0.4*dep)); g.addColorStop(1,wkHexA(color,0));
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(a[0],a[1],rad*3.2,0,7); ctx.fill();
+    ctx.fillStyle=`rgba(255,255,255,${0.9*dep})`; ctx.beginPath(); ctx.arc(a[0],a[1],Math.max(0.9,rad*0.55),0,7); ctx.fill();
     const desc = s.mode==='hours' ? (p.x+'時') : ((behaviorDetailMonth.getMonth()+1)+'/'+p.x);
-    hits.push({cx:cxp, top:yTop, desc, val:bhMetricFormat(metric,p.v)});
+    lc.hits.push({cx:a[0], cy:a[1], desc, val:bhMetricFormat(metric,p.v)});
   });
-  /* 基準線（横軸） */
-  ctx.strokeStyle='rgba(140,170,255,.30)'; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(x0,baseY); ctx.lineTo(x0+plotW,baseY); ctx.stroke();
-  /* 横軸ラベル */
-  ctx.fillStyle='rgba(144,166,223,.82)'; ctx.font='700 10px -apple-system,sans-serif';
+
+  /* 軸ラベル（テキストは source-over で描画） */
+  ctx.globalCompositeOperation='source-over';
+  ctx.font='700 10px -apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif';
+  ctx.fillStyle='rgba(165,182,224,.9)';
+  ctx.textAlign='right'; ctx.textBaseline='middle';
+  [0,0.5,1].forEach(vn=>{ const a=P(0,vn); ctx.fillText(bhMetricFormat(metric, lo+vn*range), a[0]-6, a[1]); });
   ctx.textAlign='center'; ctx.textBaseline='top';
-  s.ticks.forEach(t=>{
-    const cxp=x0+(t-s.axisMin+0.5)*slotW;
-    ctx.fillText(s.tickLabel(t), cxp, baseY+7);
-  });
-  /* 棒をタップ／クリックすると具体的な数値を表示 */
-  const tip=document.getElementById('behavBarTip');
-  const hitRadius=Math.max(slotW/2, bw/2+3);
-  cv.onclick=ev=>{
-    if(!tip) return;
-    const rect=cv.getBoundingClientRect();
-    const mx=ev.clientX-rect.left, my=ev.clientY-rect.top;
-    let best=null, bd=1e9;
-    hits.forEach(hh=>{ const d=Math.abs(hh.cx-mx); if(d<bd){ bd=d; best=hh; } });
-    if(best && bd<=hitRadius && my<=baseY+6){
-      tip.innerHTML=`<b>${best.val}</b><span>${best.desc}</span>`;
-      tip.style.left=Math.max(34,Math.min(W-34,best.cx))+'px';
-      tip.style.top=Math.max(20,best.top-8)+'px';
-      tip.classList.add('show');
-    }else{ tip.classList.remove('show'); }
-  };
+  s.ticks.forEach(tk=>{ const a=P(NX(tk),0); ctx.fillText(s.tickLabel(tk), a[0], a[1]+5); });
 }
 /* ---- 各項目カード（3D枠の直下）---- */
 function behaviorRenderCards(){
@@ -3635,6 +3811,7 @@ function markBehavCard(id){
 function behaviorSelect(id){
   const m=BEHAV_METRIC_MAP[id]; if(!m) return;
   wk.selId=id; wk.frozen=true;
+  lcReset();   // 新規選択時はグラフの向き・拡大率を初期化（揺れに戻す）
   behaviorDetailMonth=new Date(view.getFullYear(),view.getMonth(),1);
   behaviorDetailDay=new Date();
   behaviorRenderDetail();
@@ -3663,7 +3840,7 @@ function behaviorRenderDetail(){
   const prev=document.getElementById('behavPrevM'), next=document.getElementById('behavNextM');
   if(prev) prev.onclick=()=>{ if(isCond) behaviorDetailDay.setDate(behaviorDetailDay.getDate()-1); else behaviorDetailMonth.setMonth(behaviorDetailMonth.getMonth()-1); behaviorRenderDetail(); };
   if(next) next.onclick=()=>{ if(isCond) behaviorDetailDay.setDate(behaviorDetailDay.getDate()+1); else behaviorDetailMonth.setMonth(behaviorDetailMonth.getMonth()+1); behaviorRenderDetail(); };
-  if(!isTable) requestAnimationFrame(()=>bhDrawTrendBars(m,c.color));
+  if(!isTable) requestAnimationFrame(()=>lcMount(m,c.color));
   el.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 /* 詳細ヘッダの「・」区切りを改行表示にし、「記録〇日／〇件」などの件数表記は除外 */
