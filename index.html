@@ -264,14 +264,6 @@
   .wiki-cats button.on{color:#fff;background:rgba(20,30,60,.82);border-color:var(--cc,rgba(150,180,255,.7));
     box-shadow:0 0 0 1px var(--cc,transparent),0 6px 18px rgba(40,70,160,.35)}
   .wiki-cats button.on i{box-shadow:0 0 10px var(--cc),0 0 4px var(--cc)}
-  /* 全画面ボタン（右上） */
-  .wiki-fsbtn{position:absolute;right:14px;top:13px;z-index:5;display:inline-flex;align-items:center;gap:6px;
-    padding:7px 12px;border-radius:999px;cursor:pointer;font-size:11px;font-weight:800;letter-spacing:.04em;
-    color:#dce6ff;background:rgba(10,16,34,.62);border:1px solid rgba(140,170,255,.3);
-    -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:all .15s ease}
-  .wiki-fsbtn svg{width:15px;height:15px}
-  .wiki-fsbtn:hover{color:#fff;border-color:rgba(150,180,255,.6);box-shadow:0 8px 20px rgba(60,100,255,.3)}
-  .wiki-fsbtn.active{color:#3a2c06;background:linear-gradient(135deg,#f0d98f,#c9a13a);border-color:transparent}
   /* 移動／回転トグル（左下） */
   .wiki-panbtn{position:absolute;left:14px;bottom:30px;z-index:5;display:inline-flex;align-items:center;gap:6px;
     padding:7px 12px;border-radius:999px;cursor:pointer;font-size:11px;font-weight:800;letter-spacing:.04em;
@@ -280,15 +272,11 @@
   .wiki-panbtn svg{width:15px;height:15px}
   .wiki-panbtn:hover{color:#fff;border-color:rgba(150,180,255,.6);box-shadow:0 8px 20px rgba(60,100,255,.3)}
   .wiki-panbtn.active{color:#3a2c06;background:linear-gradient(135deg,#f0d98f,#c9a13a);border-color:transparent}
-  .wiki-galaxy:fullscreen{width:100%;height:100%;border-radius:0}
-  .wiki-galaxy:fullscreen::before{border-radius:0}
-  .wiki-galaxy:-webkit-full-screen{width:100%;height:100%;border-radius:0}
   @media(max-width:560px){
     .wiki-galaxy{height:clamp(360px,62vh,520px);border-radius:16px}
     .wiki-galaxy::before{border-radius:16px}
     .wiki-cats{gap:5px}
     .wiki-cats button{font-size:10px;padding:4px 9px 4px 8px}
-    .wiki-fsbtn{padding:8px 12px;font-size:12px}
   }
 
   /* 行動傾向カード（3D枠直下） */
@@ -369,19 +357,12 @@
   .behav-orb canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
   .behav-orb::before{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;z-index:3;
     box-shadow:inset 0 0 80px rgba(3,5,13,.85),inset 0 6px 30px rgba(120,160,255,.08)}
-  /* 全画面：枠内右上／リセット：枠内右下 */
-  .behav-rotbtn,.behav-fsbtn{position:absolute;right:12px;z-index:5;display:inline-flex;align-items:center;gap:6px;
+  .behav-rotbtn{position:absolute;right:12px;bottom:12px;z-index:5;display:inline-flex;align-items:center;gap:6px;
     padding:7px 12px;border-radius:999px;cursor:pointer;font-size:11px;font-weight:800;letter-spacing:.04em;font-family:inherit;
     color:#dce6ff;background:rgba(10,16,34,.62);border:1px solid rgba(140,170,255,.3);
     -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:all .15s ease}
-  .behav-fsbtn{top:12px}
-  .behav-rotbtn{bottom:12px}
-  .behav-rotbtn svg,.behav-fsbtn svg{width:14px;height:14px}
-  .behav-rotbtn:hover,.behav-fsbtn:hover{color:#fff;border-color:rgba(150,180,255,.6);box-shadow:0 8px 20px rgba(60,100,255,.3)}
-  .behav-fsbtn.active{color:#3a2c06;background:linear-gradient(135deg,#f0d98f,#c9a13a);border-color:transparent}
-  .behav-orb:fullscreen{width:100%;height:100%;border-radius:0}
-  .behav-orb:fullscreen::before{border-radius:0}
-  .behav-orb:-webkit-full-screen{width:100%;height:100%;border-radius:0}
+  .behav-rotbtn svg{width:14px;height:14px}
+  .behav-rotbtn:hover{color:#fff;border-color:rgba(150,180,255,.6);box-shadow:0 8px 20px rgba(60,100,255,.3)}
   .behav-chart-empty{position:relative;z-index:1;height:150px;display:grid;place-items:center;color:#8fa1cf;font-size:12px;font-weight:800}
   /* 運動の内容テーブル（暗色テーマ） */
   .behav-extable-wrap{position:relative;z-index:1;margin-top:10px;max-height:340px;overflow:auto;border-radius:12px;
@@ -919,10 +900,6 @@
             <canvas id="wikiCanvas"></canvas>
             <div class="wiki-tip" id="wikiTip"></div>
             <div class="wiki-cats" id="wikiCats"></div>
-            <button class="wiki-fsbtn" id="wikiFsBtn" type="button" title="全画面" aria-pressed="false">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
-              <span>全画面</span>
-            </button>
             <button class="wiki-panbtn" id="wikiPanBtn" type="button" title="平行移動モードに切り替え（もう一度で回転に戻る）" aria-pressed="false">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg>
               <span>移動</span>
@@ -2877,7 +2854,7 @@ function nebDraw(now){
    直近30日の記録から、運動・睡眠・食事・コンディションなどの傾向を
    知識マップと同じ3次元放射状レイアウトで配置。
    項目の光をクリックすると、3D枠の下に「平均・いつ・曜日/時間帯の傾向」を表示。
-   3D空間の枠・回転・ズーム・平行移動・全画面はそのまま流用。
+   3D空間の枠・回転・ズーム・平行移動をそのまま流用。
    =================================================================== */
 const BEHAV_DAYS = 30;
 const BEHAV_CORE_COLOR='#f0d98f';
@@ -3319,19 +3296,6 @@ function wikiInit(){
   }
   for(let i=0;i<26;i++){ const a=(Math.random()*wk.stars.length)|0,b=(Math.random()*wk.stars.length)|0; if(a!==b) wk.links.push([a,b]); }
   behaviorBuild();
-  // 全画面ボタン
-  const fb=document.getElementById('wikiFsBtn');
-  if(fb){
-    const isFs=()=>document.fullscreenElement===gx||document.webkitFullscreenElement===gx;
-    const syncFs=()=>{ const on=isFs();
-      fb.classList.toggle('active',on); fb.setAttribute('aria-pressed',on);
-      fb.querySelector('span').textContent=on?'戻る':'全画面';
-      requestAnimationFrame(wikiResize); setTimeout(wikiResize,120); };
-    fb.addEventListener('pointerdown',e=>e.stopPropagation());
-    fb.addEventListener('click',e=>{ e.stopPropagation(); fs3dToggle(gx); });   // スマホは横画面ロック
-    document.addEventListener('fullscreenchange',syncFs);
-    document.addEventListener('webkitfullscreenchange',syncFs);
-  }
   // ポインタ操作
   gx.addEventListener('contextmenu',e=>e.preventDefault());
   gx.addEventListener('pointerdown',e=>{ wk.drag=true; wk.moved=false;
@@ -3587,9 +3551,6 @@ function bhLineChartHTML(metric,color){
   return nav+`<div class="behav-chart-title">${s.title}</div>`+
     `<div class="behav-orb" id="behavOrb">`+
       `<canvas id="behavTrendCanvas" aria-label="${metric.label}の推移"></canvas>`+
-      `<button class="behav-fsbtn" id="behavFsBtn" type="button" title="全画面" aria-pressed="false">`+
-        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg><span>全画面</span>`+
-      `</button>`+
       `<button class="behav-rotbtn" id="behavRotBtn" type="button" title="揺れに戻す">`+
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg><span>リセット</span>`+
       `</button>`+
@@ -3604,7 +3565,7 @@ function bhLineChartHTML(metric,color){
 const lc={ started:false, cv:null, ctx:null, W:0,H:0,dpr:1, t0:0,
   rotY:0, rotX:-0.24, userY:0, userX:0, frozen:false, zoom:1, panX:0, panY:0, _pinch:false,
   drag:false, moved:false, lastX:0, lastY:0, downX:0, downY:0,
-  mx:null, my:null, metric:null, color:'#8ec5ff', stars:[], hits:[], _winBound:false, _fsBound:false };
+  mx:null, my:null, metric:null, color:'#8ec5ff', stars:[], hits:[], _winBound:false };
 function lcReset(){ lc.userX=0; lc.userY=0; lc.frozen=false; lc.zoom=1; lc.panX=0; lc.panY=0; }
 const LC_BASE_X=0;   // 既定は正面（傾けない）。揺れは左右(rotY)のみ
 
@@ -3630,19 +3591,6 @@ function lcResize(){
   cv.width=Math.round(r.width*lc.dpr); cv.height=Math.round(r.height*lc.dpr);
   lc.ctx.setTransform(lc.dpr,0,0,lc.dpr,0,0);
 }
-/* ---- 3D枠の全画面（スマホは横画面ロック）。放射状3D枠とラインチャートで共用 ---- */
-function fs3dActive(el){ return document.fullscreenElement===el||document.webkitFullscreenElement===el; }
-function fs3dLockLandscape(){ try{ const o=screen.orientation; if(o&&o.lock) o.lock('landscape').catch(()=>{}); }catch(_){} }
-function fs3dToggle(el){
-  if(fs3dActive(el)){
-    try{ const o=screen.orientation; if(o&&o.unlock) o.unlock(); }catch(_){}
-    (document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);
-  }else{
-    const req=el.requestFullscreen||el.webkitRequestFullscreen;
-    if(req){ const p=req.call(el); if(p&&p.then) p.then(fs3dLockLandscape).catch(()=>{}); else fs3dLockLandscape(); }
-  }
-}
-
 /* 詳細パネルは再生成のたびに canvas/枠が作り直されるので、その都度ここで結線する */
 function lcMount(metric,color){
   lcStars();
@@ -3677,16 +3625,6 @@ function lcMount(metric,color){
   const rb=document.getElementById('behavRotBtn');
   if(rb){ rb.addEventListener('pointerdown',e=>e.stopPropagation());
     rb.addEventListener('click',e=>{ e.stopPropagation(); lcReset(); }); }
-  const fsb=document.getElementById('behavFsBtn');
-  if(fsb){ fsb.addEventListener('pointerdown',e=>e.stopPropagation());
-    fsb.addEventListener('click',e=>{ e.stopPropagation(); fs3dToggle(orb); }); }
-  if(!lc._fsBound){ lc._fsBound=true;
-    const syncFs=()=>{ const b=document.getElementById('behavFsBtn'), o=document.getElementById('behavOrb'), on=o&&fs3dActive(o);
-      if(b){ b.classList.toggle('active',!!on); const sp=b.querySelector('span'); if(sp) sp.textContent=on?'戻る':'全画面'; }
-      requestAnimationFrame(lcResize); setTimeout(lcResize,150); };
-    document.addEventListener('fullscreenchange',syncFs);
-    document.addEventListener('webkitfullscreenchange',syncFs);
-  }
   if(!lc._winBound){ lc._winBound=true; window.addEventListener('resize',lcResize); }
   if(!lc.started){ lc.started=true; requestAnimationFrame(lcFrame); }
 }
