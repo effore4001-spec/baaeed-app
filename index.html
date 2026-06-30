@@ -798,6 +798,29 @@
   .tabbar button.active svg{filter:drop-shadow(0 2px 6px rgba(201,161,58,.4))}
   @media(max-width:380px){ .tabbar button span{font-size:9.5px} .tabbar button svg{width:21px;height:21px} }
 
+  /* ---- 使い方ガイド（初回起動時に表示）---- */
+  .guide-intro{font-size:13px;color:var(--ink-soft);line-height:1.7;margin-top:10px}
+  .guide-steps{display:flex;flex-direction:column;gap:13px;margin-top:22px}
+  .guide-step{display:flex;gap:14px;align-items:flex-start;padding:15px 16px;border:1px solid var(--line);
+    border-radius:var(--radius);background:var(--panel2);box-shadow:var(--shadow-sm)}
+  .guide-step .gnum{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    font-weight:900;font-size:14px;color:#3a2c06;background:linear-gradient(135deg,#f0d98f,#c9a13a);
+    box-shadow:0 4px 12px rgba(177,136,44,.32)}
+  .guide-step .gtab{flex:none;align-self:flex-start;min-width:92px;text-align:center;padding:6px 11px;border-radius:999px;
+    font-weight:900;font-size:11.5px;letter-spacing:.02em;color:#1d4ed8;background:var(--blue-soft);
+    border:1px solid rgba(37,99,235,.25);white-space:nowrap}
+  .guide-step-txt{min-width:0}
+  .guide-step-txt strong{display:block;font-size:15px;font-weight:800;color:#101a36;margin-bottom:4px}
+  .guide-step-txt span{font-size:12.5px;color:var(--muted);line-height:1.6}
+  .guide-ok-row{margin-top:26px;display:flex;justify-content:center}
+  .guide-ok{appearance:none;-webkit-appearance:none;border:0;cursor:pointer;font-family:inherit;
+    width:100%;max-width:360px;padding:17px 24px;border-radius:var(--rBtn);
+    font-size:16px;font-weight:900;letter-spacing:.06em;color:#fff;
+    background:linear-gradient(135deg,#e2455c,#b21d36);
+    box-shadow:0 12px 28px rgba(192,49,74,.38),inset 0 1px 0 rgba(255,255,255,.25);
+    transition:transform .14s ease,box-shadow .14s,filter .14s}
+  .guide-ok:hover{transform:translateY(-1px);filter:brightness(1.05);box-shadow:0 16px 34px rgba(192,49,74,.5)}
+  .guide-ok:active{transform:translateY(0)}
 </style>
 </head>
 <body>
@@ -826,6 +849,40 @@
     </div></div>
   </section>
 
+  <!-- 使い方ガイド（初回起動時に表示）-->
+  <section id="guideView" class="hidden">
+    <div class="card"><div class="pad">
+      <div class="day-head">
+        <div>
+          <div class="day-title">Baaeed の使い方</div>
+          <div class="day-sub">ダイエットと習慣を記録するアプリです。</div>
+        </div>
+      </div>
+      <p class="guide-intro">毎日の体重・食事・運動を記録すると、推移グラフや傾向マップが自動でつくられます。まずは「基本情報」の入力から始めましょう。</p>
+
+      <div class="sec-label">はじめの流れ（この順番で進めてください）</div>
+      <div class="guide-steps">
+        <div class="guide-step"><span class="gnum">1</span><div class="guide-step-txt"><strong>基本情報を入力する</strong><span>性別・年齢・身長・体重・目標などを登録します。これがないと、目標カロリーや「ダイエットがどれくらい進んでいるか」を計算できません。最初に必ず入力してください。</span></div></div>
+        <div class="guide-step"><span class="gnum">2</span><div class="guide-step-txt"><strong>食品DBによく食べる食品と、その成分を登録する</strong><span>毎日の食事を入力するには、食品DBに食品を登録しておく必要があります。商品パッケージに記載の栄養成分表示の数値（カロリー・タンパク質など）を入れておくと、食事入力ですぐ呼び出せます。</span></div></div>
+        <div class="guide-step"><span class="gnum">3</span><div class="guide-step-txt"><strong>今日の記録を入力する</strong><span>その日の体重・食事・運動などを記録します。続けるほど推移グラフや傾向が見えてきます。</span></div></div>
+      </div>
+
+      <div class="sec-label">各タブでできること</div>
+      <div class="guide-steps">
+        <div class="guide-step"><span class="gtab">今日の記録</span><div class="guide-step-txt"><span>その日の体重・食事・運動などを入力します。1時間ごとに記録できます。</span></div></div>
+        <div class="guide-step"><span class="gtab">データ</span><div class="guide-step-txt"><span>体重やPFC（P＝タンパク質・F＝脂質・C＝炭水化物）の推移グラフ、3Dの傾向マップで変化を振り返れます。スマホは2本指で拡大・縮小、ダブルタップで元の表示に戻せます。</span></div></div>
+        <div class="guide-step"><span class="gtab">カレンダー</span><div class="guide-step-txt"><span>過去の日付をタップすると、その日の記録を見たり編集したりできます。</span></div></div>
+        <div class="guide-step"><span class="gtab">食品DB</span><div class="guide-step-txt"><span>よく食べる食品の栄養値を登録・更新します。食事入力で呼び出せます。</span></div></div>
+        <div class="guide-step"><span class="gtab">メニュー</span><div class="guide-step-txt"><span>基本情報・目標数値の設定、週次レビュー、データのバックアップ・復元ができます。</span></div></div>
+      </div>
+
+      <p class="guide-intro" style="margin-top:20px">記録は自動でこの端末に保存されます。（この画面はあとから「メニュー」でいつでも見返せます）</p>
+      <div class="guide-ok-row">
+        <button class="guide-ok" id="guideOkBtn" type="button">基本情報を入力する</button>
+      </div>
+    </div></div>
+  </section>
+
   <!-- DATA TREND (3D) -->
   <section id="trendView" class="hidden">
     <div class="nebula-wrap home-radial-only" id="nebulaWrap">
@@ -840,10 +897,6 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg>
               <span>移動</span>
             </button>
-            <button class="wiki-fsbtn" id="wikiFsBtn" type="button" title="全画面表示（もう一度押すと戻る）" aria-pressed="false">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4"/><path d="M20 9V5a1 1 0 0 0-1-1h-4"/><path d="M4 15v4a1 1 0 0 0 1 1h4"/><path d="M20 15v4a1 1 0 0 1-1 1h-4"/></svg>
-              <span>全画面</span>
-            </button>
           </div>
           <div id="behavCards" style="width:100%"></div>
           <div id="behavDetail" style="display:none;width:100%"></div>
@@ -853,6 +906,11 @@
   <!-- MENU -->
   <section id="menuView" class="hidden">
     <div class="home-tools">
+          <button class="home-tool" id="guideBtn" type="button">
+            <span class="tool-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.6 2.6 0 0 1 5 .8c0 1.7-2.4 2.2-2.4 3.9"/><circle cx="12" cy="17" r="0.7" fill="currentColor" stroke="none"/></svg></span>
+            <span class="tool-txt"><strong>使い方ガイド</strong></span>
+            <span class="tool-arrow">›</span>
+          </button>
           <button class="home-tool" id="basicInfoBtn" type="button">
             <span class="tool-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
             <span class="tool-txt"><strong>基本情報</strong></span>
@@ -949,7 +1007,7 @@
       <div class="profile-head">
         <div>
           <div class="profile-title">食品DB</div>
-          <div class="profile-copy">食事入力で使う食品名と栄養値を登録・更新できます。同じ食品名で保存すると上書きされます。</div>
+          <div class="profile-copy">食事入力で使う食品名と栄養値を登録・更新できます（同じ食品名で保存すると上書きされます）。商品パッケージに記載されている栄養成分表示の数値を入力してください。</div>
         </div>
         <div class="profile-status" id="foodDbStatus">Auto Save</div>
       </div>
@@ -960,16 +1018,16 @@
             <label class="food-field wide">食品名
               <input id="foodNameInput" type="text" list="foodNameOptions" placeholder="例: 鶏むね肉（100g）">
             </label>
-            <label class="food-field">kcal
+            <label class="food-field">カロリー (kcal)
               <input id="foodCaloriesInput" type="number" min="0" step="0.1">
             </label>
-            <label class="food-field">P (g)
+            <label class="food-field">タンパク質 (g)
               <input id="foodProteinInput" type="number" min="0" step="0.01">
             </label>
-            <label class="food-field">F (g)
+            <label class="food-field">脂質 (g)
               <input id="foodFatInput" type="number" min="0" step="0.01">
             </label>
-            <label class="food-field">C (g)
+            <label class="food-field">炭水化物 (g)
               <input id="foodCarbsInput" type="number" min="0" step="0.01">
             </label>
             <label class="food-field">食物繊維 (g)
@@ -1140,8 +1198,7 @@
         </div>
         <div class="visual-card">
           <span class="eyebrow">PFCバランス</span>
-          <strong id="dayMacroTotal">--</strong>
-          <p id="dayMacroNote">タンパク質・脂質・炭水化物の比率</p>
+          <p id="dayMacroNote" style="margin-top:0">P＝タンパク質／F＝脂質／C＝炭水化物の比率</p>
           <div class="macro-stack" id="dayMacroStack"><i></i><i></i><i></i></div>
           <div class="macro-legend" id="dayMacroLegend"><span>未記録</span></div>
         </div>
@@ -1221,6 +1278,7 @@
 const STORE_KEY = 'baaeed_diet_v1';
 const PROFILE_KEY = 'baaeed_profile_v1';
 const FOOD_STORE_KEY = 'baaeed_foods_v1';
+const GUIDE_KEY = 'baaeed_onboarded_v1';   // 初回の使い方ガイドを表示済みかどうか
 // 旧CRIMSONキーからBaaeedキーへ自動移行（既存データを保持）
 [['crimson_diet_v1',STORE_KEY],['crimson_profile_v1',PROFILE_KEY],['crimson_foods_v1',FOOD_STORE_KEY]].forEach(([oldKey,newKey])=>{
   try{ if(localStorage.getItem(newKey)===null){ const v=localStorage.getItem(oldKey); if(v!==null) localStorage.setItem(newKey,v); } }catch(e){}
@@ -1512,7 +1570,7 @@ function renderProfile(){
   setText('targetNote',note);
 }
 /* ---- view switching ---- */
-const ALL_VIEWS=['homeView','dayView','trendView','menuView','reviewView','graphView','foodDbView','basicInfoView','targetNumbersView','dataToolsView'];
+const ALL_VIEWS=['homeView','dayView','trendView','menuView','reviewView','graphView','foodDbView','basicInfoView','targetNumbersView','dataToolsView','guideView'];
 const FRAMELESS_VIEWS=['homeView','dayView','trendView'];
 // 各画面 → 下部タブのどれをアクティブ表示にするか
 const VIEW_TAB={homeView:'cal',dayView:'today',trendView:'trend',foodDbView:'food',
@@ -1531,6 +1589,7 @@ function showFoodDb(){ showView('foodDbView'); renderFoodDb(); }
 function showBasicInfo(){ showView('basicInfoView'); renderProfile(); }
 function showTargetNumbers(){ showView('targetNumbersView'); renderProfile(); }
 function showDataTools(){ showView('dataToolsView'); }
+function showGuide(){ showView('guideView'); }
 /* ---- 3D枠のモード切替（推移 / 傾向マップ）---- */
 let space3DMode='map';
 function setSpace3DMode(mode){
@@ -1777,8 +1836,7 @@ function renderDayVisuals(dd){
   const protein=num(dd.protein), fat=num(dd.fat), carbs=num(dd.carbs);
   const proteinKcal=protein*4, fatKcal=fat*9, carbsKcal=carbs*4;
   const macroTotal=proteinKcal+fatKcal+carbsKcal;
-  setText('dayMacroTotal',macroTotal ? 'PFC比率' : '--');
-  setText('dayMacroNote',macroTotal ? 'kcal合計は表示せず、比率だけ表示' : 'PFCを入れると比率が出ます');
+  setText('dayMacroNote',macroTotal ? 'P＝タンパク質／F＝脂質／C＝炭水化物の比率' : 'PFCを入れると比率が出ます（P＝タンパク質・F＝脂質・C＝炭水化物）');
   const stack=document.getElementById('dayMacroStack');
   if(stack) stack.style.gridTemplateColumns=macroTotal ? `${proteinKcal}fr ${fatKcal}fr ${carbsKcal}fr` : '0fr 0fr 0fr';
   const legend=document.getElementById('dayMacroLegend');
@@ -2304,6 +2362,9 @@ document.getElementById('reviewBtn').onclick=showReview;
 document.getElementById('basicInfoBtn').onclick=showBasicInfo;
 document.getElementById('targetNumbersBtn').onclick=showTargetNumbers;
 document.getElementById('dataToolsBtn').onclick=showDataTools;
+document.getElementById('guideBtn').onclick=showGuide;
+// 使い方ガイドの「OK」→ 表示済みを記録して基本情報の入力へ
+document.getElementById('guideOkBtn').onclick=()=>{ try{ localStorage.setItem(GUIDE_KEY,'1'); }catch(e){} showBasicInfo(); };
 document.querySelectorAll('#space3dToggle .s3d-tab').forEach(b=>{ b.onclick=()=>setSpace3DMode(b.dataset.mode); });
 document.getElementById('csvBtn').onclick=exportCSV;
 document.getElementById('jsonBackupBtn').onclick=exportJSON;
@@ -2480,6 +2541,39 @@ function nebLegend(){
   });
 }
 
+/* スマホ向け：2本指ピンチで拡大縮小／ダブルタップで表示リセット
+   （PCのホイール拡大縮小・ダブルクリックリセットと同じ挙動をタッチでも提供）
+   st は {zoom,panX,panY,W,H,drag,_pinch} を持つ neb / wk のどちらか。 */
+function attach3DTouch(el, st, maxZoom, resetView){
+  let d0=0, z0=1, lastTap=0;
+  el.addEventListener('touchstart',e=>{
+    if(e.touches.length===2){
+      e.preventDefault();
+      st._pinch=true; st.drag=false; st.moved=true; // ピンチ中は1本指ドラッグ／タップ判定を止める
+      const a=e.touches[0], b=e.touches[1];
+      d0=Math.hypot(b.clientX-a.clientX,b.clientY-a.clientY)||1; z0=st.zoom;
+    }else if(e.touches.length===1){
+      const now=performance.now();
+      if(now-lastTap<300){ e.preventDefault(); resetView(); lastTap=0; }  // ダブルタップ
+      else lastTap=now;
+    }
+  },{passive:false});
+  el.addEventListener('touchmove',e=>{
+    if(st._pinch && e.touches.length>=2){
+      e.preventDefault();
+      const a=e.touches[0], b=e.touches[1], rc=el.getBoundingClientRect();
+      const d=Math.hypot(b.clientX-a.clientX,b.clientY-a.clientY)||1;
+      const mx=(a.clientX+b.clientX)/2-rc.left, my=(a.clientY+b.clientY)/2-rc.top; // 2指の中点
+      const nz=Math.max(0.5,Math.min(maxZoom, z0*(d/d0))), r=nz/st.zoom;
+      const ax=st.W/2+st.panX, ay=st.H/2+st.panY;                                  // 中点を中心にズーム
+      st.panX=mx-(mx-ax)*r-st.W/2; st.panY=my-(my-ay)*r-st.H/2; st.zoom=nz;
+    }
+  },{passive:false});
+  const end=e=>{ if(!e.touches || e.touches.length<2) st._pinch=false; };
+  el.addEventListener('touchend',end);
+  el.addEventListener('touchcancel',end);
+}
+
 function nebInit(){
   if(neb.ready) return;
   const cv=document.getElementById('nebulaCanvas'), orb=document.getElementById('nebulaOrb');
@@ -2500,7 +2594,7 @@ function nebInit(){
   orb.addEventListener('pointermove',e=>{
     const rc=orb.getBoundingClientRect();
     neb.mx=e.clientX-rc.left; neb.my=e.clientY-rc.top;
-    if(neb.drag){
+    if(neb.drag && !neb._pinch){
       const dx=e.clientX-neb.lastX, dy=e.clientY-neb.lastY;
       if(neb.rotateMode){
         neb.userY+=dx*0.009;
@@ -2555,10 +2649,12 @@ function nebInit(){
     neb.panY=my-(my-ay)*r - neb.H/2;
     neb.zoom=nz;
   },{passive:false});
-  // ダブルクリックで表示リセット（位置・倍率・回転・ゆらぎを復帰）
-  orb.addEventListener('dblclick',()=>{ neb.panX=0; neb.panY=0; neb.zoom=1;
+  // ダブルクリック／ダブルタップで表示リセット（位置・倍率・回転・ゆらぎを復帰）
+  const nebReset=()=>{ neb.panX=0; neb.panY=0; neb.zoom=1;
     neb.userX=0; neb.userY=0; neb.rotateMode=false; neb.frozen=false;
-    if(neb._syncBtn) neb._syncBtn(); });
+    if(neb._syncBtn) neb._syncBtn(); };
+  orb.addEventListener('dblclick',nebReset);
+  attach3DTouch(orb,neb,4,nebReset);   // スマホ：ピンチ拡大縮小／ダブルタップでリセット
   window.addEventListener('resize',nebResize);
   nebResize();
   requestAnimationFrame(nebFrame);
@@ -3193,6 +3289,7 @@ function wikiInit(){
     const rc=gx.getBoundingClientRect(); wk.mx=e.clientX-rc.left; wk.my=e.clientY-rc.top;
     if(wk.drag){
       const dx=e.clientX-wk.lastX, dy=e.clientY-wk.lastY;
+      if(wk._pinch){ wk.lastX=e.clientX; wk.lastY=e.clientY; return; }   // ピンチ中はドラッグ無効
       if(Math.abs(e.clientX-wk.downX)+Math.abs(e.clientY-wk.downY)>5) wk.moved=true;
       if(wk.dragPan){ wk.panX+=dx; wk.panY+=dy; }
       else{ wk.frozen=true; wk.userY+=dx*0.008; wk.userX=Math.max(-1.35,Math.min(1.35,wk.userX+dy*0.006)); }
@@ -3213,8 +3310,10 @@ function wikiInit(){
     const ax=wk.W/2+wk.panX, ay=wk.H/2+wk.panY;
     wk.panX=mx-(mx-ax)*r-wk.W/2; wk.panY=my-(my-ay)*r-wk.H/2; wk.zoom=nz;
   },{passive:false});
-  gx.addEventListener('dblclick',()=>{ wk.userX=0; wk.userY=0; wk.zoom=1; wk.panX=0; wk.panY=0; wk.frozen=false;
-    wk.hl.clear(); Object.values(wk.chips).forEach(b=>b&&b.classList.remove('on')); if(wk.selId) behaviorDeselect(); });
+  const wkReset=()=>{ wk.userX=0; wk.userY=0; wk.zoom=1; wk.panX=0; wk.panY=0; wk.frozen=false;
+    wk.hl.clear(); Object.values(wk.chips).forEach(b=>b&&b.classList.remove('on')); if(wk.selId) behaviorDeselect(); };
+  gx.addEventListener('dblclick',wkReset);
+  attach3DTouch(gx,wk,9,wkReset);   // スマホ：ピンチ拡大縮小／ダブルタップでリセット
   const pb=document.getElementById('wikiPanBtn');
   if(pb){
     const sync=()=>{ pb.classList.toggle('active',wk.panMode); pb.setAttribute('aria-pressed',wk.panMode);
@@ -3628,7 +3727,9 @@ function behaviorDeselect(){
 
 renderProfile();
 renderCal();
-openToday();
+// 初回起動時は使い方ガイドを表示。OKを押す（＝表示済み）と以降は今日の記録から開く
+let seenGuide=false; try{ seenGuide=localStorage.getItem(GUIDE_KEY)==='1'; }catch(e){}
+if(seenGuide) openToday(); else showGuide();
 </script>
 <script>
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
