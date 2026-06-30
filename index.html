@@ -1775,8 +1775,8 @@ function renderDayVisuals(dd){
   const protein=num(dd.protein), fat=num(dd.fat), carbs=num(dd.carbs);
   const proteinKcal=protein*4, fatKcal=fat*9, carbsKcal=carbs*4;
   const macroTotal=proteinKcal+fatKcal+carbsKcal;
-  setText('dayMacroTotal',macroTotal ? `${fmt(Math.round(macroTotal))}kcal` : '--');
-  setText('dayMacroNote',macroTotal ? 'P/F/Cから見た熱量バランス' : 'PFCを入れると比率が出ます');
+  setText('dayMacroTotal',macroTotal ? 'PFC比率' : '--');
+  setText('dayMacroNote',macroTotal ? 'kcal合計は表示せず、比率だけ表示' : 'PFCを入れると比率が出ます');
   const stack=document.getElementById('dayMacroStack');
   if(stack) stack.style.gridTemplateColumns=macroTotal ? `${proteinKcal}fr ${fatKcal}fr ${carbsKcal}fr` : '0fr 0fr 0fr';
   const legend=document.getElementById('dayMacroLegend');
