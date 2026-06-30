@@ -505,8 +505,6 @@
   .profile-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
   .profile-title{font-family:var(--serif);font-size:23px;font-weight:700;letter-spacing:.02em;color:#101a36}
   .profile-copy{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}
-  .food-guidance{margin:0 0 14px;padding:11px 13px;border:1px solid rgba(37,99,235,.14);border-radius:var(--radius-sm);
-    background:rgba(37,99,235,.05);color:var(--ink-soft);font-size:12px;font-weight:800;line-height:1.7}
   .profile-status{font-size:11px;color:var(--gold-deep);font-weight:900;letter-spacing:.1em;text-transform:uppercase}
   .profile-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:14px}
   .profile-tabs button{border:1px solid var(--line);border-radius:var(--rBtn);background:#fff;color:var(--muted);
@@ -1013,7 +1011,6 @@
       </div>
       <div class="food-tools">
         <div class="food-form">
-          <div class="food-guidance">商品パッケージに記載されている栄養成分表示の数値を入力してください。商品改定や内容量違いで数値が変わることがあります。</div>
           <div class="food-form-grid">
             <label class="food-field wide">食品名
               <input id="foodNameInput" type="text" list="foodNameOptions" placeholder="例: 鶏むね肉（100g）">
@@ -2050,7 +2047,7 @@ function renderFoodDb(){
   const search=normalizeFoodName(document.getElementById('foodSearchInput').value).toLowerCase();
   const foods=allFoods();
   const filtered=foods.filter(food=>!search || normalizeFoodName(food.name).toLowerCase().includes(search)).slice(0,120);
-  setText('foodDbStatus',`食品 ${foods.length}件 / 追加・更新 ${customFoods.length}件`);
+  setText('foodDbStatus',`登録した食品：${customFoods.length}件`);
   setText('foodListCount',`${filtered.length}件表示`);
   const options=document.getElementById('foodNameOptions');
   options.innerHTML=foods.map(food=>`<option value="${esc(food.name)}"></option>`).join('');
