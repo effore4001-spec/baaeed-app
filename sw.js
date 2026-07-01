@@ -1,4 +1,4 @@
-const CACHE_NAME = "baaeed-pwa-2026-06-30-v15";
+const CACHE_NAME = "baaeed-pwa-2026-07-01-v31";
 const APP_SHELL = [
   "./",
   "./index.html",
