@@ -1055,7 +1055,7 @@
         <div>
           <div class="profile-title">食品DB</div>
           <div class="profile-copy">毎日の食事で入力する食品名と成分数値を登録・更新できます。</div>
-          <div class="profile-note">商品パッケージに記載されている栄養成分表示の数値を入力してください。商品改定や内容量違いで数値が変わることがあります。</div>
+          <div class="profile-note">初期設定の食品データは一般的な目安です。商品パッケージに記載されている栄養成分表示と異なる場合は、実際の数値に更新してください。</div>
         </div>
         <div class="profile-status" id="foodDbStatus">Auto Save</div>
       </div>
@@ -1085,7 +1085,7 @@
             </label>
           </div>
           <div class="food-actions">
-            <button class="btn primary" id="foodSaveBtn" type="button">保存</button>
+            <button class="btn primary" id="foodSaveBtn" type="button">新規登録</button>
             <button class="btn primary" id="foodUpdateBtn" type="button">更新</button>
             <button class="btn ghost" id="foodClearBtn" type="button">クリア</button>
             <button class="btn danger" id="foodDeleteBtn" type="button">削除</button>
@@ -1093,7 +1093,7 @@
           <div class="food-photo-row">
             <button class="btn silver" id="foodPhotoBtn" type="button">📷 写真から入力</button>
             <input id="foodPhotoInput" type="file" accept="image/*" capture="environment" hidden>
-            <span class="food-photo-status" id="foodPhotoStatus">栄養成分表示を撮影すると、数値を自動で読み取ります（初回のみ通信が必要）。読み取り後は数値を確認してから保存してください。</span>
+            <span class="food-photo-status" id="foodPhotoStatus">栄養成分表示を撮影すると、数値を自動で読み取ります（初回のみ通信が必要）。読み取り後は数値を確認してから新規登録してください。</span>
           </div>
           <datalist id="foodNameOptions"></datalist>
         </div>
@@ -1350,7 +1350,908 @@ const MEAL_DEFS = [
   {key:'lunch',     ic:'昼', name:'昼食', ph:'例: 鶏胸肉、玄米、サラダ…'},
   {key:'dinner',    ic:'夜', name:'夕食', ph:'例: 焼き魚、味噌汁、温野菜…'},
 ];
-const FOOD_DB = [];
+const FOOD_DB = [
+  {
+    "name": "ご飯（茶碗1杯150g）",
+    "calories": 234,
+    "protein": 3.8,
+    "fat": 0.5,
+    "carbs": 55.7,
+    "fiber": 2.3,
+    "salt": 0
+  },
+  {
+    "name": "玄米ご飯（150g）",
+    "calories": 228,
+    "protein": 4.2,
+    "fat": 1.5,
+    "carbs": 51.3,
+    "fiber": 2.1,
+    "salt": 0
+  },
+  {
+    "name": "おにぎり 1個",
+    "calories": 156,
+    "protein": 2.7,
+    "fat": 0.3,
+    "carbs": 36,
+    "fiber": 1.5,
+    "salt": 0.6
+  },
+  {
+    "name": "食パン6枚切り 1枚",
+    "calories": 149,
+    "protein": 5.3,
+    "fat": 2.5,
+    "carbs": 27.8,
+    "fiber": 2.5,
+    "salt": 0.7
+  },
+  {
+    "name": "ロールパン 1個",
+    "calories": 95,
+    "protein": 3,
+    "fat": 3,
+    "carbs": 14.6,
+    "fiber": 1,
+    "salt": 0.4
+  },
+  {
+    "name": "うどん（ゆで1玉）",
+    "calories": 262,
+    "protein": 6.5,
+    "fat": 1,
+    "carbs": 54,
+    "fiber": 2,
+    "salt": 0.8
+  },
+  {
+    "name": "そば（ゆで1玉）",
+    "calories": 238,
+    "protein": 8.6,
+    "fat": 1.8,
+    "carbs": 48,
+    "fiber": 3.5,
+    "salt": 0
+  },
+  {
+    "name": "中華麺（ゆで1玉）",
+    "calories": 290,
+    "protein": 9.8,
+    "fat": 1.4,
+    "carbs": 57.6,
+    "fiber": 2.9,
+    "salt": 0.6
+  },
+  {
+    "name": "パスタ（乾100g）",
+    "calories": 347,
+    "protein": 12.9,
+    "fat": 1.8,
+    "carbs": 66.9,
+    "fiber": 5.4,
+    "salt": 0
+  },
+  {
+    "name": "オートミール（40g）",
+    "calories": 152,
+    "protein": 5.5,
+    "fat": 2.3,
+    "carbs": 27.6,
+    "fiber": 3.8,
+    "salt": 0
+  },
+  {
+    "name": "さつまいも（100g）",
+    "calories": 132,
+    "protein": 1.2,
+    "fat": 0.2,
+    "carbs": 31.5,
+    "fiber": 2.2,
+    "salt": 0
+  },
+  {
+    "name": "じゃがいも（100g）",
+    "calories": 76,
+    "protein": 1.6,
+    "fat": 0.1,
+    "carbs": 17.6,
+    "fiber": 1.3,
+    "salt": 0
+  },
+  {
+    "name": "バナナ 1本（100g）",
+    "calories": 86,
+    "protein": 1.1,
+    "fat": 0.2,
+    "carbs": 22.5,
+    "fiber": 1.1,
+    "salt": 0
+  },
+  {
+    "name": "りんご 1/2個（125g）",
+    "calories": 68,
+    "protein": 0.3,
+    "fat": 0.3,
+    "carbs": 19.5,
+    "fiber": 1.9,
+    "salt": 0
+  },
+  {
+    "name": "みかん 1個（80g）",
+    "calories": 37,
+    "protein": 0.6,
+    "fat": 0.1,
+    "carbs": 9.6,
+    "fiber": 0.8,
+    "salt": 0
+  },
+  {
+    "name": "鶏むね肉 皮なし（100g）",
+    "calories": 105,
+    "protein": 23.3,
+    "fat": 1.9,
+    "carbs": 0,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "鶏むね肉 皮つき（100g）",
+    "calories": 145,
+    "protein": 21.3,
+    "fat": 5.9,
+    "carbs": 0,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "鶏もも肉 皮なし（100g）",
+    "calories": 116,
+    "protein": 19,
+    "fat": 5,
+    "carbs": 0,
+    "fiber": 0,
+    "salt": 0.2
+  },
+  {
+    "name": "鶏ささみ（100g）",
+    "calories": 98,
+    "protein": 23.9,
+    "fat": 0.8,
+    "carbs": 0,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "豚ロース（100g）",
+    "calories": 263,
+    "protein": 19.3,
+    "fat": 19.2,
+    "carbs": 0.2,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "豚ヒレ肉（100g）",
+    "calories": 118,
+    "protein": 22.2,
+    "fat": 3.7,
+    "carbs": 0.3,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "豚バラ（100g）",
+    "calories": 366,
+    "protein": 14.4,
+    "fat": 35.4,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "牛もも肉（100g）",
+    "calories": 182,
+    "protein": 21.2,
+    "fat": 9.6,
+    "carbs": 0.5,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "牛ひき肉（100g）",
+    "calories": 251,
+    "protein": 17.1,
+    "fat": 21.1,
+    "carbs": 0.3,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "牛ヒレ肉 赤身（100g）",
+    "calories": 133,
+    "protein": 20.5,
+    "fat": 4.8,
+    "carbs": 0.3,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "鮭 1切れ（80g）",
+    "calories": 106,
+    "protein": 17.8,
+    "fat": 3.3,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.2
+  },
+  {
+    "name": "さば 1切れ（80g）",
+    "calories": 169,
+    "protein": 16.5,
+    "fat": 13.4,
+    "carbs": 0.2,
+    "fiber": 0,
+    "salt": 0.2
+  },
+  {
+    "name": "まぐろ赤身（100g）",
+    "calories": 125,
+    "protein": 26.4,
+    "fat": 1.4,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "ツナ缶 水煮 1缶（70g）",
+    "calories": 50,
+    "protein": 11.2,
+    "fat": 0.5,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.5
+  },
+  {
+    "name": "ツナ缶 油漬 1缶（70g）",
+    "calories": 188,
+    "protein": 12.5,
+    "fat": 15.5,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.5
+  },
+  {
+    "name": "えび（100g）",
+    "calories": 82,
+    "protein": 18.4,
+    "fat": 0.3,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.4
+  },
+  {
+    "name": "いか（100g）",
+    "calories": 76,
+    "protein": 17.9,
+    "fat": 0.8,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.5
+  },
+  {
+    "name": "たら 1切れ（80g）",
+    "calories": 61,
+    "protein": 14.1,
+    "fat": 0.2,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.2
+  },
+  {
+    "name": "さんま 1尾（100g）",
+    "calories": 287,
+    "protein": 18.5,
+    "fat": 24.6,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.3
+  },
+  {
+    "name": "卵 1個（50g）",
+    "calories": 71,
+    "protein": 6.1,
+    "fat": 5.1,
+    "carbs": 0.2,
+    "fiber": 0,
+    "salt": 0.2
+  },
+  {
+    "name": "ゆで卵 1個（50g）",
+    "calories": 68,
+    "protein": 6.5,
+    "fat": 5,
+    "carbs": 0.2,
+    "fiber": 0,
+    "salt": 0.2
+  },
+  {
+    "name": "卵白 1個分（33g）",
+    "calories": 15,
+    "protein": 3.4,
+    "fat": 0,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "納豆 1パック（45g）",
+    "calories": 90,
+    "protein": 7.4,
+    "fat": 4.5,
+    "carbs": 5.4,
+    "fiber": 3,
+    "salt": 0
+  },
+  {
+    "name": "木綿豆腐（1/2丁150g）",
+    "calories": 110,
+    "protein": 10.5,
+    "fat": 6.9,
+    "carbs": 2.4,
+    "fiber": 1.7,
+    "salt": 0
+  },
+  {
+    "name": "絹豆腐（1/2丁150g）",
+    "calories": 84,
+    "protein": 8,
+    "fat": 4.7,
+    "carbs": 3,
+    "fiber": 1.4,
+    "salt": 0
+  },
+  {
+    "name": "厚揚げ（100g）",
+    "calories": 150,
+    "protein": 10.7,
+    "fat": 11.3,
+    "carbs": 1,
+    "fiber": 0.7,
+    "salt": 0
+  },
+  {
+    "name": "豆乳 無調整（200ml）",
+    "calories": 92,
+    "protein": 7.2,
+    "fat": 4,
+    "carbs": 6.2,
+    "fiber": 0.4,
+    "salt": 0.1
+  },
+  {
+    "name": "牛乳（200ml）",
+    "calories": 134,
+    "protein": 6.6,
+    "fat": 7.6,
+    "carbs": 9.6,
+    "fiber": 0,
+    "salt": 0.2
+  },
+  {
+    "name": "ヨーグルト 無糖（100g）",
+    "calories": 62,
+    "protein": 3.6,
+    "fat": 3,
+    "carbs": 4.9,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "ギリシャヨーグルト 無糖（100g）",
+    "calories": 59,
+    "protein": 10.2,
+    "fat": 0.4,
+    "carbs": 3.8,
+    "fiber": 0,
+    "salt": 0.1
+  },
+  {
+    "name": "プロセスチーズ 1枚（18g）",
+    "calories": 60,
+    "protein": 4.1,
+    "fat": 4.7,
+    "carbs": 0.2,
+    "fiber": 0,
+    "salt": 0.5
+  },
+  {
+    "name": "カッテージチーズ（100g）",
+    "calories": 99,
+    "protein": 13.3,
+    "fat": 4.5,
+    "carbs": 1.9,
+    "fiber": 0,
+    "salt": 1
+  },
+  {
+    "name": "プロテイン 1杯（30g）",
+    "calories": 116,
+    "protein": 22,
+    "fat": 1.5,
+    "carbs": 3,
+    "fiber": 0.5,
+    "salt": 0.2
+  },
+  {
+    "name": "ブロッコリー（ゆで80g）",
+    "calories": 30,
+    "protein": 3.9,
+    "fat": 0.4,
+    "carbs": 4.2,
+    "fiber": 3.5,
+    "salt": 0
+  },
+  {
+    "name": "キャベツ（生100g）",
+    "calories": 23,
+    "protein": 1.3,
+    "fat": 0.2,
+    "carbs": 5.2,
+    "fiber": 1.8,
+    "salt": 0
+  },
+  {
+    "name": "レタス（100g）",
+    "calories": 12,
+    "protein": 0.6,
+    "fat": 0.1,
+    "carbs": 2.8,
+    "fiber": 1.1,
+    "salt": 0
+  },
+  {
+    "name": "トマト 1個（150g）",
+    "calories": 29,
+    "protein": 1.1,
+    "fat": 0.2,
+    "carbs": 7,
+    "fiber": 1.5,
+    "salt": 0
+  },
+  {
+    "name": "玉ねぎ（100g）",
+    "calories": 37,
+    "protein": 1,
+    "fat": 0.1,
+    "carbs": 8.8,
+    "fiber": 1.5,
+    "salt": 0
+  },
+  {
+    "name": "にんじん（100g）",
+    "calories": 39,
+    "protein": 0.7,
+    "fat": 0.2,
+    "carbs": 9.3,
+    "fiber": 2.8,
+    "salt": 0.1
+  },
+  {
+    "name": "ほうれん草（ゆで80g）",
+    "calories": 20,
+    "protein": 2.1,
+    "fat": 0.4,
+    "carbs": 3,
+    "fiber": 2.9,
+    "salt": 0
+  },
+  {
+    "name": "小松菜（ゆで80g）",
+    "calories": 12,
+    "protein": 1.3,
+    "fat": 0.1,
+    "carbs": 2,
+    "fiber": 1.9,
+    "salt": 0
+  },
+  {
+    "name": "きゅうり 1本（100g）",
+    "calories": 14,
+    "protein": 1,
+    "fat": 0.1,
+    "carbs": 3,
+    "fiber": 1.1,
+    "salt": 0
+  },
+  {
+    "name": "しめじ（100g）",
+    "calories": 22,
+    "protein": 2.7,
+    "fat": 0.5,
+    "carbs": 4.8,
+    "fiber": 3.7,
+    "salt": 0
+  },
+  {
+    "name": "えのき（100g）",
+    "calories": 34,
+    "protein": 2.7,
+    "fat": 0.2,
+    "carbs": 7.6,
+    "fiber": 3.9,
+    "salt": 0
+  },
+  {
+    "name": "わかめ（戻し30g）",
+    "calories": 5,
+    "protein": 0.5,
+    "fat": 0.1,
+    "carbs": 1.5,
+    "fiber": 1,
+    "salt": 0.2
+  },
+  {
+    "name": "アボカド 1/2個（70g）",
+    "calories": 131,
+    "protein": 1.8,
+    "fat": 13,
+    "carbs": 4.4,
+    "fiber": 3.7,
+    "salt": 0
+  },
+  {
+    "name": "アーモンド 10粒（15g）",
+    "calories": 92,
+    "protein": 3,
+    "fat": 8,
+    "carbs": 3,
+    "fiber": 1.5,
+    "salt": 0
+  },
+  {
+    "name": "くるみ（20g）",
+    "calories": 135,
+    "protein": 3,
+    "fat": 13.8,
+    "carbs": 2.3,
+    "fiber": 1.5,
+    "salt": 0
+  },
+  {
+    "name": "ミックスナッツ 素焼き（25g）",
+    "calories": 155,
+    "protein": 5,
+    "fat": 13,
+    "carbs": 5,
+    "fiber": 2.5,
+    "salt": 0
+  },
+  {
+    "name": "味噌汁 1杯",
+    "calories": 40,
+    "protein": 3,
+    "fat": 1.5,
+    "carbs": 4,
+    "fiber": 1,
+    "salt": 1.5
+  },
+  {
+    "name": "コーヒー ブラック（1杯）",
+    "calories": 4,
+    "protein": 0.2,
+    "fat": 0,
+    "carbs": 0.7,
+    "fiber": 0,
+    "salt": 0
+  },
+  {
+    "name": "チョコレート 1かけ（5g）",
+    "calories": 28,
+    "protein": 0.3,
+    "fat": 1.7,
+    "carbs": 2.8,
+    "fiber": 0.2,
+    "salt": 0
+  },
+  {
+    "name": "高カカオチョコ 1かけ（5g）",
+    "calories": 28,
+    "protein": 0.5,
+    "fat": 2,
+    "carbs": 1.5,
+    "fiber": 0.7,
+    "salt": 0
+  },
+  {
+    "name": "せんべい 1枚（10g）",
+    "calories": 37,
+    "protein": 0.8,
+    "fat": 0.1,
+    "carbs": 8.3,
+    "fiber": 0.1,
+    "salt": 0.2
+  },
+  {
+    "name": "缶ビール（350ml）",
+    "calories": 137,
+    "protein": 1.1,
+    "fat": 0,
+    "carbs": 10.9,
+    "fiber": 0,
+    "salt": 0
+  },
+  {
+    "name": "サラダチキン 1個（115g）",
+    "calories": 121,
+    "protein": 27,
+    "fat": 1.5,
+    "carbs": 0.3,
+    "fiber": 0,
+    "salt": 1.1
+  },
+  {
+    "name": "プロテインバー 1本（40g）",
+    "calories": 175,
+    "protein": 15,
+    "fat": 8.5,
+    "carbs": 12,
+    "fiber": 3,
+    "salt": 0.3
+  },
+  {
+    "name": "干し芋（50g）",
+    "calories": 151,
+    "protein": 1.7,
+    "fat": 0.3,
+    "carbs": 36.6,
+    "fiber": 2.9,
+    "salt": 0
+  },
+  {
+    "name": "枝豆（可食部80g）",
+    "calories": 107,
+    "protein": 9.4,
+    "fat": 4.8,
+    "carbs": 8.8,
+    "fiber": 4,
+    "salt": 0
+  },
+  {
+    "name": "ちくわ 1本（30g）",
+    "calories": 36,
+    "protein": 3.7,
+    "fat": 0.6,
+    "carbs": 4.1,
+    "fiber": 0,
+    "salt": 0.6
+  },
+  {
+    "name": "かまぼこ 2切れ（30g）",
+    "calories": 29,
+    "protein": 3.6,
+    "fat": 0.3,
+    "carbs": 3,
+    "fiber": 0,
+    "salt": 0.8
+  },
+  {
+    "name": "ウインナー 1本（20g）",
+    "calories": 64,
+    "protein": 2.3,
+    "fat": 6,
+    "carbs": 0.6,
+    "fiber": 0,
+    "salt": 0.4
+  },
+  {
+    "name": "ハム 1枚（15g）",
+    "calories": 30,
+    "protein": 2.4,
+    "fat": 2.1,
+    "carbs": 0.2,
+    "fiber": 0,
+    "salt": 0.4
+  },
+  {
+    "name": "ベーコン 1枚（20g）",
+    "calories": 81,
+    "protein": 2.6,
+    "fat": 7.8,
+    "carbs": 0.1,
+    "fiber": 0,
+    "salt": 0.4
+  },
+  {
+    "name": "コーンフレーク（40g）",
+    "calories": 152,
+    "protein": 3.1,
+    "fat": 0.4,
+    "carbs": 34.4,
+    "fiber": 1,
+    "salt": 0.7
+  },
+  {
+    "name": "グラノーラ（50g）",
+    "calories": 220,
+    "protein": 4.5,
+    "fat": 7.8,
+    "carbs": 34.8,
+    "fiber": 4.5,
+    "salt": 0.3
+  },
+  {
+    "name": "もち 1個（50g）",
+    "calories": 118,
+    "protein": 2.1,
+    "fat": 0.3,
+    "carbs": 25.2,
+    "fiber": 0.3,
+    "salt": 0
+  },
+  {
+    "name": "納豆巻き 1本",
+    "calories": 180,
+    "protein": 6.5,
+    "fat": 3,
+    "carbs": 32,
+    "fiber": 2.5,
+    "salt": 1
+  },
+  {
+    "name": "カレーライス 1皿",
+    "calories": 650,
+    "protein": 18,
+    "fat": 22,
+    "carbs": 92,
+    "fiber": 4,
+    "salt": 3
+  },
+  {
+    "name": "牛丼 並盛",
+    "calories": 730,
+    "protein": 20,
+    "fat": 25,
+    "carbs": 100,
+    "fiber": 3,
+    "salt": 3.5
+  },
+  {
+    "name": "ラーメン 1杯",
+    "calories": 520,
+    "protein": 20,
+    "fat": 15,
+    "carbs": 72,
+    "fiber": 4,
+    "salt": 6
+  },
+  {
+    "name": "焼きそば 1皿",
+    "calories": 560,
+    "protein": 17,
+    "fat": 20,
+    "carbs": 78,
+    "fiber": 5,
+    "salt": 4
+  },
+  {
+    "name": "餃子 6個",
+    "calories": 300,
+    "protein": 12,
+    "fat": 15,
+    "carbs": 30,
+    "fiber": 2,
+    "salt": 1.8
+  },
+  {
+    "name": "鶏の唐揚げ 3個",
+    "calories": 290,
+    "protein": 18,
+    "fat": 19,
+    "carbs": 10,
+    "fiber": 0.5,
+    "salt": 1.3
+  },
+  {
+    "name": "ハンバーグ 1個（150g）",
+    "calories": 330,
+    "protein": 20,
+    "fat": 22,
+    "carbs": 12,
+    "fiber": 1,
+    "salt": 1.8
+  },
+  {
+    "name": "豚汁 1杯",
+    "calories": 160,
+    "protein": 8,
+    "fat": 8,
+    "carbs": 14,
+    "fiber": 3,
+    "salt": 1.8
+  },
+  {
+    "name": "さば缶 水煮 1缶（190g）",
+    "calories": 317,
+    "protein": 26.8,
+    "fat": 23.4,
+    "carbs": 0.2,
+    "fiber": 0,
+    "salt": 1.8
+  },
+  {
+    "name": "さば缶 味噌煮 1缶（190g）",
+    "calories": 400,
+    "protein": 28,
+    "fat": 26,
+    "carbs": 14,
+    "fiber": 0,
+    "salt": 2.2
+  },
+  {
+    "name": "豆腐ハンバーグ 1個",
+    "calories": 210,
+    "protein": 14,
+    "fat": 12,
+    "carbs": 12,
+    "fiber": 2,
+    "salt": 1.2
+  },
+  {
+    "name": "蒸し鶏（100g）",
+    "calories": 115,
+    "protein": 24,
+    "fat": 2.5,
+    "carbs": 0,
+    "fiber": 0,
+    "salt": 0.5
+  },
+  {
+    "name": "きんぴらごぼう 小鉢",
+    "calories": 95,
+    "protein": 2,
+    "fat": 4,
+    "carbs": 14,
+    "fiber": 3,
+    "salt": 1
+  },
+  {
+    "name": "ひじき煮 小鉢",
+    "calories": 80,
+    "protein": 3,
+    "fat": 3,
+    "carbs": 11,
+    "fiber": 4,
+    "salt": 1.2
+  },
+  {
+    "name": "オリーブオイル 小さじ1",
+    "calories": 37,
+    "protein": 0,
+    "fat": 4,
+    "carbs": 0,
+    "fiber": 0,
+    "salt": 0
+  },
+  {
+    "name": "マヨネーズ 大さじ1",
+    "calories": 84,
+    "protein": 0.2,
+    "fat": 9.2,
+    "carbs": 0.3,
+    "fiber": 0,
+    "salt": 0.2
+  },
+  {
+    "name": "ドレッシング 大さじ1",
+    "calories": 60,
+    "protein": 0.2,
+    "fat": 5.5,
+    "carbs": 2.2,
+    "fiber": 0,
+    "salt": 0.5
+  }
+];
 const SCALE = ['#2a55c9','#4f8cff','#74a6ff','#d8b24a','#f2d488'];
 // text colour for each level's selected (full-colour) button — white except where dark text reads better
 const SCALE_TXT = ['#ffffff','#ffffff','#0c1326','#0c1326','#0c1326'];
@@ -2201,7 +3102,7 @@ function updateFoodForm(){
   const food=getFoodForm();
   const key=normalizeFoodName(food.name);
   if(!key){ flash('更新する食品を選んでください'); return; }
-  if(!FOOD_MAP.has(key)){ flash('その名前の食品はまだありません。「保存」で登録してください'); return; }
+  if(!FOOD_MAP.has(key)){ flash('その名前の食品はまだありません。「新規登録」で登録してください'); return; }
   customFoods = customFoods.filter(item=>normalizeFoodName(item.name)!==key);
   customFoods.push(food);
   saveCustomFoods();
@@ -2277,7 +3178,7 @@ async function runFoodPhotoOcr(file){
       if(parsed[key]!=null){ document.getElementById(ids[key]).value=parsed[key]; filled++; }
     });
     setStatus(filled
-      ? `${filled}項目を読み取りました。数値を確認・修正してから「保存」してください。`
+      ? `${filled}項目を読み取りました。数値を確認・修正してから「新規登録」してください。`
       : '数値を読み取れませんでした。明るく・水平・大きめに撮り直すか、手入力してください。');
   }catch(e){
     setStatus('解析に失敗しました。撮り直すか手入力してください。');
@@ -2290,12 +3191,12 @@ function renderFoodDb(){
   const search=normalizeFoodName(document.getElementById('foodSearchInput').value).toLowerCase();
   const foods=allFoods();
   const filtered=foods.filter(food=>!search || normalizeFoodName(food.name).toLowerCase().includes(search)).slice(0,120);
-  setText('foodDbStatus',`登録した食品：${customFoods.length}件`);
+  setText('foodDbStatus',`登録した食品：${foods.length}件`);
   setText('foodListCount',`${filtered.length}件表示`);
   const options=document.getElementById('foodNameOptions');
   options.innerHTML=foods.map(food=>`<option value="${esc(food.name)}"></option>`).join('');
   const list=document.getElementById('foodList');
-  if(!filtered.length){ list.innerHTML='<div class="chart-empty">登録済み食品はありません。商品パッケージの栄養成分表示を見て入力し、保存してください。</div>'; return; }
+  if(!filtered.length){ list.innerHTML='<div class="chart-empty">該当する食品はありません。商品パッケージの栄養成分表示を見て入力し、新規登録してください。</div>'; return; }
   list.innerHTML='';
   filtered.forEach(food=>{
     const row=document.createElement('button');
