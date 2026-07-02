@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Baaeed — ダイエット記録</title>
-<meta name="theme-color" content="#eef1f8">
+<meta name="theme-color" content="#d6e3fb">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Baaeed">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -16,14 +16,16 @@
      Baaeed · LUME — light luxury theme (white / gold frame / blue accent)
      =================================================================== */
   :root{
-    --bg:#eef1f8;
+    --home-g1:#d6e3fb;--home-g2:#e4ecfb;--home-g3:#f1f6fe;
     --text:#1a2340;--ink-soft:#33406a;--muted:#6b7699;
     --line:rgba(40,60,120,.13);--line2:rgba(40,60,120,.07);
     --panel:#ffffff;--panel2:#f7f9fe;--inset:#f3f6fc;
     --field-bg:#f5f7fc;--field-line:rgba(40,60,120,.18);--field-muted:#6b7699;
-    /* blue = accent / energy */
+    /* blue = accent / energy（テーマカラーで上書きされる） */
     --accent:#2563eb;--accent2:#3b82f6;--accent-soft:#dbe6ff;
-    --blue:#2563eb;--blue-bright:#3b82f6;--blue-deep:#1d4ed8;--blue-soft:#dbe6ff;
+    --blue:#2563eb;--blue-bright:#3b82f6;--blue-deep:#1d4ed8;--blue-soft:#dbe6ff;--blue-pale:#74a6ff;
+    --acc-rgb:37,99,235;
+    --select-arrow:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
     /* gold = frames / luxury */
     --gold:#c9a13a;--gold2:#e8c977;--gold-deep:#b1882c;--gold-soft:#f4e9c8;
     --card-line:rgba(177,136,44,.55);
@@ -31,26 +33,59 @@
     --card:var(--panel);
     --shadow:0 1px 2px rgba(40,60,120,.06),0 14px 30px rgba(40,60,120,.10),0 40px 80px rgba(40,60,120,.10);
     --shadow-sm:0 1px 2px rgba(40,60,120,.05),0 8px 20px rgba(40,60,120,.07);
-    --glow-blue:0 10px 26px rgba(37,99,235,.20);
+    --glow-blue:0 10px 26px rgba(var(--acc-rgb),.20);
     --glow-gold:0 10px 26px rgba(177,136,44,.22);
-    --ring:0 0 0 3px rgba(37,99,235,.22);
-    --serif:Georgia,"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif;
+    --ring:0 0 0 3px rgba(var(--acc-rgb),.22);
+    --serif:"Times New Roman","Yu Mincho","Hiragino Mincho ProN",serif;
     --bevel:18px;--rTile:3px 17px 3px 17px;--rBtn:2px 12px 2px 12px;--rDay:4px 13px 4px 13px;
     --radius:14px;--radius-lg:20px;--radius-sm:10px;
   }
+  /* ===== テーマカラー（メニュー > テーマカラー で切替。既定は青） ===== */
+  html[data-theme="red"]{
+    --home-g1:#f9d7d7;--home-g2:#fbe4e4;--home-g3:#fdf2f2;
+    --accent:#dc2626;--accent2:#ef4444;--accent-soft:#fee2e2;
+    --blue:#dc2626;--blue-bright:#ef4444;--blue-deep:#b91c1c;--blue-soft:#fee2e2;--blue-pale:#fca5a5;
+    --acc-rgb:220,38,38;
+    --select-arrow:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23dc2626' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>")}
+  html[data-theme="green"]{
+    --home-g1:#d4eede;--home-g2:#e2f4e9;--home-g3:#f1f9f4;
+    --accent:#16a34a;--accent2:#22c55e;--accent-soft:#dcfce7;
+    --blue:#16a34a;--blue-bright:#22c55e;--blue-deep:#15803d;--blue-soft:#dcfce7;--blue-pale:#86efac;
+    --acc-rgb:22,163,74;
+    --select-arrow:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2316a34a' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>")}
+  html[data-theme="yellow"]{
+    --home-g1:#f5e9d1;--home-g2:#f9f1e0;--home-g3:#fcf8f0;
+    --accent:#ca8a04;--accent2:#eab308;--accent-soft:#fef3c7;
+    --blue:#ca8a04;--blue-bright:#eab308;--blue-deep:#a16207;--blue-soft:#fef3c7;--blue-pale:#fde047;
+    --acc-rgb:202,138,4;
+    --select-arrow:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ca8a04' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>")}
+  html[data-theme="pink"]{
+    --home-g1:#f8d7e6;--home-g2:#fbe4ee;--home-g3:#fdf2f7;
+    --accent:#db2777;--accent2:#ec4899;--accent-soft:#fce7f3;
+    --blue:#db2777;--blue-bright:#ec4899;--blue-deep:#be185d;--blue-soft:#fce7f3;--blue-pale:#f9a8d4;
+    --acc-rgb:219,39,119;
+    --select-arrow:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23db2777' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>")}
+  html[data-theme="black"]{
+    --home-g1:#d6d7da;--home-g2:#e3e5e6;--home-g3:#f2f2f3;
+    --accent:#1f2937;--accent2:#4b5563;--accent-soft:#e5e7eb;
+    --blue:#1f2937;--blue-bright:#4b5563;--blue-deep:#111827;--blue-soft:#e5e7eb;--blue-pale:#9ca3af;
+    --acc-rgb:31,41,55;
+    --select-arrow:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231f2937' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>")}
+  html[data-theme="orange"]{
+    --home-g1:#fbe0d2;--home-g2:#fceae1;--home-g3:#fef5f0;
+    --accent:#ea580c;--accent2:#f97316;--accent-soft:#ffedd5;
+    --blue:#ea580c;--blue-bright:#f97316;--blue-deep:#c2410c;--blue-soft:#ffedd5;--blue-pale:#fdba74;
+    --acc-rgb:234,88,12;
+    --select-arrow:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ea580c' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>")}
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
-    background:
-      radial-gradient(1100px 640px at 88% -12%, rgba(201,161,58,.12), transparent 60%),
-      radial-gradient(980px 700px at 2% 0%, rgba(37,99,235,.10), transparent 55%),
-      linear-gradient(160deg,#f4f6fc 0%, #eaf0fb 52%, #f6f3ec 100%),
-      var(--bg);
+    background:linear-gradient(180deg,var(--home-g1) 0%,var(--home-g2) 26%,var(--home-g3) 56%,#ffffff 88%);
     background-attachment:fixed;background-size:cover;
     color:var(--text);min-height:100%;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   }
-  ::selection{background:rgba(37,99,235,.18);color:#0f1730}
+  ::selection{background:rgba(var(--acc-rgb),.18);color:#0f1730}
   .wrap{max-width:1300px;margin:0 auto;padding:38px 26px 110px;position:relative;z-index:1}
   /* faint HUD grid */
   .wrap::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
@@ -119,9 +154,9 @@
   .dash-tile strong{display:block;font-family:var(--serif);color:#101a36;font-size:29px;line-height:1;letter-spacing:.01em}
   .dash-tile p{color:var(--muted);font-size:10.5px;line-height:1.45;margin-top:9px}
   .kpi-ic{position:absolute;top:13px;right:13px;width:30px;height:30px;border-radius:8px 3px 8px 3px;display:grid;place-items:center;
-    background:rgba(37,99,235,.10);color:var(--blue-deep)}
+    background:rgba(var(--acc-rgb),.10);color:var(--blue-deep)}
   .kpi-ic svg{width:17px;height:17px}
-  .t-weight::before{background:linear-gradient(180deg,#3b82f6,#1d4ed8)}
+  .t-weight::before{background:linear-gradient(180deg,var(--blue-bright),var(--blue-deep))}
   .t-steps::before{background:linear-gradient(180deg,#e8c977,#b1882c)}
   .t-intake::before{background:linear-gradient(180deg,#14b8a6,#0d7a72)}
   .t-net::before{background:linear-gradient(180deg,#64748b,#334155)}
@@ -144,7 +179,7 @@
   .mini-chart svg{display:block;width:100%;height:100%;overflow:visible}
   .mini-line{fill:none;stroke:var(--blue);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
   .mini-line.steps{stroke:var(--gold-deep)}
-  .mini-area{fill:rgba(37,99,235,.10)}
+  .mini-area{fill:rgba(var(--acc-rgb),.10)}
   .mini-area.steps{fill:rgba(201,161,58,.12)}
   .mini-dot{fill:var(--gold);stroke:#fff;stroke-width:2}
   .mini-empty{height:100%;display:grid;place-items:center;color:var(--muted);font-size:12px;font-weight:800;text-align:center}
@@ -206,19 +241,6 @@
     -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:all .15s ease}
   .nebula-rotbtn svg{width:15px;height:15px}
   .nebula-rotbtn:hover{border-color:rgba(150,180,255,.6);color:#fff;box-shadow:0 8px 20px rgba(60,100,255,.3)}
-  /* 全画面ボタン（右上） */
-  .nebula-fsbtn{position:absolute;right:14px;top:12px;z-index:5;display:inline-flex;align-items:center;gap:6px;
-    padding:8px 12px;border-radius:999px;cursor:pointer;font-size:11px;font-weight:800;letter-spacing:.04em;
-    color:#dce6ff;background:rgba(10,16,34,.72);border:1px solid rgba(140,170,255,.35);
-    box-shadow:0 6px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06);
-    -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:all .15s ease}
-  .nebula-fsbtn svg{width:15px;height:15px}
-  .nebula-fsbtn:hover{border-color:rgba(150,180,255,.6);color:#fff;box-shadow:0 8px 20px rgba(60,100,255,.3)}
-  /* フルスクリーン中はパネルを画面いっぱいに */
-  .nebula-orb:fullscreen{width:100%;height:100%;border-radius:0}
-  .nebula-orb:fullscreen::before{border-radius:0}
-  .nebula-orb:-webkit-full-screen{width:100%;height:100%;border-radius:0}
-
   /* ---- knowledge wiki (space galaxy) ---- */
   .wiki-shell{max-width:980px;margin:0 auto}
   .wiki-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:14px}
@@ -417,23 +439,7 @@
     .nebula-legend span{font-size:11.5px;padding:11px 8px}
   }
 
-  /* ---- monthly chart ---- */
-  .month-chart{max-width:860px;margin:0 auto}
-  .chart-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
-  .chart-nav .mlabel{font-family:var(--serif);font-weight:700;font-size:24px;letter-spacing:.03em;color:#101a36}
-  .chart-panel{border:0;border-radius:0;background:none;padding:0}
-  .chart-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
-  .chart-head strong{display:block;color:#101a36;font-size:15px;font-weight:900;line-height:1.2}
-  .chart-head span{display:block;color:var(--muted);font-size:12px;line-height:1.6;margin-top:2px}
-  .chart-unit{color:var(--gold-deep);font-family:var(--serif);font-size:18px;font-weight:700}
-  .chart-canvas{height:230px;position:relative}
-  .chart-canvas svg{display:block;width:100%;height:100%;overflow:visible}
-  .chart-grid{stroke:rgba(40,60,120,.10);stroke-width:1}
-  .chart-axis{stroke:rgba(40,60,120,.20);stroke-width:1}
-  .chart-line{fill:none;stroke:var(--blue);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-  .chart-dot{fill:var(--gold);stroke:#fff;stroke-width:2}
-  .chart-label{fill:var(--muted);font-size:10px;font-weight:800}
-  .chart-value{fill:#101a36;font-size:10px;font-weight:900}
+  /* 食品DB等で使う空状態表示 */
   .chart-empty{height:100%;display:grid;place-items:center;color:var(--muted);font-size:13px;font-weight:800;text-align:center}
 
   /* ---- calendar ---- */
@@ -460,7 +466,7 @@
   .day:hover{background:#eef4ff}
   .day.other{--dcol:#aeb6cf;color:#aeb6cf;background:#fafbfd}
   .day.today{box-shadow:inset 0 0 0 2px var(--gold)}
-  .day.sel{--dcol:#fff;background:linear-gradient(140deg,#3b82f6,#1d4ed8);color:#fff;font-weight:700}
+  .day.sel{--dcol:#fff;background:linear-gradient(140deg,var(--blue-bright),var(--blue-deep));color:#fff;font-weight:700}
   .cal-week .day:nth-child(1):not(.other){--dcol:#d8453a}
   .day .cal-n{position:absolute;top:4px;left:6px;font-size:12.5px;font-weight:700;line-height:1;color:var(--dcol)}
   /* 体重：下部中央のグレー帯に表示（折れ線はこの帯に被らない） */
@@ -484,8 +490,8 @@
   .home-tool:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:var(--glow-blue)}
   .home-tool:hover::after{border-color:var(--blue)}
   .tool-ic{width:42px;height:42px;flex:none;border-radius:12px 4px 12px 4px;display:grid;place-items:center;
-    background:linear-gradient(140deg,rgba(37,99,235,.14),rgba(29,78,216,.06));color:var(--blue-deep);
-    box-shadow:inset 0 0 0 1px rgba(37,99,235,.14)}
+    background:linear-gradient(140deg,rgba(var(--acc-rgb),.14),rgba(var(--acc-rgb),.06));color:var(--blue-deep);
+    box-shadow:inset 0 0 0 1px rgba(var(--acc-rgb),.14)}
   .tool-ic svg{width:21px;height:21px}
   .tool-txt{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
   .home-tool strong{font-family:-apple-system,"Noto Sans JP",sans-serif;font-size:14.5px;font-weight:800;color:#101a36;letter-spacing:.01em}
@@ -512,7 +518,7 @@
   .day-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
   .date-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;
     margin:0 -26px 16px;padding:12px 22px;
-    background:linear-gradient(135deg,#2f6bd6,#2153b0);box-shadow:0 4px 14px rgba(37,99,235,.20)}
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue-deep));box-shadow:0 4px 14px rgba(var(--acc-rgb),.20)}
   .date-nav{background:none;border:none;color:#fff;font-size:17px;font-weight:900;letter-spacing:.06em;
     padding:4px 8px;cursor:pointer;transition:.15s;line-height:1;opacity:.9}
   .date-nav:hover{opacity:1}
@@ -539,13 +545,13 @@
   .profile-field input,.profile-field select{width:100%;min-width:0;border:1px solid var(--field-line);border-radius:var(--radius-sm);background:var(--field-bg);
     color:var(--text);padding:11px 12px;font-size:13px;font-weight:700;font-family:inherit;outline:none;transition:border-color .14s,box-shadow .14s}
   .profile-field select{appearance:none;-webkit-appearance:none;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
+    background-image:var(--select-arrow);
     background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
   .profile-field input:focus,.profile-field select:focus{border-color:var(--blue);box-shadow:var(--ring)}
   .profile-seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   .profile-seg button{border:1px solid var(--line);border-radius:var(--radius-sm);background:#fff;color:var(--muted);
     min-height:40px;font-size:13px;font-weight:900;cursor:pointer;transition:.15s}
-  .profile-seg button.active{border-color:var(--blue);background:rgba(37,99,235,.10);color:var(--blue-deep)}
+  .profile-seg button.active{border-color:var(--blue);background:rgba(var(--acc-rgb),.10);color:var(--blue-deep)}
   .profile-results{display:grid;grid-template-columns:minmax(190px,.8fr) 1.2fr;gap:12px;margin-top:14px}
   .profile-main,.profile-rows,.macro-targets{border:0;border-radius:0;background:none;padding:0}
   .profile-main{position:relative;overflow:hidden}
@@ -583,7 +589,7 @@
   .food-search:focus{border-color:var(--blue);box-shadow:var(--ring)}
   .food-list{display:grid;gap:7px;max-height:420px;overflow:auto;padding-right:2px}
   .food-row{border:1px solid var(--line);border-radius:var(--radius-sm);background:#fff;padding:11px;text-align:left;cursor:pointer;color:var(--text);transition:.14s}
-  .food-row:hover{border-color:var(--blue);background:rgba(37,99,235,.04)}
+  .food-row:hover{border-color:var(--blue);background:rgba(var(--acc-rgb),.04)}
   .food-row strong{display:block;font-size:13px;margin-bottom:5px;color:#101a36}
   .food-row span{display:block;color:var(--muted);font-size:11px;line-height:1.45}
   .food-row em{font-style:normal;color:var(--gold-deep);font-size:10px;font-weight:900;margin-left:6px}
@@ -601,6 +607,7 @@
   .review-stat{display:flex;flex-direction:column;gap:7px;padding:4px 2px}
   .review-stat span{color:var(--muted);font-size:11.5px;font-weight:800;letter-spacing:.02em}
   .review-stat strong{font-family:var(--serif);font-size:25px;line-height:1;color:#101a36}
+  .review-stat em{font-style:normal;font-size:11px;font-weight:800;color:var(--blue-deep)}
   .review-tile{position:relative;border:1px solid var(--card-line);border-radius:var(--rTile);background:var(--panel2);padding:15px;overflow:hidden;
     transition:transform .16s,border-color .16s,box-shadow .16s}
   .review-tile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--blue-bright),var(--blue-deep))}
@@ -624,6 +631,23 @@
   @media(max-width:900px){.review-grid,.review-body{grid-template-columns:1fr 1fr}}
   @media(max-width:620px){.review-grid,.review-body,.review-day{grid-template-columns:1fr}.review-list div{grid-template-columns:1fr}}
 
+  /* ---- WEEKLY RESULT（週次リザルト画面） ---- */
+  .wr-hero{position:relative;overflow:hidden;margin-bottom:18px;padding:24px 20px 20px;border-radius:var(--rTile);
+    border:1px solid var(--card-line);background:linear-gradient(140deg,#0d1530 0%,#14224a 55%,#1a2a5e 100%);
+    text-align:center;box-shadow:var(--shadow-sm)}
+  .wr-hero::before{content:"";position:absolute;left:50%;top:-70px;transform:translateX(-50%);width:340px;height:200px;border-radius:50%;
+    background:radial-gradient(circle,rgba(90,140,255,.30),transparent 70%);pointer-events:none}
+  .wr-eyebrow{font-size:10px;font-weight:900;letter-spacing:.34em;text-transform:uppercase;color:#8fa6df;margin-bottom:10px;position:relative}
+  .wr-grade{font-family:var(--serif);font-size:34px;letter-spacing:.08em;color:#f0d98f;text-shadow:0 0 22px rgba(232,201,119,.5);line-height:1.1;position:relative}
+  .wr-range{color:#90a6df;font-size:11px;font-weight:700;margin-top:8px;position:relative}
+  .wr-days{color:#dfe7ff;font-size:12.5px;font-weight:800;margin-top:14px;position:relative}
+  .wr-days b{font-family:var(--serif);font-size:22px;color:#fff;margin:0 2px}
+  .wr-meter{height:6px;border-radius:999px;background:rgba(150,180,255,.18);overflow:hidden;max-width:320px;margin:10px auto 0;position:relative}
+  .wr-meter i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#5b8cff,#e8c977);
+    box-shadow:0 0 12px rgba(232,201,119,.55);transition:width .6s ease}
+  .wr-note{color:#c9d6ff;font-size:12px;font-weight:700;margin-top:12px;position:relative}
+  .wr-actions{display:flex;justify-content:center;margin-top:6px}
+
   /* ---- day view ---- */
   .back{display:inline-flex;align-items:center;gap:7px;color:var(--muted);background:none;border:none;
     font-size:14px;cursor:pointer;font-weight:700;margin-bottom:14px;padding:4px 0;transition:.15s}
@@ -645,8 +669,8 @@
   .sec-label{display:flex;align-items:center;gap:11px;font-size:15px;color:#101a36;font-weight:900;margin:28px 0 14px;
     letter-spacing:.02em}
   .sec-label::before{content:"";flex:none;width:10px;height:10px;transform:rotate(45deg);
-    background:linear-gradient(135deg,#f0d98f,#b1882c);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-  .sec-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(177,136,44,.5),rgba(37,99,235,.18) 45%,transparent)}
+    background:linear-gradient(135deg,#f0d98f,#b1882c);box-shadow:0 0 0 3px rgba(var(--acc-rgb),.12)}
+  .sec-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(177,136,44,.5),rgba(var(--acc-rgb),.18) 45%,transparent)}
 
   .bodylog{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .bodylog.weight-log{grid-template-columns:1fr;margin-top:14px}
@@ -669,13 +693,12 @@
   @media(max-width:680px){.bodylog{grid-template-columns:1fr}}
 
   /* ---- day input table（見出し+入力を表形式に） ---- */
-  .day-table{margin-top:14px;border:1px solid var(--field-line);border-radius:var(--radius-sm);overflow:hidden;background:#fff}
-  .dt-row{display:grid;grid-template-columns:130px 1fr;align-items:stretch;border-bottom:1px solid var(--field-line)}
-  .dt-row:last-child{border-bottom:none}
+  .day-table{margin-top:10px;border-top:1px solid rgba(22,35,63,.12);background:transparent}
+  .dt-row{display:grid;grid-template-columns:150px 1fr;align-items:center;border-bottom:1px solid rgba(22,35,63,.07)}
   .dt-label{display:flex;flex-direction:column;justify-content:center;gap:2px;
-    font-size:13.5px;font-weight:900;color:#101a36;padding:13px 15px;background:rgba(40,60,120,.05);border-right:1px solid var(--field-line)}
+    font-size:12px;font-weight:800;color:#5a6480;padding:13px 2px;letter-spacing:.05em}
   .dt-label small{font-size:9.5px;color:var(--muted);font-weight:800;letter-spacing:.06em}
-  .dt-field{display:flex;align-items:center;padding:8px 15px;background:#fff;min-width:0}
+  .dt-field{display:flex;align-items:center;padding:7px 2px;background:transparent;min-width:0}
   .dt-field .body-input{grid-template-columns:auto auto;max-width:none;justify-content:start;gap:6px}
   /* セルの中に入力枠を二重に出さない（枠なし・背景なし） */
   .dt-field .body-input input,
@@ -687,36 +710,61 @@
   .dt-field .body-input.time select:focus{box-shadow:inset 0 -2px 0 var(--blue)}
   .dt-field .steps-select{border:none;background-color:transparent;width:auto;max-width:none;padding:6px 32px 6px 0}
   .dt-field textarea.hr-memo{width:100%;margin-top:0}
+  /* Quiet Ledger：記入欄は標準フォント、フォーカスで金の下線 */
+  .dt-field .body-input input:focus{box-shadow:inset 0 -2px 0 rgba(177,136,44,.75)}
+  .dt-field .body-input.time select:focus{box-shadow:inset 0 -2px 0 rgba(177,136,44,.75)}
   .dt-field .body-input input:focus,
   .dt-field textarea.hr-memo:focus,
   .dt-field .steps-select:focus{outline:none;box-shadow:inset 0 -2px 0 var(--blue)}
   @media(max-width:420px){.dt-row{grid-template-columns:104px 1fr}.dt-label{padding:11px 12px}}
 
-  .day-visuals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 8px}
-  .visual-card{position:relative;border:1px solid var(--card-line);border-radius:var(--rTile);background:var(--panel2);padding:16px;overflow:hidden}
-  .visual-card::after{content:"";position:absolute;right:11px;top:11px;width:14px;height:14px;pointer-events:none;
-    border-top:2px solid var(--blue);border-right:2px solid var(--blue);opacity:.5}
-  .visual-card .eyebrow{display:block;color:var(--muted);font-size:14px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
-  .visual-card strong{display:block;font-family:var(--serif);color:#101a36;font-size:32px;line-height:1}
-  .visual-card p{color:var(--muted);font-size:12px;line-height:1.5;margin-top:8px}
-  /* カロリー収支：摂取／消費の横棒グラフ（カード幅いっぱい） */
-  .cal-rows{display:flex;flex-direction:column;gap:14px;margin-top:16px}
-  .cal-row{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:12px}
-  .cal-row .nm{font-size:12px;font-weight:800}
-  .cal-row .track{height:16px;border-radius:999px;background:rgba(40,60,120,.10);overflow:hidden}
-  .cal-row .track i{display:block;height:100%;border-radius:999px;min-width:6px;transition:width .3s}
-  .cal-row .vv{font-size:13px;font-weight:800;color:#1a2540;white-space:nowrap}
-  .cal-bars-empty{color:var(--muted);font-size:12px;font-weight:700;text-align:center;padding:26px 0}
-  .macro-donut{display:flex;justify-content:space-around;gap:6px;margin-top:14px}
-  .macro-ring{display:flex;flex-direction:column;align-items:center;gap:7px;flex:1;min-width:0}
-  .mring{position:relative;width:80px;height:80px;max-width:100%}
-  .mring svg{width:100%;height:100%;display:block}
-  .mring .mseg{transition:stroke-dasharray .35s ease}
-  .mring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
-  .mring-center b{font-size:19px;font-weight:900;color:#101a36}
-  .mring-center span{font-size:13px;font-weight:800;color:var(--muted);margin-top:2px}
-  .macro-ring-label{font-size:11px;font-weight:800;color:var(--muted)}
-  @media(max-width:760px){.day-visuals{grid-template-columns:1fr}}
+  /* ---- 今日のサマリー：Quiet Ledger（静かな台帳）----
+     数字はインクのセリフ体、罫線はヘアライン、金は装丁の箔として一筋だけ。
+     進捗は海緑、「今日」だけが琥珀で灯る。 */
+  .holo{position:relative;margin:2px 0 12px}
+  .holo-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:12px}
+  .hp{position:relative;background:#fff;border:1px solid rgba(22,35,63,.09);border-radius:var(--rTile);
+    padding:15px 17px 14px;box-shadow:0 1px 2px rgba(22,35,63,.04),0 12px 30px rgba(22,35,63,.05);transition:opacity .3s}
+  .hp header{display:flex;align-items:center;justify-content:flex-start;gap:8px;font-size:10.5px;font-weight:800;letter-spacing:.14em;
+    color:#8a94ae;margin-bottom:11px}
+  .hp header::before{content:"";flex:none;width:14px;height:1px;background:linear-gradient(90deg,#c9a13a,rgba(201,161,58,.15))}
+  .hp header span{font-size:9.5px;font-weight:700;letter-spacing:.06em;color:#aab2c6;margin-left:auto}
+  .hp.nodata{opacity:.52}
+  .hp .nd{position:absolute;right:15px;top:15px;font-style:normal;font-size:9px;font-weight:800;letter-spacing:.18em;color:#b6bdcf}
+  .hp-big{font-family:var(--serif);font-weight:700;font-size:38px;line-height:1;color:#101a36;letter-spacing:.01em;margin:0 0 13px}
+  .hp-big small{font-size:12px;font-weight:700;color:#8a94ae;margin-left:5px;letter-spacing:.1em}
+  .hp-rows{display:grid;gap:9px;margin-bottom:9px;padding-top:10px;border-top:1px solid rgba(22,35,63,.07)}
+  .hp-row{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:10px}
+  .hp-row span{font-size:10.5px;font-weight:800;color:#8a94ae;letter-spacing:.1em}
+  .hp-row .track{height:3px;background:rgba(22,35,63,.06);overflow:hidden;border-radius:1.5px}
+  .hp-row .track i{display:block;height:100%;width:0;background:#1a9e8f;transition:width .5s ease}
+  .hp-row.or .track i{background:#d99a2b}
+  .hp-row b{font-family:var(--serif);font-size:13.5px;font-weight:700;color:#101a36;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+  .hp-sub{font-size:10px;font-weight:700;color:#9aa2b8;min-height:12px;letter-spacing:.05em;line-height:1.6}
+  .hp-val{display:flex;align-items:baseline;gap:5px;margin:0 0 5px}
+  .hp-val b{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1;color:#101a36}
+  .hp-val small{font-size:10.5px;font-weight:700;color:#8a94ae;letter-spacing:.1em}
+  .spark{margin-top:9px;height:40px}
+  .spark svg{display:block;width:100%;height:100%;overflow:visible}
+  .spark-nd{height:100%;display:grid;place-items:center;font-size:9.5px;font-weight:800;letter-spacing:.18em;color:#b6bdcf}
+  .ring{position:relative;width:98px;height:98px;margin:1px auto 8px}
+  .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .ring svg .prog{transition:stroke-dasharray .6s ease}
+  .ring-val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:700;font-size:24px;line-height:1;color:#101a36}
+  .ring-val small{font-size:11px;font-weight:700;color:#8a94ae;margin-left:2px}
+  .ring.over svg .prog{stroke:#c65a24}
+  .ring.over .ring-val{color:#a34a1e}
+  .holo-grid>.hp-wide{grid-column:1/-1}
+  /* PFC：台帳の行 */
+  .pfc-row{display:grid;grid-template-columns:76px 1fr auto;align-items:center;gap:12px;padding:8.5px 0}
+  .pfc-row+.pfc-row{border-top:1px solid rgba(22,35,63,.06)}
+  .pfc-row .pn{font-size:11px;font-weight:800;color:#4a5670;letter-spacing:.05em}
+  .pfc-row .ptrack{position:relative;height:3px;background:rgba(22,35,63,.06);border-radius:1.5px;overflow:hidden}
+  .pfc-row .ptrack i{position:absolute;left:0;top:0;bottom:0;width:0;transition:width .5s ease}
+  .pfc-row b{font-family:var(--serif);font-size:13.5px;font-weight:700;color:#101a36;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .pfc-row b small{color:#9aa2b8;font-size:10px;font-weight:700}
+  .pfc-row.over b{color:#a34a1e}
 
   .meals{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   @media(max-width:680px){.meals{grid-template-columns:1fr}}
@@ -736,13 +784,13 @@
   .meal-select:focus{outline:none;border-color:var(--blue);box-shadow:var(--ring)}
   .meal-add{margin-top:8px;width:100%;background:none;border:1px dashed rgba(40,60,120,.30);color:var(--blue-deep);
     font-size:11.5px;font-weight:800;border-radius:var(--radius-sm);padding:8px 10px;cursor:pointer;transition:.14s}
-  .meal-add:hover{border-color:var(--blue);color:var(--blue);background:rgba(37,99,235,.04)}
+  .meal-add:hover{border-color:var(--blue);color:var(--blue);background:rgba(var(--acc-rgb),.04)}
   .meal-nutrition{margin-top:8px;color:var(--muted);font-size:11px;font-weight:700;line-height:1.45}
   .meal-nutrition strong{color:var(--gold-deep);font-weight:900}
   .meal-nutrition .miss{color:#d4761f;font-weight:800}
   .meal-copy{margin-left:auto;background:none;border:1px solid var(--field-line);color:var(--blue-deep);
     font-size:10.5px;font-weight:800;border-radius:999px;padding:5px 11px;cursor:pointer;transition:.14s}
-  .meal-copy:hover{border-color:var(--blue);color:var(--blue);background:rgba(37,99,235,.05)}
+  .meal-copy:hover{border-color:var(--blue);color:var(--blue);background:rgba(var(--acc-rgb),.05)}
   .meal-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
   .meal-chip{background:rgba(240,217,143,.20);border:1px solid rgba(177,136,44,.4);color:var(--gold-deep);
     font-size:11px;font-weight:800;border-radius:999px;padding:5px 11px;cursor:pointer;transition:.14s;max-width:100%;
@@ -769,7 +817,7 @@
   .steps-select{appearance:none;-webkit-appearance:none;background-color:var(--field-bg);color:var(--text);
     width:140px;max-width:140px;border:1px solid var(--field-line);border-radius:var(--radius-sm);padding:12px 38px 12px 14px;font-size:15px;font-weight:500;
     font-family:inherit;cursor:pointer;transition:border-color .14s,box-shadow .14s;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");
+    background-image:var(--select-arrow);
     background-repeat:no-repeat;background-position:right 13px center}
   .steps-select:hover,.steps-select:focus{outline:none;border-color:var(--blue);box-shadow:var(--ring)}
 
@@ -786,7 +834,7 @@
   .rating{display:grid;grid-template-columns:1fr;gap:12px;align-items:center}
   .rating-bar{position:relative;padding:13px 0 16px;margin-right:28px}
   .rating-bar::before{content:'';position:absolute;left:0;right:0;top:18px;height:2px;
-    background:linear-gradient(90deg,#1d4ed8,#3b82f6,#74a6ff,#e8c977,#caa23e);opacity:.85;border-radius:2px}
+    background:linear-gradient(90deg,var(--blue-deep),var(--blue-bright),var(--blue-pale),#e8c977,#caa23e);opacity:.85;border-radius:2px}
   .rating input[type="range"]{position:relative;z-index:1;width:calc(100% + 18px);height:30px;margin:0 0 0 -9px;
     appearance:none;-webkit-appearance:none;background:transparent;cursor:pointer}
   .rating input[type="range"]::-webkit-slider-runnable-track{height:2px;background:transparent}
@@ -828,9 +876,7 @@
   .btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
   .btn:disabled:hover{transform:none;border-color:var(--line);color:var(--ink-soft)}
 
-  /* ---- home: frameless, blue→white vertical gradient (no hard boundary) ---- */
-  body.home-bg{background:linear-gradient(180deg,#d6e3fb 0%,#e4ecfb 26%,#f1f6fe 56%,#ffffff 88%);
-    background-attachment:fixed;background-size:cover}
+  /* ---- home: frameless（背景は body と共通の縦グラデーション） ---- */
   #homeView .card,#dayView .card{background:none;padding:0;clip-path:none;filter:none}
   #homeView .card .pad,#dayView .card .pad{background:none;padding:0;clip-path:none}
   #homeView .card .pad::before,#homeView .card .pad::after,
@@ -861,8 +907,8 @@
     font-weight:900;font-size:14px;color:#3a2c06;background:linear-gradient(135deg,#f0d98f,#c9a13a);
     box-shadow:0 4px 12px rgba(177,136,44,.32)}
   .guide-step .gtab{flex:none;align-self:flex-start;min-width:92px;text-align:center;padding:6px 11px;border-radius:999px;
-    font-weight:900;font-size:11.5px;letter-spacing:.02em;color:#1d4ed8;background:var(--blue-soft);
-    border:1px solid rgba(37,99,235,.25);white-space:nowrap}
+    font-weight:900;font-size:11.5px;letter-spacing:.02em;color:var(--blue-deep);background:var(--blue-soft);
+    border:1px solid rgba(var(--acc-rgb),.25);white-space:nowrap}
   .guide-step-txt{min-width:0}
   .guide-step-txt strong{display:block;font-size:15px;font-weight:800;color:#101a36;margin-bottom:4px}
   .guide-step-txt span{font-size:12.5px;color:var(--muted);line-height:1.6}
@@ -875,6 +921,19 @@
     transition:transform .14s ease,box-shadow .14s,filter .14s}
   .guide-ok:hover{transform:translateY(-1px);filter:brightness(1.05);box-shadow:0 16px 34px rgba(192,49,74,.5)}
   .guide-ok:active{transform:translateY(0)}
+
+  /* ---- テーマカラー選択 ---- */
+  .theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:14px}
+  .theme-opt{display:flex;flex-direction:column;align-items:center;gap:9px;padding:16px 10px 13px;cursor:pointer;
+    border:1px solid var(--line);border-radius:var(--rTile);background:linear-gradient(180deg,#ffffff,#f8fafe);
+    box-shadow:var(--shadow-sm);transition:transform .16s ease,box-shadow .16s ease,border-color .16s;font-family:inherit}
+  .theme-opt:hover{transform:translateY(-2px);border-color:var(--blue);box-shadow:var(--glow-blue)}
+  .theme-opt .sw{width:38px;height:38px;border-radius:50%;background:var(--sw);
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.08),0 4px 10px rgba(40,60,120,.18)}
+  .theme-opt strong{font-size:12.5px;font-weight:800;color:var(--text);letter-spacing:.02em}
+  .theme-opt.active{border-color:var(--blue);box-shadow:var(--ring)}
+  .theme-opt.active .sw{box-shadow:inset 0 0 0 1px rgba(0,0,0,.08),0 0 0 3px #fff,0 0 0 5px var(--blue)}
+  .theme-opt.active strong{color:var(--blue-deep)}
 
   /* ---- header メニューボタン（右側・アイコンのみ）---- */
   .hdr-menu{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;
@@ -904,9 +963,7 @@
   .chat-inputbar{position:fixed;left:0;right:0;bottom:var(--tabH,64px);z-index:180;padding:10px 0;
     background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
     border-top:1px solid rgba(40,60,120,.12);box-shadow:0 -6px 20px rgba(40,60,120,.06)}
-  .chat-tpls{display:flex;gap:7px;overflow-x:auto;max-width:720px;margin:0 auto;padding:2px 26px 10px;
-    -webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .chat-tpls::-webkit-scrollbar{display:none}
+  .chat-tpls{display:flex;flex-wrap:wrap;gap:7px;max-width:720px;margin:0 auto;padding:2px 26px 10px}
   .chat-tpl{flex:none;display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:999px;cursor:pointer;
     font-family:inherit;font-size:12px;font-weight:700;color:#5a6a90;background:#fff;border:1px solid var(--line);
     white-space:nowrap;transition:border-color .14s,color .14s,box-shadow .14s}
@@ -931,6 +988,16 @@
   body.chat-mode .wrap{padding-bottom:calc(var(--tabH,64px) + var(--chatInputH,64px) + 24px)}
   @media(max-width:560px){ .chat-inputrow{padding:0 14px} .chat-tpls{padding:2px 14px 10px} }
 </style>
+<script>
+// テーマカラーを描画前に適用（ちらつき防止）。既定は青。
+try{
+  var __t=localStorage.getItem('baaeed_theme');
+  if(__t&&__t!=='blue') document.documentElement.setAttribute('data-theme',__t);
+  var __m=document.querySelector('meta[name="theme-color"]');
+  var __c=getComputedStyle(document.documentElement).getPropertyValue('--home-g1').trim();
+  if(__m&&__c) __m.setAttribute('content',__c);
+}catch(e){}
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -1044,7 +1111,34 @@
             <span class="tool-txt"><strong>データ整理</strong></span>
             <span class="tool-arrow">›</span>
           </button>
+          <button class="home-tool" id="themeColorBtn" type="button">
+            <span class="tool-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 2-.9 2-2 0-.6-.2-1-.6-1.4-.4-.4-.6-.9-.6-1.4 0-1.1.9-2 2-2h2.4A3.8 3.8 0 0 0 21 10.4 8.9 8.9 0 0 0 12 3z"/><circle cx="7.5" cy="11" r="1.1" fill="currentColor" stroke="none"/><circle cx="10.5" cy="7.3" r="1.1" fill="currentColor" stroke="none"/><circle cx="15" cy="7.3" r="1.1" fill="currentColor" stroke="none"/></svg></span>
+            <span class="tool-txt"><strong>テーマカラー</strong></span>
+            <span class="tool-arrow">›</span>
+          </button>
         </div>
+  </section>
+
+  <!-- THEME COLOR -->
+  <section id="themeColorView" class="hidden">
+    <button class="back" id="themeColorBackBtn">‹ メニューへ戻る</button>
+    <div class="card"><div class="pad">
+      <div class="day-head">
+        <div>
+          <div class="day-title">テーマカラー</div>
+          <div class="day-sub">アプリのアクセントカラーを選べます。選択はこの端末に保存されます。</div>
+        </div>
+      </div>
+      <div class="theme-grid" id="themeGrid">
+        <button type="button" class="theme-opt" data-theme="blue" style="--sw:linear-gradient(140deg,#3b82f6,#1d4ed8)"><span class="sw"></span><strong>青</strong></button>
+        <button type="button" class="theme-opt" data-theme="red" style="--sw:linear-gradient(140deg,#ef4444,#b91c1c)"><span class="sw"></span><strong>赤</strong></button>
+        <button type="button" class="theme-opt" data-theme="green" style="--sw:linear-gradient(140deg,#22c55e,#15803d)"><span class="sw"></span><strong>緑</strong></button>
+        <button type="button" class="theme-opt" data-theme="yellow" style="--sw:linear-gradient(140deg,#eab308,#a16207)"><span class="sw"></span><strong>黄色</strong></button>
+        <button type="button" class="theme-opt" data-theme="pink" style="--sw:linear-gradient(140deg,#ec4899,#be185d)"><span class="sw"></span><strong>ピンク</strong></button>
+        <button type="button" class="theme-opt" data-theme="black" style="--sw:linear-gradient(140deg,#4b5563,#111827)"><span class="sw"></span><strong>黒</strong></button>
+        <button type="button" class="theme-opt" data-theme="orange" style="--sw:linear-gradient(140deg,#f97316,#c2410c)"><span class="sw"></span><strong>オレンジ</strong></button>
+      </div>
+    </div></div>
   </section>
 
   <!-- CHAT (LINE風メモ) -->
@@ -1095,36 +1189,6 @@
           </div>
           <button class="btn ghost" id="jsonRestoreBtn">復元</button>
           <input class="file-input" id="jsonRestoreInput" type="file" accept="application/json,.json">
-        </div>
-      </div>
-    </div></div>
-  </section>
-
-  <!-- GRAPH -->
-  <section id="graphView" class="hidden">
-    <button class="back" id="graphBackBtn">‹ メニューへ戻る</button>
-    <div class="card"><div class="pad">
-      <div class="day-head">
-        <div>
-          <div class="day-title" id="graphPageTitle">体重グラフ</div>
-          <div class="day-sub" id="graphPageSub">月ごとの推移</div>
-        </div>
-      </div>
-      <div class="month-chart">
-        <div class="chart-nav">
-          <button class="nav" id="graphPrevM">‹</button>
-          <div class="mlabel" id="graphMlabel"></div>
-          <button class="nav" id="graphNextM">›</button>
-        </div>
-        <div class="chart-panel">
-          <div class="chart-head">
-            <div>
-              <strong id="chartTitle">体重</strong>
-              <span id="chartMeta">月ごとの推移</span>
-            </div>
-            <div class="chart-unit" id="chartUnit">kg</div>
-          </div>
-          <div class="chart-canvas" id="monthlyChart"></div>
         </div>
       </div>
     </div></div>
@@ -1292,14 +1356,16 @@
   <section id="reviewView" class="hidden">
     <button class="back" id="reviewBackBtn">‹ メニューへ戻る</button>
     <div class="card"><div class="pad">
-      <div class="review-head">
-        <div>
-          <div class="review-title">Weekly Review</div>
-          <div class="review-sub" id="reviewRange"></div>
-        </div>
-        <button class="btn primary" id="copyWeekBtn">週次レビューをコピー</button>
+      <div class="wr-hero">
+        <div class="wr-eyebrow">Weekly Result</div>
+        <div class="wr-grade" id="wrGrade">—</div>
+        <div class="wr-range" id="reviewRange"></div>
+        <div class="wr-days" id="wrDays"></div>
+        <div class="wr-meter"><i id="wrMeterBar"></i></div>
+        <div class="wr-note" id="wrNote"></div>
       </div>
       <div class="review-grid" id="reviewTiles"></div>
+      <div class="wr-actions"><button class="btn primary" id="copyWeekBtn">週次レビューをコピー</button></div>
     </div></div>
   </section>
 
@@ -1317,17 +1383,46 @@
         </div>
       </div>
 
-      <div class="day-visuals">
-        <div class="visual-card">
-          <span class="eyebrow">カロリー収支</span>
-          <strong id="dayNetCalories">--</strong>
-          <p id="dayNetNote">摂取カロリー − 消費カロリー</p>
-          <div class="cal-rows" id="dayCalBars"></div>
-        </div>
-        <div class="visual-card">
-          <span class="eyebrow">PFCバランス</span>
-          <p id="dayMacroNote" style="margin-top:0">P＝タンパク質／F＝脂質／C＝炭水化物の比率</p>
-          <div class="macro-donut" id="dayMacroDonut"></div>
+      <!-- 今日のダッシュボード：健康管理アプリらしい落ち着いたカードUI -->
+      <div class="sec-label">今日のサマリー</div>
+      <div class="holo">
+        <div class="holo-grid">
+          <section class="hp hp-main" id="holoBalance">
+            <header>カロリー収支</header>
+            <div class="hp-big" id="holoNet">--</div>
+            <div class="hp-rows">
+              <div class="hp-row"><span>摂取</span><div class="track"><i id="holoInBar"></i></div><b id="holoIn">--</b></div>
+              <div class="hp-row or"><span>消費</span><div class="track"><i id="holoOutBar"></i></div><b id="holoOut">--</b></div>
+            </div>
+            <div class="hp-sub" id="holoNetSub"></div>
+          </section>
+          <section class="hp" id="holoTarget">
+            <header>目標達成率</header>
+            <div class="ring" id="holoRing">
+              <svg viewBox="0 0 84 84">
+                <circle cx="42" cy="42" r="36" fill="none" stroke="#eef1f7" stroke-width="7"></circle>
+                <circle class="prog" cx="42" cy="42" r="36" fill="none" stroke="#1a9e8f" stroke-width="7" stroke-linecap="round" stroke-dasharray="0 226.2"></circle>
+              </svg>
+              <div class="ring-val" id="holoRingVal">--</div>
+            </div>
+            <div class="hp-sub" id="holoRingSub" style="text-align:center"></div>
+          </section>
+          <section class="hp" id="holoWeightP">
+            <header>体重</header>
+            <div class="hp-val"><b id="holoWeight">--</b><small>kg</small></div>
+            <div class="hp-sub" id="holoWeightSub"></div>
+            <div class="spark" id="holoWeightChart"></div>
+          </section>
+          <section class="hp" id="holoStepsP">
+            <header>歩数</header>
+            <div class="hp-val"><b id="holoSteps">--</b><small>歩</small></div>
+            <div class="hp-sub" id="holoStepsSub"></div>
+            <div class="spark" id="holoStepsChart"></div>
+          </section>
+          <section class="hp hp-wide" id="holoPfcP">
+            <header>PFCバランス<span>目標に対する摂取量</span></header>
+            <div id="holoPfc"></div>
+          </section>
         </div>
       </div>
 
@@ -2514,7 +2609,6 @@ let profile = loadProfile();
 let view = new Date();
 let sel = ymd(new Date());
 let activeHour = new Date().getHours();
-let chartMode = 'weight';
 let chat = loadChat();
 let chatTemplates = loadChatTemplates();
 let toastTimer;
@@ -2607,7 +2701,7 @@ function renderProfile(){
   setText('targetNote',note);
 }
 /* ---- view switching ---- */
-const ALL_VIEWS=['homeView','dayView','trendView','chatView','menuView','reviewView','graphView','foodDbView','basicInfoView','targetNumbersView','dataToolsView','guideView'];
+const ALL_VIEWS=['homeView','dayView','trendView','chatView','menuView','reviewView','foodDbView','basicInfoView','targetNumbersView','dataToolsView','guideView','themeColorView'];
 const FRAMELESS_VIEWS=['homeView','dayView','trendView'];
 // 各画面 → 下部タブのどれをアクティブ表示にするか（メニュー系はヘッダーボタンからなのでタブは非アクティブ）
 const VIEW_TAB={homeView:'cal',dayView:'today',trendView:'trend',foodDbView:'food',chatView:'chat'};
@@ -2624,12 +2718,12 @@ function openToday(){ openDay(ymd(new Date())); }
 function showTrend(){ showView('trendView'); buildNebula(); setSpace3DMode('map'); }
 function showMenu(){ showView('menuView'); }
 function showReview(){ showView('reviewView'); renderReview(); }
-function showGraph(mode){ chartMode=mode; showView('graphView'); renderMonthlyChart(); }
 function showFoodDb(){ showView('foodDbView'); renderFoodDb(); }
 function showBasicInfo(){ showView('basicInfoView'); renderProfile(); }
 function showTargetNumbers(){ showView('targetNumbersView'); renderProfile(); }
 function showDataTools(){ showView('dataToolsView'); }
 function showGuide(){ showView('guideView'); }
+function showThemeColor(){ showView('themeColorView'); syncThemeGrid(); }
 function showChat(){ showView('chatView'); renderChat(); renderChatTemplates(); syncChatMetrics();
   requestAnimationFrame(()=>{ syncChatMetrics(); chatScrollToBottom(); }); }
 
@@ -2757,7 +2851,6 @@ function renderCal(){
     if(overlay) row.insertAdjacentHTML('beforeend', overlay);
     grid.appendChild(row);
   }
-  renderMonthlyChart();
   renderDashboard();
 }
 
@@ -2781,78 +2874,6 @@ function weekWeightOverlay(week){
 }
 
 function chartDayKey(y,m,d){ return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'); }
-function chartFormatValue(value,mode){
-  if(mode==='steps') return fmt(Math.round(value))+'歩';
-  return round(value,1)+'kg';
-}
-function chartScale(values,mode){
-  const minValue=Math.min(...values), maxValue=Math.max(...values);
-  if(mode==='steps'){
-    const max=Math.max(1000,Math.ceil(maxValue/1000)*1000);
-    return {min:0,max};
-  }
-  const min=Math.floor((minValue-.8)*10)/10;
-  const max=Math.ceil((maxValue+.8)*10)/10;
-  return min===max ? {min:min-1,max:max+1} : {min,max};
-}
-function renderMonthlyChart(){
-  const y=view.getFullYear(), m=view.getMonth();
-  const days=new Date(y,m+1,0).getDate();
-  const mode=chartMode;
-  const title=mode==='weight'?'体重':'歩数';
-  const unit=mode==='weight'?'kg':'歩';
-  setText('graphMlabel',`${y}年 ${m+1}月`);
-  setText('graphPageTitle',`${title}グラフ`);
-  setText('graphPageSub',`${y}年${m+1}月の毎日の${title}推移`);
-  setText('chartTitle',title);
-  setText('chartUnit',unit);
-  const series=Array.from({length:days},(_,idx)=>{
-    const day=idx+1;
-    const entry=data[chartDayKey(y,m,day)]||{};
-    const value=mode==='weight' ? parseFloat(entry.weight) : Number(entry.steps);
-    return {day,value:Number.isFinite(value)&&value>0?value:null};
-  });
-  const recorded=series.filter(p=>p.value!==null);
-  const chart=document.getElementById('monthlyChart');
-  if(!chart) return;
-  if(!recorded.length){
-    setText('chartMeta',`${y}年${m+1}月の${title}はまだ未記録です`);
-    chart.innerHTML=`<div class="chart-empty">${title}を入力すると、この月の折れ線グラフが表示されます。</div>`;
-    return;
-  }
-  const avg=recorded.reduce((sum,p)=>sum+p.value,0)/recorded.length;
-  setText('chartMeta',`${recorded.length}日記録 / 平均 ${chartFormatValue(avg,mode)}`);
-  const w=640,h=220,padL=42,padR=18,padT=18,padB=30;
-  const plotW=w-padL-padR, plotH=h-padT-padB;
-  const scale=chartScale(recorded.map(p=>p.value),mode);
-  const xFor=day=>padL+((day-1)/(days-1))*plotW;
-  const yFor=value=>padT+((scale.max-value)/(scale.max-scale.min))*plotH;
-  const segments=[];
-  let current=[];
-  series.forEach(p=>{
-    if(p.value!==null){ current.push([xFor(p.day),yFor(p.value)]); }
-    else if(current.length){ segments.push(current); current=[]; }
-  });
-  if(current.length) segments.push(current);
-  const gridLines=[0,.5,1].map(t=>{
-    const yLine=padT+t*plotH;
-    const value=scale.max-(scale.max-scale.min)*t;
-    return `<line class="chart-grid" x1="${padL}" y1="${yLine}" x2="${w-padR}" y2="${yLine}"></line>
-      <text class="chart-label" x="4" y="${yLine+3}">${mode==='steps'?fmt(Math.round(value)):round(value,1)}</text>`;
-  }).join('');
-  const paths=segments.map(points=>{
-    const d=points.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
-    return `<path class="chart-line" d="${d}"></path>`;
-  }).join('');
-  const dots=recorded.map(p=>`<circle class="chart-dot" cx="${xFor(p.day).toFixed(1)}" cy="${yFor(p.value).toFixed(1)}" r="4"><title>${p.day}日 ${chartFormatValue(p.value,mode)}</title></circle>`).join('');
-  const xLabels=[1,5,10,15,20,25,days].filter((day,idx,arr)=>day<=days&&arr.indexOf(day)===idx)
-    .map(day=>`<text class="chart-label" x="${xFor(day).toFixed(1)}" y="${h-8}" text-anchor="middle">${day}</text>`).join('');
-  chart.innerHTML=`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="${y}年${m+1}月の${title}グラフ">
-    ${gridLines}
-    <line class="chart-axis" x1="${padL}" y1="${h-padB}" x2="${w-padR}" y2="${h-padB}"></line>
-    ${paths}${dots}${xLabels}
-  </svg>`;
-}
 
 function monthEntries(){
   const y=view.getFullYear(), m=view.getMonth();
@@ -2935,50 +2956,116 @@ function renderDayVisuals(dd){
   const burned=useBmr ? (bmr+exTrain) : num(dd.burnedCalories);
   const hasBalance=intake>0 || burned>0;
   const net=intake-burned;
-  setText('dayNetCalories',hasBalance ? signedKcal(net) : '--');
-  setText('dayNetNote',
-    useBmr
-      ? `摂取 ${fmt(Math.round(intake))} − 消費 ${fmt(Math.round(burned))}kcal（基礎代謝 ${fmt(bmr)} ＋ 運動 ${fmt(exTrain)}）`
-      : (hasBalance ? `摂取 ${fmt(Math.round(intake))}kcal - 消費 ${fmt(Math.round(burned))}kcal` : '摂取と消費を入れると収支が出ます'));
-  const calBars=document.getElementById('dayCalBars');
-  if(calBars){
-    if(!hasBalance){
-      calBars.innerHTML='<div class="cal-bars-empty">摂取と消費を入れると比較が出ます</div>';
-    }else{
-      const mx=Math.max(intake,burned)||1;
-      const row=(nm,val,color,txt)=>`<div class="cal-row"><span class="nm" style="color:${txt}">${nm}</span>`+
-        `<div class="track"><i style="width:${Math.max(3,Math.round(val/mx*100))}%;background:${color}"></i></div>`+
-        `<span class="vv">${fmt(Math.round(val))}<small style="font-weight:700;color:var(--muted)">kcal</small></span></div>`;
-      calBars.innerHTML=row('摂取',intake,'#2563eb','#1d4ed8')+row('消費',burned,'#e2463a','#c5362b');
-    }
+  const met=profileMetrics();
+  const target=met?Math.round(met.target):0;
+
+  // カロリー収支パネル
+  setHTML('holoNet', hasBalance ? `${signedKcal(net).replace('kcal','')}<small>kcal</small>` : '--');
+  setText('holoIn', intake>0?fmt(Math.round(intake)):'--');
+  setText('holoOut', burned>0?fmt(Math.round(burned)):'--');
+  const mx=Math.max(intake,burned)||1;
+  const inBar=document.getElementById('holoInBar'), outBar=document.getElementById('holoOutBar');
+  if(inBar) inBar.style.width=intake>0?Math.max(4,Math.round(intake/mx*100))+'%':'0%';
+  if(outBar) outBar.style.width=burned>0?Math.max(4,Math.round(burned/mx*100))+'%':'0%';
+  setText('holoNetSub', hasBalance ? (useBmr?`基礎代謝 ${fmt(bmr)} ＋ 運動 ${fmt(exTrain)}kcal`:'') : '摂取と消費を入れると収支が出ます');
+  holoNodata('holoBalance', !hasBalance);
+
+  // 目標カロリーリング
+  const ringFrac = target>0 ? Math.min(1,intake/target) : 0;
+  const over = target>0 && intake>target;
+  const ring=document.getElementById('holoRing');
+  if(ring){
+    ring.classList.toggle('over',over);
+    const C=2*Math.PI*36;
+    const prog=ring.querySelector('.prog');
+    if(prog) prog.setAttribute('stroke-dasharray',`${(C*ringFrac).toFixed(1)} ${C.toFixed(1)}`);
+    setHTML('holoRingVal', target>0 ? `${Math.round(intake/target*100)}<small>%</small>` : '--');
   }
+  setText('holoRingSub', target>0
+    ? `摂取 ${intake>0?fmt(Math.round(intake)):0} / ${fmt(target)}kcal${over?'（超過）':''}`
+    : '基本情報を入れると目標が出ます');
+  holoNodata('holoTarget', !(target>0 && intake>0));
+
+  // 体重
+  const w=num(dd.weight);
+  setText('holoWeight', w>0?String(round(w,1)):'--');
+  const prevW=num((data[ymd(addDays(dateFromKey(sel),-1))]||{}).weight);
+  const wd=(w>0&&prevW>0)?round(w-prevW,1):null;
+  setText('holoWeightSub', wd===null?'直近7日の推移':(wd?`前日比 ${wd>0?'+':'−'}${Math.abs(wd).toFixed(1)}kg`:'前日と同じ'));
+  setHTML('holoWeightChart', holoSparkLine(holoSeries('weight')));
+  holoNodata('holoWeightP', !(w>0));
+
+  // 歩数
+  const st=num(dd.steps);
+  setText('holoSteps', st>0?fmt(Math.round(st)):'--');
+  const wkSteps=holoSeries('steps').filter(v=>v!=null);
+  setText('holoStepsSub', wkSteps.length?`7日平均 ${fmt(Math.round(wkSteps.reduce((a,b)=>a+b,0)/wkSteps.length))}歩`:'直近7日の記録');
+  setHTML('holoStepsChart', holoSparkBars(holoSeries('steps')));
+  holoNodata('holoStepsP', !(st>0));
+
+  // PFC（目標に対する摂取量：セグメントゲージ）
   const protein=num(dd.protein), fat=num(dd.fat), carbs=num(dd.carbs);
-  const recorded=protein||fat||carbs;
-  setText('dayMacroNote',recorded ? '目標に対する摂取量（P＝タンパク質・F＝脂質・C＝炭水化物）' : '食事内容を記載するとPFCが自動で出ます（P＝タンパク質・F＝脂質・C＝炭水化物）。');
-  const donut=document.getElementById('dayMacroDonut');
-  if(donut){
-    const met=profileMetrics();
-    const rings=[
-      {label:'タンパク質', cur:protein, target:met&&met.protein, color:'var(--blue)'},
-      {label:'脂質',       cur:fat,     target:met&&met.fat,     color:'var(--gold)'},
-      {label:'炭水化物',   cur:carbs,   target:met&&met.carbs,   color:'#e2463a'}
-    ];
-    donut.innerHTML=rings.map(macroRingHTML).join('');
-  }
+  setHTML('holoPfc',[
+    {name:'タンパク質', cur:protein, t:met?Math.round(met.protein):0},
+    {name:'脂質',      cur:fat,     t:met?Math.round(met.fat):0},
+    {name:'炭水化物',  cur:carbs,   t:met?Math.round(met.carbs):0}
+  ].map(r=>{
+    const pct=r.t>0?Math.min(100,Math.round(r.cur/r.t*100)):(r.cur>0?100:0);
+    const rOver=r.t>0&&r.cur>r.t;
+    return `<div class="pfc-row${rOver?' over':''}">`+
+      `<span class="pn">${r.name}</span>`+
+      `<div class="ptrack"><i style="width:${pct}%;background:${rOver?'#c65a24':'#1a9e8f'}"></i></div>`+
+      `<b>${r.cur?fmt(Math.round(r.cur)):0}<small> / ${r.t>0?fmt(r.t)+'g':'—'}${rOver?'（超過）':''}</small></b></div>`;
+  }).join(''));
+  holoNodata('holoPfcP', !(protein||fat||carbs));
 }
-function macroRingHTML(r){
-  const cur=num(r.cur), target=r.target?Math.round(r.target):0;
-  const pct = target>0 ? Math.min(100, cur/target*100) : (cur>0?100:0);
-  const dash = `${pct.toFixed(2)} ${(100-pct).toFixed(2)}`;
-  const arc = pct>0
-    ? `<circle class="mseg" cx="21" cy="21" r="15.915" fill="none" stroke="${r.color}" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="${dash}" stroke-dashoffset="25"></circle>`
-    : '';
-  return `<div class="macro-ring">`+
-    `<div class="mring"><svg viewBox="0 0 42 42" role="img" aria-label="${r.label}">`+
-    `<circle cx="21" cy="21" r="15.915" fill="none" stroke="rgba(40,60,120,.12)" stroke-width="3.5"></circle>${arc}</svg>`+
-    `<div class="mring-center"><b>${cur?fmt(Math.round(cur)):0}</b><span>${target>0?`/${fmt(target)}g`:'g'}</span></div></div>`+
-    `<div class="macro-ring-label">${r.label}</div>`+
-    `</div>`;
+/* パネルの未記録状態（薄く沈み、タグが点く） */
+function holoNodata(id,off){
+  const el=document.getElementById(id); if(!el) return;
+  el.classList.toggle('nodata',off);
+  let nd=el.querySelector('.nd');
+  if(off){ if(!nd){ nd=document.createElement('i'); nd.className='nd'; nd.textContent='未記録'; el.appendChild(nd); } }
+  else if(nd) nd.remove();
+}
+/* 選択日を含む直近7日の値（未記録日は null） */
+function holoSeries(field){
+  const out=[];
+  for(let i=6;i>=0;i--){
+    const k=ymd(addDays(dateFromKey(sel),-i));
+    const v=num((data[k]||{})[field]);
+    out.push(v>0?v:null);
+  }
+  return out;
+}
+/* 体重ミニチャート（折れ線＋面。最終日はオレンジの点） */
+function holoSparkLine(vals){
+  const pts=vals.map((v,i)=>v==null?null:[i,v]).filter(Boolean);
+  if(pts.length<2) return '<div class="spark-nd">記録なし</div>';
+  const nums=pts.map(p=>p[1]);
+  const min=Math.min(...nums), max=Math.max(...nums), span=(max-min)||1;
+  const X=i=>4+i*(112/6), Y=v=>29-((v-min)/span)*23;
+  const dLine=pts.map((p,i)=>(i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)).join(' ');
+  const dArea=`${dLine} L ${X(pts[pts.length-1][0]).toFixed(1)} 33 L ${X(pts[0][0]).toFixed(1)} 33 Z`;
+  const dots=pts.filter(p=>p[0]===6).map(p=>`<circle cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="2.3" fill="#d99a2b"></circle>`).join('');
+  return `<svg viewBox="0 0 120 34" preserveAspectRatio="none">`+
+    `<line x1="2" y1="32.5" x2="118" y2="32.5" stroke="rgba(22,35,63,.10)" stroke-width="0.8"></line>`+
+    `<path d="${dArea}" fill="rgba(22,35,63,.055)"></path>`+
+    `<path d="${dLine}" fill="none" stroke="#16233f" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"></path>`+
+    `${dots}</svg>`;
+}
+/* 歩数ミニチャート（バー。今日はオレンジ） */
+function holoSparkBars(vals){
+  const nums=vals.filter(v=>v!=null);
+  if(!nums.length) return '<div class="spark-nd">記録なし</div>';
+  const max=Math.max(...nums)||1;
+  const bars=vals.map((v,i)=>{
+    if(v==null) return '';
+    const h=Math.max(2,(v/max)*27);
+    const x=4+i*(112/7);
+    return `<rect x="${x.toFixed(1)}" y="${(32-h).toFixed(1)}" width="7" height="${h.toFixed(1)}" rx="1" fill="${i===6?'#d99a2b':'rgba(22,35,63,.14)'}"></rect>`;
+  }).join('');
+  return `<svg viewBox="0 0 120 34" preserveAspectRatio="none">`+
+    `<line x1="2" y1="32.5" x2="118" y2="32.5" stroke="rgba(22,35,63,.10)" stroke-width="0.8"></line>${bars}</svg>`;
 }
 
 /* ---- day detail ---- */
@@ -3519,18 +3606,46 @@ function weekAdvice(s){
 }
 function renderReview(){
   const s=weekStats(sel);
-  document.getElementById('reviewRange').textContent=`${s.keys[0]} 〜 ${s.keys[s.keys.length-1]} の7日間の平均値`;
-  document.getElementById('reviewTiles').innerHTML=[
-    ['歩数', s.avgSteps?`${fmt(s.avgSteps)}歩`:'—'],
-    ['体重', s.avgWeight?`${s.avgWeight}kg`:'—'],
-    ['ウエスト', s.avgWaist?`${s.avgWaist}cm`:'—'],
-    ['摂取カロリー', s.avgCalories?`${fmt(s.avgCalories)}kcal`:'—'],
-    ['消費カロリー', s.avgBurn?`${fmt(s.avgBurn)}kcal`:'—'],
-    ['タンパク質の摂取量', s.avgProtein?`${s.avgProtein}g`:'—'],
-    ['脂質の摂取量', s.avgFat?`${s.avgFat}g`:'—'],
-    ['炭水化物の摂取量', s.avgCarbs?`${s.avgCarbs}g`:'—'],
-    ['塩分の摂取量', s.avgSalt?`${s.avgSalt}g`:'—']
-  ].map(([label,value])=>`<div class="review-stat"><span>${label}</span><strong>${value}</strong></div>`).join('');
+  // 先週（直前7日間）との比較用
+  const prevEndKey=ymd(addDays(dateFromKey(s.keys[0]),-1));
+  const p=weekStats(prevEndKey);
+  document.getElementById('reviewRange').textContent=`${s.keys[0]} 〜 ${s.keys[s.keys.length-1]}`;
+
+  // グレードは「記録の継続」だけで決める（体重の増減では評価しない）
+  const grades=[[7,'PERFECT WEEK'],[5,'EXCELLENT'],[3,'GOOD'],[1,'GOOD START'],[0,'READY']];
+  const g=grades.find(x=>s.recordedDays>=x[0]);
+  setText('wrGrade',g[1]);
+  document.getElementById('wrDays').innerHTML=`記録した日 <b>${s.recordedDays}</b> / 7`;
+  const bar=document.getElementById('wrMeterBar');
+  bar.style.width='0%';
+  requestAnimationFrame(()=>{ bar.style.width=`${Math.round(s.recordedDays/7*100)}%`; });
+  setText('wrNote',`${s.recordedDays}日記録できました`);
+
+  // 先週比（数値の増減は事実として表示し、良し悪しは断定しない）
+  const fmtDelta=(curr,prev,unit,dec=0)=>{
+    if(!curr) return '';
+    if(!prev) return '先週の記録なし';
+    const r=dec?round(Number(curr)-Number(prev),dec):Math.round(Number(curr)-Number(prev));
+    if(!r) return `先週と同じ`;
+    const v=dec?Math.abs(r).toFixed(dec):fmt(Math.abs(r));
+    return `先週比 ${r>0?'+':'−'}${v}${unit}`;
+  };
+  const TILES=[
+    ['歩数', s.avgSteps, p.avgSteps, 0,'歩', s.avgSteps?`${fmt(s.avgSteps)}歩`:'—'],
+    ['体重', s.avgWeight, p.avgWeight, 1,'kg', s.avgWeight?`${s.avgWeight}kg`:'—'],
+    ['ウエスト', s.avgWaist, p.avgWaist, 1,'cm', s.avgWaist?`${s.avgWaist}cm`:'—'],
+    ['摂取カロリー', s.avgCalories, p.avgCalories, 0,'kcal', s.avgCalories?`${fmt(s.avgCalories)}kcal`:'—'],
+    ['消費カロリー', s.avgBurn, p.avgBurn, 0,'kcal', s.avgBurn?`${fmt(s.avgBurn)}kcal`:'—'],
+    ['タンパク質の摂取量', s.avgProtein, p.avgProtein, 0,'g', s.avgProtein?`${s.avgProtein}g`:'—'],
+    ['脂質の摂取量', s.avgFat, p.avgFat, 0,'g', s.avgFat?`${s.avgFat}g`:'—'],
+    ['炭水化物の摂取量', s.avgCarbs, p.avgCarbs, 0,'g', s.avgCarbs?`${s.avgCarbs}g`:'—'],
+    ['塩分の摂取量', s.avgSalt, p.avgSalt, 1,'g', s.avgSalt?`${s.avgSalt}g`:'—']
+  ];
+  document.getElementById('reviewTiles').innerHTML=TILES.map(([label,curr,prev,dec,unit,display])=>{
+    const delta=fmtDelta(curr,prev,unit,dec);
+    return `<div class="review-stat"><span>${label}</span><strong>${display}</strong>`+
+      (delta?`<em>${delta}</em>`:'')+`</div>`;
+  }).join('');
 }
 async function copyText(text,success){
   try{
@@ -3678,7 +3793,6 @@ document.getElementById('prevM').onclick=()=>{view.setMonth(view.getMonth()-1);r
 document.getElementById('nextM').onclick=()=>{view.setMonth(view.getMonth()+1);renderCal();};
 document.getElementById('backBtn').onclick=()=>{ const [y,m,d]=sel.split('-').map(Number); const pv=new Date(y,m-1,d-1); view=new Date(pv.getFullYear(),pv.getMonth(),1); openDay(ymd(pv)); };
 document.getElementById('reviewBackBtn').onclick=showMenu;
-document.getElementById('graphBackBtn').onclick=showMenu;
 document.getElementById('basicInfoBackBtn').onclick=showMenu;
 document.getElementById('targetNumbersBackBtn').onclick=showMenu;
 document.getElementById('dataToolsBackBtn').onclick=showMenu;
@@ -3703,14 +3817,39 @@ document.getElementById('hdrMenuBtn').onclick=showMenu;
   ta.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){ e.preventDefault(); sendChat(); } });
 })();
 window.addEventListener('resize',syncChatMetrics);
-document.getElementById('graphPrevM').onclick=()=>{view.setMonth(view.getMonth()-1);renderMonthlyChart();};
-document.getElementById('graphNextM').onclick=()=>{view.setMonth(view.getMonth()+1);renderMonthlyChart();};
 document.getElementById('nextDayBtn').onclick=()=>{ const [y,m,d]=sel.split('-').map(Number); const nx=new Date(y,m-1,d+1); view=new Date(nx.getFullYear(),nx.getMonth(),1); openDay(ymd(nx)); };
 document.getElementById('reviewBtn').onclick=showReview;
 document.getElementById('basicInfoBtn').onclick=showBasicInfo;
 document.getElementById('targetNumbersBtn').onclick=showTargetNumbers;
 document.getElementById('dataToolsBtn').onclick=showDataTools;
 document.getElementById('guideBtn').onclick=showGuide;
+// テーマカラー
+const THEME_KEY='baaeed_theme';
+const THEME_NAMES=['blue','red','green','yellow','pink','black','orange'];
+function currentTheme(){ try{ const t=localStorage.getItem(THEME_KEY); return THEME_NAMES.includes(t)?t:'blue'; }catch(e){ return 'blue'; } }
+function applyTheme(name){
+  if(!THEME_NAMES.includes(name)) name='blue';
+  if(name==='blue') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme',name);
+  try{ localStorage.setItem(THEME_KEY,name); }catch(e){}
+  syncThemeMeta();
+  syncThemeGrid();
+}
+function syncThemeMeta(){
+  try{
+    const m=document.querySelector('meta[name="theme-color"]');
+    const c=getComputedStyle(document.documentElement).getPropertyValue('--home-g1').trim();
+    if(m&&c) m.setAttribute('content',c);
+  }catch(e){}
+}
+function syncThemeGrid(){
+  const cur=currentTheme();
+  document.querySelectorAll('#themeGrid .theme-opt').forEach(b=>b.classList.toggle('active',b.dataset.theme===cur));
+}
+document.getElementById('themeColorBtn').onclick=showThemeColor;
+document.getElementById('themeColorBackBtn').onclick=showMenu;
+document.querySelectorAll('#themeGrid .theme-opt').forEach(b=>{ b.onclick=()=>applyTheme(b.dataset.theme); });
+applyTheme(currentTheme());
 // 使い方ガイドの「OK」→ 表示済みを記録して基本情報の入力へ
 document.getElementById('guideOkBtn').onclick=()=>{ try{ localStorage.setItem(GUIDE_KEY,'1'); }catch(e){} showBasicInfo(); };
 document.querySelectorAll('#space3dToggle .s3d-tab').forEach(b=>{ b.onclick=()=>setSpace3DMode(b.dataset.mode); });
@@ -3988,27 +4127,6 @@ function nebInit(){
     rb.addEventListener('click',e=>{ e.stopPropagation();
       neb.rotateMode=!neb.rotateMode; if(neb.rotateMode) neb.frozen=true; sync(); });
     neb._syncBtn=sync;
-  }
-  // 全画面ボタン（右上）
-  const fb=document.getElementById('nebulaFsBtn');
-  if(fb){
-    const isFs=()=>document.fullscreenElement===orb||document.webkitFullscreenElement===orb;
-    const syncFs=()=>{ const on=isFs();
-      fb.classList.toggle('active',on); fb.setAttribute('aria-pressed',on);
-      fb.querySelector('span').textContent=on?'戻る':'全画面';
-      // 画面サイズが変わるのでキャンバスを取り直す
-      requestAnimationFrame(nebResize); setTimeout(nebResize,120); };
-    fb.addEventListener('pointerdown',e=>e.stopPropagation());
-    fb.addEventListener('dblclick',e=>e.stopPropagation());
-    fb.addEventListener('click',e=>{ e.stopPropagation();
-      if(isFs()){
-        (document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);
-      }else{
-        (orb.requestFullscreen||orb.webkitRequestFullscreen||function(){}).call(orb);
-      }
-    });
-    document.addEventListener('fullscreenchange',syncFs);
-    document.addEventListener('webkitfullscreenchange',syncFs);
   }
   // スクロールで拡大縮小（マウス位置を中心に）
   orb.addEventListener('wheel',e=>{ e.preventDefault();
