@@ -364,6 +364,13 @@
     -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:all .15s ease}
   .behav-rotbtn svg{width:14px;height:14px}
   .behav-rotbtn:hover{color:#fff;border-color:rgba(150,180,255,.6);box-shadow:0 8px 20px rgba(60,100,255,.3)}
+  .behav-panbtn{position:absolute;left:12px;bottom:12px;z-index:5;display:inline-flex;align-items:center;gap:6px;
+    padding:7px 12px;border-radius:999px;cursor:pointer;font-size:11px;font-weight:800;letter-spacing:.04em;font-family:inherit;
+    color:#dce6ff;background:rgba(10,16,34,.62);border:1px solid rgba(140,170,255,.3);
+    -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:all .15s ease}
+  .behav-panbtn svg{width:14px;height:14px}
+  .behav-panbtn:hover{color:#fff;border-color:rgba(150,180,255,.6);box-shadow:0 8px 20px rgba(60,100,255,.3)}
+  .behav-panbtn.active{color:#3a2c06;background:linear-gradient(135deg,#f0d98f,#c9a13a);border-color:transparent}
   .behav-chart-empty{position:relative;z-index:1;height:150px;display:grid;place-items:center;color:#8fa1cf;font-size:12px;font-weight:800}
   /* 運動の内容テーブル（暗色テーマ） */
   .behav-extable-wrap{position:relative;z-index:1;margin-top:10px;max-height:340px;overflow:auto;border-radius:12px;
@@ -868,6 +875,61 @@
     transition:transform .14s ease,box-shadow .14s,filter .14s}
   .guide-ok:hover{transform:translateY(-1px);filter:brightness(1.05);box-shadow:0 16px 34px rgba(192,49,74,.5)}
   .guide-ok:active{transform:translateY(0)}
+
+  /* ---- header メニューボタン（右側・アイコンのみ）---- */
+  .hdr-menu{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;
+    width:42px;height:42px;padding:0;border-radius:var(--rBtn);
+    color:var(--ink-soft);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);
+    transition:transform .15s,box-shadow .15s,border-color .15s,color .15s}
+  .hdr-menu:hover{transform:translateY(-1px);border-color:var(--blue);color:var(--blue-deep);box-shadow:var(--glow-blue)}
+  .hdr-menu svg{width:20px;height:20px}
+  .hdr-menu.active{background:linear-gradient(135deg,#f0d98f,#c9a13a);border-color:transparent;color:#3a2c06}
+
+  /* ---- チャット（LINE風メモ）---- */
+  .chat-wrap{max-width:720px;margin:0 auto}
+  .chat-scroll{display:flex;flex-direction:column;gap:10px}
+  .chat-empty{text-align:center;color:var(--muted);font-size:13px;font-weight:700;padding:56px 12px;line-height:1.9}
+  .chat-datesep{align-self:center;margin:12px 0 4px;padding:4px 14px;border-radius:999px;font-size:11px;font-weight:800;
+    color:#5a6a90;background:rgba(40,60,120,.08);border:1px solid rgba(40,60,120,.1)}
+  .chat-msg{align-self:flex-end;display:flex;align-items:flex-end;gap:7px;max-width:84%}
+  .chat-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none;padding-bottom:2px}
+  .chat-time{font-size:10px;color:var(--muted);font-weight:700;white-space:nowrap}
+  .chat-del{appearance:none;border:0;background:none;cursor:pointer;color:#b6bccb;font-size:13px;line-height:1;padding:0;
+    opacity:0;transition:opacity .15s,color .15s}
+  .chat-msg:hover .chat-del{opacity:.7}
+  .chat-del:hover{opacity:1;color:#c0314a}
+  .chat-bubble{position:relative;padding:10px 13px;border-radius:16px 16px 4px 16px;font-size:14px;line-height:1.55;
+    color:#3a2c06;background:linear-gradient(135deg,#f6e6ad,#e6c869);box-shadow:0 4px 14px rgba(177,136,44,.28);
+    white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere}
+  .chat-inputbar{position:fixed;left:0;right:0;bottom:var(--tabH,64px);z-index:180;padding:10px 0;
+    background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border-top:1px solid rgba(40,60,120,.12);box-shadow:0 -6px 20px rgba(40,60,120,.06)}
+  .chat-tpls{display:flex;gap:7px;overflow-x:auto;max-width:720px;margin:0 auto;padding:2px 26px 10px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .chat-tpls::-webkit-scrollbar{display:none}
+  .chat-tpl{flex:none;display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:999px;cursor:pointer;
+    font-family:inherit;font-size:12px;font-weight:700;color:#5a6a90;background:#fff;border:1px solid var(--line);
+    white-space:nowrap;transition:border-color .14s,color .14s,box-shadow .14s}
+  .chat-tpl:hover{border-color:var(--blue);color:var(--blue-deep);box-shadow:var(--shadow-sm)}
+  .chat-tpl.add{color:var(--gold-deep);border-style:dashed;border-color:rgba(177,136,44,.55);font-weight:800}
+  .chat-tpl.add:hover{border-color:var(--gold-deep);color:var(--gold-deep)}
+  .chat-tpl-del{appearance:none;border:0;background:none;cursor:pointer;color:#b6bccb;font-size:13px;line-height:1;
+    padding:0 0 0 2px;margin:0;transition:color .14s}
+  .chat-tpl-del:hover{color:#c0314a}
+  .chat-inputrow{max-width:720px;margin:0 auto;padding:0 26px;display:flex;align-items:flex-end;gap:10px}
+  .chat-inputrow textarea{flex:1;resize:none;font-family:inherit;font-size:14px;line-height:1.5;color:var(--text);
+    background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 14px;height:42px;max-height:120px;
+    outline:none;transition:border-color .14s,box-shadow .14s}
+  .chat-inputrow textarea:focus{border-color:var(--blue);box-shadow:var(--ring)}
+  .chat-send{flex:none;width:42px;height:42px;border:0;border-radius:50%;cursor:pointer;display:grid;place-items:center;
+    color:#3a2c06;background:linear-gradient(135deg,#f0d98f,#c9a13a);box-shadow:0 6px 16px rgba(177,136,44,.35);
+    transition:transform .12s,filter .12s}
+  .chat-send:hover{filter:brightness(1.05)}
+  .chat-send:active{transform:scale(.94)}
+  .chat-send:disabled{opacity:.5;cursor:default;filter:grayscale(.3)}
+  .chat-send svg{width:20px;height:20px}
+  body.chat-mode .wrap{padding-bottom:calc(var(--tabH,64px) + var(--chatInputH,64px) + 24px)}
+  @media(max-width:560px){ .chat-inputrow{padding:0 14px} .chat-tpls{padding:2px 14px 10px} }
 </style>
 </head>
 <body>
@@ -878,6 +940,9 @@
         <h1>Baaeed</h1>
       </div>
     </div>
+    <button class="hdr-menu" id="hdrMenuBtn" type="button" aria-label="メニュー" title="メニュー">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </header>
 
   <!-- HOME / CALENDAR -->
@@ -920,7 +985,8 @@
         <div class="guide-step"><span class="gtab">データ</span><div class="guide-step-txt"><span>体重やPFC（P＝タンパク質・F＝脂質・C＝炭水化物）の推移グラフ、3Dの傾向マップで変化を振り返れます。スマホは2本指で拡大・縮小、ダブルタップで元の表示に戻せます。</span></div></div>
         <div class="guide-step"><span class="gtab">カレンダー</span><div class="guide-step-txt"><span>過去の日付をタップすると、その日の記録を見たり編集したりできます。</span></div></div>
         <div class="guide-step"><span class="gtab">食品DB</span><div class="guide-step-txt"><span>よく食べる食品の栄養値を登録・更新します。食事入力で呼び出せます。</span></div></div>
-        <div class="guide-step"><span class="gtab">メニュー</span><div class="guide-step-txt"><span>基本情報・目標数値の設定、週次レビュー、データのバックアップ・復元ができます。</span></div></div>
+        <div class="guide-step"><span class="gtab">チャット</span><div class="guide-step-txt"><span>ダイエット・生活・体調などで思ったことを、その場でメモとして記録できます。送信した日時（月日・時刻）はエクスポートにも残るので、あとから振り返れます。</span></div></div>
+        <div class="guide-step"><span class="gtab">メニュー</span><div class="guide-step-txt"><span>画面右上の「メニュー」ボタンから開きます。基本情報・目標数値の設定、週次レビュー、データのバックアップ・復元ができます。</span></div></div>
       </div>
 
       <p class="guide-intro" style="margin-top:20px">記録は自動でこの端末に保存されます。（この画面はあとから「メニュー」でいつでも見返せます）</p>
@@ -979,6 +1045,22 @@
             <span class="tool-arrow">›</span>
           </button>
         </div>
+  </section>
+
+  <!-- CHAT (LINE風メモ) -->
+  <section id="chatView" class="hidden">
+    <div class="chat-wrap">
+      <div class="chat-scroll" id="chatScroll"></div>
+    </div>
+    <form class="chat-inputbar" id="chatForm">
+      <div class="chat-tpls" id="chatTpls"></div>
+      <div class="chat-inputrow">
+        <textarea id="chatInput" placeholder="いまの気分・体調・食べたもの…" rows="1" maxlength="2000"></textarea>
+        <button type="submit" class="chat-send" id="chatSend" aria-label="送信" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l16-8-6 16-3.5-6.5L4 12z"/></svg>
+        </button>
+      </div>
+    </form>
   </section>
 
   <!-- DATA TOOLS -->
@@ -1311,9 +1393,9 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
     <span>食品DB</span>
   </button>
-  <button type="button" data-tab="menu">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    <span>メニュー</span>
+  <button type="button" data-tab="chat">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l.8-5.5A8 8 0 1 1 21 12z"/></svg>
+    <span>チャット</span>
   </button>
 </nav>
 
@@ -1323,6 +1405,9 @@
 const STORE_KEY = 'baaeed_diet_v1';
 const PROFILE_KEY = 'baaeed_profile_v1';
 const FOOD_STORE_KEY = 'baaeed_foods_v1';
+const CHAT_KEY = 'baaeed_chat_v1';         // チャットメモ（思いつきの記録）
+const CHAT_TPL_KEY = 'baaeed_chat_templates_v1';   // チャットの追加テンプレ（ユーザー定義分）
+const DEFAULT_CHAT_TEMPLATES = ['お腹が空いた','間食してしまった','たくさん歩いた','運動できた','よく眠れた','寝不足で体がだるい','食べすぎた…反省','体重が減ってた','むくみが気になる','体調がいい感じ'];
 const GUIDE_KEY = 'baaeed_onboarded_v1';   // 初回の使い方ガイドを表示済みかどうか
 // 旧CRIMSONキーからBaaeedキーへ自動移行（既存データを保持）
 [['crimson_diet_v1',STORE_KEY],['crimson_profile_v1',PROFILE_KEY],['crimson_foods_v1',FOOD_STORE_KEY]].forEach(([oldKey,newKey])=>{
@@ -2430,10 +2515,16 @@ let view = new Date();
 let sel = ymd(new Date());
 let activeHour = new Date().getHours();
 let chartMode = 'weight';
+let chat = loadChat();
+let chatTemplates = loadChatTemplates();
 let toastTimer;
 
 function load(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY))||{}; }catch(e){ return {}; } }
 function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(data)); }
+function loadChat(){ try{ const a=JSON.parse(localStorage.getItem(CHAT_KEY)); return Array.isArray(a)?a.filter(m=>m&&m.text):[]; }catch(e){ return []; } }
+function saveChat(){ localStorage.setItem(CHAT_KEY, JSON.stringify(chat)); }
+function loadChatTemplates(){ try{ const a=JSON.parse(localStorage.getItem(CHAT_TPL_KEY)); return Array.isArray(a)?a.filter(t=>typeof t==='string'&&t.trim()):[]; }catch(e){ return []; } }
+function saveChatTemplates(){ localStorage.setItem(CHAT_TPL_KEY, JSON.stringify(chatTemplates)); }
 function loadProfile(){ try{ return {...DEFAULT_PROFILE, ...(JSON.parse(localStorage.getItem(PROFILE_KEY))||{})}; }catch(e){ return {...DEFAULT_PROFILE}; } }
 function saveProfile(){ localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); }
 function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
@@ -2516,14 +2607,17 @@ function renderProfile(){
   setText('targetNote',note);
 }
 /* ---- view switching ---- */
-const ALL_VIEWS=['homeView','dayView','trendView','menuView','reviewView','graphView','foodDbView','basicInfoView','targetNumbersView','dataToolsView','guideView'];
+const ALL_VIEWS=['homeView','dayView','trendView','chatView','menuView','reviewView','graphView','foodDbView','basicInfoView','targetNumbersView','dataToolsView','guideView'];
 const FRAMELESS_VIEWS=['homeView','dayView','trendView'];
-// 各画面 → 下部タブのどれをアクティブ表示にするか
-const VIEW_TAB={homeView:'cal',dayView:'today',trendView:'trend',foodDbView:'food',
-  menuView:'menu',reviewView:'menu',graphView:'menu',basicInfoView:'menu',targetNumbersView:'menu',dataToolsView:'menu'};
-function setActiveTab(name){ document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('active', b.dataset.tab===name)); }
+// 各画面 → 下部タブのどれをアクティブ表示にするか（メニュー系はヘッダーボタンからなのでタブは非アクティブ）
+const VIEW_TAB={homeView:'cal',dayView:'today',trendView:'trend',foodDbView:'food',chatView:'chat'};
+function setActiveTab(name){ document.querySelectorAll('#tabbar button').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
+  const hm=document.getElementById('hdrMenuBtn'); if(hm) hm.classList.toggle('active', name==='menu'); }
 function hideAllViews(){ ALL_VIEWS.forEach(id=>{ const e=document.getElementById(id); if(e) e.classList.add('hidden'); }); }
-function showView(id){ hideAllViews(); const e=document.getElementById(id); if(e) e.classList.remove('hidden'); document.body.classList.toggle('home-bg', FRAMELESS_VIEWS.includes(id)); setActiveTab(VIEW_TAB[id]||''); window.scrollTo(0,0); }
+function showView(id){ hideAllViews(); const e=document.getElementById(id); if(e) e.classList.remove('hidden');
+  document.body.classList.toggle('home-bg', FRAMELESS_VIEWS.includes(id));
+  document.body.classList.toggle('chat-mode', id==='chatView');
+  setActiveTab(id==='menuView'?'menu':(VIEW_TAB[id]||'')); window.scrollTo(0,0); }
 function showHome(){ showView('homeView'); renderProfile(); renderCal(); }
 function openDay(k){ sel=k; showView('dayView'); renderDay(); }
 function openToday(){ openDay(ymd(new Date())); }
@@ -2536,6 +2630,85 @@ function showBasicInfo(){ showView('basicInfoView'); renderProfile(); }
 function showTargetNumbers(){ showView('targetNumbersView'); renderProfile(); }
 function showDataTools(){ showView('dataToolsView'); }
 function showGuide(){ showView('guideView'); }
+function showChat(){ showView('chatView'); renderChat(); renderChatTemplates(); syncChatMetrics();
+  requestAnimationFrame(()=>{ syncChatMetrics(); chatScrollToBottom(); }); }
+
+/* ---- チャットメモ ---- */
+function chatFmtTime(t){ const d=new Date(t); return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
+function chatDateLabel(t){ const d=new Date(t); return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日（'+DOW[d.getDay()]+'）'; }
+function chatScrollToBottom(){ window.scrollTo(0, document.body.scrollHeight); }
+// 入力バー・タブバーの高さをCSS変数へ反映（入力欄が隠れないように）
+function syncChatMetrics(){
+  const tb=document.getElementById('tabbar'), ib=document.getElementById('chatForm');
+  if(tb) document.documentElement.style.setProperty('--tabH', tb.offsetHeight+'px');
+  if(ib && !document.getElementById('chatView').classList.contains('hidden'))
+    document.documentElement.style.setProperty('--chatInputH', ib.offsetHeight+'px');
+}
+function renderChat(){
+  const el=document.getElementById('chatScroll'); if(!el) return;
+  if(!chat.length){ el.innerHTML='<div class="chat-empty">まだメモがありません。<br>思いついたことを下の入力欄から記録してみましょう。</div>'; return; }
+  const list=chat.slice().sort((a,b)=>a.t-b.t);
+  let html='', lastDay='';
+  list.forEach(m=>{
+    const day=ymd(new Date(m.t));
+    if(day!==lastDay){ html+=`<div class="chat-datesep">${chatDateLabel(m.t)}</div>`; lastDay=day; }
+    html+=`<div class="chat-msg" data-id="${esc(m.id)}">`+
+      `<div class="chat-meta"><button class="chat-del" type="button" aria-label="削除">×</button><span class="chat-time">${chatFmtTime(m.t)}</span></div>`+
+      `<div class="chat-bubble">${esc(m.text)}</div>`+
+    `</div>`;
+  });
+  el.innerHTML=html;
+  el.querySelectorAll('.chat-del').forEach(b=>{ b.onclick=()=>{ const id=b.closest('.chat-msg').dataset.id; deleteChat(id); }; });
+}
+function sendChat(){
+  const ta=document.getElementById('chatInput'); if(!ta) return;
+  const text=ta.value.replace(/\s+$/,'');
+  if(!text.trim()) return;
+  chat.push({ id:String(Date.now())+Math.random().toString(36).slice(2,6), t:Date.now(), text });
+  saveChat();
+  ta.value=''; chatAutoGrow(ta); syncChatSendState();
+  renderChat(); syncChatMetrics();
+  requestAnimationFrame(chatScrollToBottom);
+}
+function deleteChat(id){
+  const i=chat.findIndex(m=>m.id===id); if(i<0) return;
+  if(!confirm('このメモを削除しますか？')) return;
+  chat.splice(i,1); saveChat(); renderChat(); syncChatMetrics();
+}
+function chatAutoGrow(ta){ ta.style.height='42px'; ta.style.height=Math.min(120, ta.scrollHeight)+'px'; }
+function syncChatSendState(){ const ta=document.getElementById('chatInput'), b=document.getElementById('chatSend');
+  if(ta&&b) b.disabled=!ta.value.trim(); }
+// ---- テンプレート（よく送る文言）----
+function renderChatTemplates(){
+  const el=document.getElementById('chatTpls'); if(!el) return;
+  let html='';
+  DEFAULT_CHAT_TEMPLATES.forEach(t=>{ html+=`<button type="button" class="chat-tpl" data-tpl="${esc(t)}">${esc(t)}</button>`; });
+  chatTemplates.forEach((t,i)=>{ html+=`<button type="button" class="chat-tpl" data-tpl="${esc(t)}">${esc(t)}`+
+    `<span class="chat-tpl-del" data-del="${i}" role="button" aria-label="このテンプレを削除">×</span></button>`; });
+  html+=`<button type="button" class="chat-tpl add" id="chatTplAdd">＋ 追加</button>`;
+  el.innerHTML=html;
+  el.querySelectorAll('.chat-tpl[data-tpl]').forEach(b=>{ b.onclick=e=>{ if(e.target.closest('.chat-tpl-del')) return; insertChatTemplate(b.dataset.tpl); }; });
+  el.querySelectorAll('.chat-tpl-del').forEach(x=>{ x.onclick=e=>{ e.stopPropagation(); deleteChatTemplate(Number(x.dataset.del)); }; });
+  const add=document.getElementById('chatTplAdd'); if(add) add.onclick=addChatTemplate;
+}
+function insertChatTemplate(text){
+  const ta=document.getElementById('chatInput'); if(!ta) return;
+  const cur=ta.value.replace(/\s+$/,'');
+  ta.value = cur ? (cur+' '+text) : text;
+  chatAutoGrow(ta); syncChatSendState(); syncChatMetrics();
+  ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
+}
+function addChatTemplate(){
+  const t=prompt('チャットでよく使う文言を追加します。'); if(t==null) return;
+  const text=t.trim(); if(!text) return;
+  if(DEFAULT_CHAT_TEMPLATES.includes(text)||chatTemplates.includes(text)){ flash('同じ文言がすでにあります'); return; }
+  chatTemplates.push(text); saveChatTemplates(); renderChatTemplates(); syncChatMetrics(); flash('テンプレを追加しました');
+}
+function deleteChatTemplate(i){
+  if(i<0||i>=chatTemplates.length) return;
+  if(!confirm('このテンプレを削除しますか？')) return;
+  chatTemplates.splice(i,1); saveChatTemplates(); renderChatTemplates(); syncChatMetrics();
+}
 /* ---- 3D枠のモード切替（推移 / 傾向マップ）---- */
 let space3DMode='map';
 function setSpace3DMode(mode){
@@ -3398,7 +3571,18 @@ function exportCSV(){
       });
     }
   });
-  if(rows.length===1){ flash('書き出せる記録がありません'); return; }
+  const hasDiet=rows.length>1;
+  // チャットメモを日時つきで追記（別セクション）
+  if(chat.length){
+    if(hasDiet) rows.push([]);   // 空行で区切る
+    rows.push(['チャットメモ']);
+    rows.push(['日付','時刻','内容']);
+    chat.slice().sort((a,b)=>a.t-b.t).forEach(m=>{
+      const d=new Date(m.t);
+      rows.push([ymd(d), String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'), m.text]);
+    });
+  }
+  if(!hasDiet && !chat.length){ flash('書き出せる記録がありません'); return; }
   const csv='﻿'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
@@ -3423,8 +3607,11 @@ function exportJSON(){
     storageKey:STORE_KEY,
     profileKey:PROFILE_KEY,
     foodKey:FOOD_STORE_KEY,
+    chatKey:CHAT_KEY,
     profile,
     foods:customFoods,
+    chat,
+    chatTemplates,
     data
   };
   downloadText('baaeed-backup-'+ymd(new Date())+'.json', JSON.stringify(backup,null,2), 'application/json;charset=utf-8');
@@ -3435,13 +3622,19 @@ function normalizeBackup(parsed){
   const restored = isApp && parsed.data ? parsed.data : parsed;
   const restoredProfile = isApp && parsed.profile ? {...DEFAULT_PROFILE, ...parsed.profile} : profile;
   const restoredFoods = isApp && Array.isArray(parsed.foods) ? parsed.foods.map(normalizeFoodRecord).filter(food=>food.name) : customFoods;
+  const restoredChat = isApp && Array.isArray(parsed.chat)
+    ? parsed.chat.filter(m=>m&&m.text).map(m=>({ id:m.id||(String(m.t||Date.now())+Math.random().toString(36).slice(2,6)), t:Number(m.t)||Date.parse(m.ts)||Date.now(), text:String(m.text) }))
+    : chat;
+  const restoredTpls = isApp && Array.isArray(parsed.chatTemplates)
+    ? parsed.chatTemplates.filter(t=>typeof t==='string'&&t.trim())
+    : chatTemplates;
   if(!restored || Array.isArray(restored) || typeof restored!=='object') throw new Error('invalid');
   Object.keys(restored).forEach(k=>{
     if(!/^\d{4}-\d{2}-\d{2}$/.test(k)) throw new Error('invalid');
     const d=restored[k];
     if(!d || Array.isArray(d) || typeof d!=='object') throw new Error('invalid');
   });
-  return {data:restored, profile:restoredProfile, foods:restoredFoods};
+  return {data:restored, profile:restoredProfile, foods:restoredFoods, chat:restoredChat, chatTemplates:restoredTpls};
 }
 function restoreJSONFile(file){
   if(!file) return;
@@ -3453,13 +3646,18 @@ function restoreJSONFile(file){
       data=restored.data;
       profile=restored.profile;
       customFoods=restored.foods;
+      chat=restored.chat;
+      chatTemplates=restored.chatTemplates;
       save();
       saveProfile();
       saveCustomFoods();
+      saveChat();
+      saveChatTemplates();
       renderProfile();
       renderCal();
       if(!document.getElementById('dayView').classList.contains('hidden')) renderDay();
       if(!document.getElementById('reviewView').classList.contains('hidden')) renderReview();
+      if(!document.getElementById('chatView').classList.contains('hidden')){ renderChat(); renderChatTemplates(); }
       flash('JSONバックアップを復元しました');
     }catch(e){
       flash('復元できないJSONファイルです');
@@ -3492,9 +3690,19 @@ document.querySelectorAll('#tabbar button').forEach(b=>{
     else if(t==='trend') showTrend();
     else if(t==='cal') showHome();
     else if(t==='food') showFoodDb();
-    else if(t==='menu') showMenu();
+    else if(t==='chat') showChat();
   };
 });
+document.getElementById('hdrMenuBtn').onclick=showMenu;
+// チャット入力
+(function(){
+  const form=document.getElementById('chatForm'), ta=document.getElementById('chatInput');
+  if(!form||!ta) return;
+  form.addEventListener('submit',e=>{ e.preventDefault(); sendChat(); });
+  ta.addEventListener('input',()=>{ chatAutoGrow(ta); syncChatSendState(); syncChatMetrics(); });
+  ta.addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){ e.preventDefault(); sendChat(); } });
+})();
+window.addEventListener('resize',syncChatMetrics);
 document.getElementById('graphPrevM').onclick=()=>{view.setMonth(view.getMonth()-1);renderMonthlyChart();};
 document.getElementById('graphNextM').onclick=()=>{view.setMonth(view.getMonth()+1);renderMonthlyChart();};
 document.getElementById('nextDayBtn').onclick=()=>{ const [y,m,d]=sel.split('-').map(Number); const nx=new Date(y,m-1,d+1); view=new Date(nx.getFullYear(),nx.getMonth(),1); openDay(ymd(nx)); };
@@ -4678,11 +4886,14 @@ function bhLineChartHTML(metric,color){
   const s=bhTrendSeries(metric);
   const nav=`<div class="behav-month-nav"><button type="button" id="behavPrevM">‹</button><div class="behav-month-label">${s.navLabel}</div><button type="button" id="behavNextM">›</button></div>`;
   if(!s.points.length) return nav+`<div class="behav-chart-title">${s.title}</div><div class="behav-chart-empty">${s.empty}</div>`;
-  /* 放射状3D枠と同じ宇宙枠。折れ線は3D投影で描画（左右に揺れ＋ドラッグ回転） */
+  /* 放射状3D枠と同じ宇宙枠。折れ線は3D投影で描画（デフォルトは正面固定・ドラッグで回転） */
   return nav+`<div class="behav-chart-title">${s.title}</div>`+
     `<div class="behav-orb" id="behavOrb">`+
       `<canvas id="behavTrendCanvas" aria-label="${metric.label}の推移"></canvas>`+
-      `<button class="behav-rotbtn" id="behavRotBtn" type="button" title="揺れに戻す">`+
+      `<button class="behav-panbtn" id="behavPanBtn" type="button" title="平行移動モードに切り替え（もう一度で回転に戻る）" aria-pressed="false">`+
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg><span>移動</span>`+
+      `</button>`+
+      `<button class="behav-rotbtn" id="behavRotBtn" type="button" title="向きをリセット">`+
         `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg><span>リセット</span>`+
       `</button>`+
       `<div class="behav-bar-tip" id="behavBarTip"></div>`+
@@ -4690,15 +4901,19 @@ function bhLineChartHTML(metric,color){
 }
 /* ===================================================================
    詳細パネルのグラフ：放射状3D枠と同じエンジンで「宇宙空間に浮かぶ折れ線」
-   投影は wk と同方式（wkRotate 相当＋wkProject）。デフォルトで左右に揺れ、
-   ドラッグで回転（揺れは停止）。リセットボタン／ダブルタップで揺れに戻る。
+   投影は wk と同方式（wkRotate 相当＋wkProject）。デフォルトは正面固定（自動の揺れなし）、
+   ドラッグで回転。リセットボタン／ダブルタップで正面に戻る。
    =================================================================== */
 const lc={ started:false, cv:null, ctx:null, W:0,H:0,dpr:1, t0:0,
   rotY:0, rotX:-0.24, userY:0, userX:0, frozen:false, zoom:1, panX:0, panY:0, _pinch:false,
+  panMode:false, dragPan:false,
   drag:false, moved:false, lastX:0, lastY:0, downX:0, downY:0,
   mx:null, my:null, metric:null, color:'#8ec5ff', stars:[], hits:[], _winBound:false };
 function lcReset(){ lc.userX=0; lc.userY=0; lc.frozen=false; lc.zoom=1; lc.panX=0; lc.panY=0; }
-const LC_BASE_X=0;   // 既定は正面（傾けない）。揺れは左右(rotY)のみ
+function lcSyncPanBtn(){ const pb=document.getElementById('behavPanBtn'); if(!pb) return;
+  pb.classList.toggle('active',lc.panMode); pb.setAttribute('aria-pressed',lc.panMode);
+  const sp=pb.querySelector('span'); if(sp) sp.textContent=lc.panMode?'回転':'移動'; }
+const LC_BASE_X=0;   // 既定は正面（傾けない）
 
 function lcRotate(p){
   const cy=Math.cos(lc.rotY), sy=Math.sin(lc.rotY);
@@ -4732,6 +4947,7 @@ function lcMount(metric,color){
   lc.cv=cv; lc.ctx=cv.getContext('2d'); lcResize();
   orb.addEventListener('contextmenu',e=>e.preventDefault());
   orb.addEventListener('pointerdown',e=>{ lc.drag=true; lc.moved=false; lc.frozen=true;
+    lc.dragPan = lc.panMode || e.shiftKey || e.button===1 || e.button===2;
     const rc=orb.getBoundingClientRect(); lc.mx=e.clientX-rc.left; lc.my=e.clientY-rc.top;
     lc.lastX=lc.downX=e.clientX; lc.lastY=lc.downY=e.clientY; orb.setPointerCapture(e.pointerId); });
   orb.addEventListener('pointermove',e=>{
@@ -4739,10 +4955,11 @@ function lcMount(metric,color){
     if(!lc.drag || lc._pinch) return;
     const dx=e.clientX-lc.lastX, dy=e.clientY-lc.lastY;
     if(Math.abs(e.clientX-lc.downX)+Math.abs(e.clientY-lc.downY)>5) lc.moved=true;
-    lc.userY+=dx*0.008; lc.userX=Math.max(-1.2,Math.min(1.2,lc.userX+dy*0.006));
+    if(lc.dragPan){ lc.panX+=dx; lc.panY+=dy; }
+    else{ lc.userY+=dx*0.008; lc.userX=Math.max(-1.2,Math.min(1.2,lc.userX+dy*0.006)); }
     lc.lastX=e.clientX; lc.lastY=e.clientY; });
-  orb.addEventListener('pointerup',()=>{ if(!lc.drag) return; lc.drag=false; if(!lc.moved) lcTapTip(); });
-  orb.addEventListener('pointercancel',()=>{ lc.drag=false; });
+  orb.addEventListener('pointerup',()=>{ if(!lc.drag) return; lc.drag=false; lc.dragPan=false; if(!lc.moved) lcTapTip(); });
+  orb.addEventListener('pointercancel',()=>{ lc.drag=false; lc.dragPan=false; });
   orb.addEventListener('dblclick',lcReset);
   /* PC：ホイールでカーソル位置を中心に拡大縮小 */
   orb.addEventListener('wheel',e=>{ e.preventDefault();
@@ -4755,7 +4972,11 @@ function lcMount(metric,color){
   attach3DTouch(orb, lc, 6, lcReset);
   const rb=document.getElementById('behavRotBtn');
   if(rb){ rb.addEventListener('pointerdown',e=>e.stopPropagation());
-    rb.addEventListener('click',e=>{ e.stopPropagation(); lcReset(); }); }
+    rb.addEventListener('click',e=>{ e.stopPropagation(); lcReset(); lcSyncPanBtn(); }); }
+  const pb=document.getElementById('behavPanBtn');
+  if(pb){ pb.addEventListener('pointerdown',e=>e.stopPropagation());
+    pb.addEventListener('click',e=>{ e.stopPropagation(); lc.panMode=!lc.panMode; lcSyncPanBtn(); }); }
+  lcSyncPanBtn();   // パネル再生成のたびにボタン表示を lc.panMode に同期
   if(!lc._winBound){ lc._winBound=true; window.addEventListener('resize',lcResize); }
   if(!lc.started){ lc.started=true; requestAnimationFrame(lcFrame); }
 }
@@ -4785,10 +5006,9 @@ function lcDraw(now){
   if(!points.length) return;
   const rg=bhTrendRange(s), lo=rg.vlo, hi=rg.vhi, range=hi-lo||1;
   const t=(now-lc.t0)/1000;
-  /* 左右の揺れ（デフォルト）＋ ドラッグ回転（frozen で自動の揺れは止まる）。
-     t=0 では rotY=rotX=0 ＝ 正面。揺れは振れ幅控えめでラベルが枠内に収まる範囲に */
-  lc.rotY=(lc.frozen?0:0.24*Math.sin(t*0.34))+lc.userY;
-  lc.rotX=Math.max(-1.2,Math.min(1.2, LC_BASE_X+(lc.frozen?0:0.04*Math.sin(t*0.22))+lc.userX));
+  /* デフォルトは正面固定（自動の揺れなし）。ドラッグ回転のみ反映する。 */
+  lc.rotY=lc.userY;
+  lc.rotX=Math.max(-1.2,Math.min(1.2, LC_BASE_X+lc.userX));
   const cx=W/2+lc.panX, cy=H/2+lc.panY, Rx=W*0.40*lc.zoom, Ry=H*0.40*lc.zoom;
   ctx.globalCompositeOperation='lighter';
 
@@ -4802,10 +5022,10 @@ function lcDraw(now){
 
   /* モデル座標：グラフは厚みのない1枚の平面(z=0)。平面ごと3D空間で揺れ／回転する。
      u=日/時(0..1)→x、vn=値(0..1)→y(上が−)。奥行きは持たせない。 */
-  const ax=0.82, ay=0.54;   // ラベル込みで枠内に収まる範囲に縮小
+  const axL=0.82, axR=1.02, ay=0.54;   // 左端は値ラベル用の余白を確保し、右端（月末側）は枠の右いっぱいまで伸ばす
   const NX=v=>(v-s.axisMin)/Math.max(1,(s.axisMax-s.axisMin));
   const VN=v=>Math.max(0,Math.min(1,(v-lo)/range));
-  const MX=u=>(u-0.5)*2*ax, MY=vn=>(0.5-vn)*2*ay;
+  const MX=u=>-axL+u*(axL+axR), MY=vn=>(0.5-vn)*2*ay;
   const P=(u,vn)=>{ const p=wkProject(lcRotate({x:MX(u),y:MY(vn),z:0}),Rx,Ry,cx,cy); return [p.x,p.y,p.s]; };
 
   /* 平面上のグリッド（横＝値の目盛り、縦＝日付の目盛り） */
@@ -4880,7 +5100,7 @@ function markBehavCard(id){
 function behaviorSelect(id){
   const m=BEHAV_METRIC_MAP[id]; if(!m) return;
   wk.selId=id; wk.frozen=true;
-  lcReset();   // 新規選択時はグラフの向き・拡大率を初期化（揺れに戻す）
+  lcReset();   // 新規選択時はグラフの向き・拡大率を初期化（正面に戻す）
   behaviorDetailMonth=new Date(view.getFullYear(),view.getMonth(),1);
   behaviorDetailDay=new Date();
   behaviorRenderDetail();
@@ -4970,6 +5190,7 @@ function behaviorDeselect(){
 
 renderProfile();
 renderCal();
+syncChatMetrics();   // タブバー高さを --tabH に反映（チャット入力バーの位置決め用）
 // 初回起動時は使い方ガイドを表示。OKを押す（＝表示済み）と以降は今日の記録から開く
 let seenGuide=false; try{ seenGuide=localStorage.getItem(GUIDE_KEY)==='1'; }catch(e){}
 if(seenGuide) openToday(); else showGuide();
